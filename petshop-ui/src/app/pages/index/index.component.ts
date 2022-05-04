@@ -34,7 +34,7 @@ export class IndexComponent implements OnInit {
     this.loadScript();
     this.getPromotion();
 
-    this.petCondition.TopPet = 3;
+    this.petCondition.TopProduct = 3;
     this.getList();
 
     this.getListBreedParent();

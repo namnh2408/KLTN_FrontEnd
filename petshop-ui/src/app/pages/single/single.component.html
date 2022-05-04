@@ -160,9 +160,13 @@
                                         {{ cmt.Content }}
                                         <span class="text-muted pull-right">
                                             <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId"
+                                             (click)="DeleteComment(cmt.CommentId)" style="color: blue;"><b>Cập nhật</b></button>
+                                             <span *ngIf="user.Id == cmt.UserId">|</span> 
+                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId"
                                              (click)="DeleteComment(cmt.CommentId)"><b>Xóa bình luận</b></button>
                                         </span>
                                     </p>
+                                    <a><span><i class="fa fa-reply"></i> Phản hồi</span></a> 
                                 </div>
                             </li>
                         </ul>
