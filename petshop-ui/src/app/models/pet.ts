@@ -21,13 +21,13 @@ export class PetCondition{
     BreedIdRoot: number;
     SupplierId: number;
     FindString: string;
-    TopPet:number;
+    TopProduct:number;
 
     constructor(){
         this.BreedId = 0;
         this.BreedIdRoot = 0;
         this.SupplierId = 0;
         this.FindString = "";
-        this.TopPet = 0;
+        this.TopProduct = 0;
     }
 }

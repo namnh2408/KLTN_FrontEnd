@@ -81,7 +81,7 @@ export class SingleComponent implements OnInit {
     this.petDetailId = this.route.snapshot.params['id'];
     this.getDetailPet();
 
-    this.petCondition.TopPet = 6;
+    this.petCondition.TopProduct = 6;
     this.getList();
 
     this.getQuantityByPetDetailId(this.petDetailId);
