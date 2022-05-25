@@ -20,8 +20,8 @@ export class CreateCategoryComponent implements OnInit {
   categoryRootSelection: CategoryRootSelection[];
   typeProductSelection : TypeProductSelection[];
 
-  categoryStatusText : StatusNormal;
-  categoryStatusOption: [];
+  categoryStatusText = StatusNormal;
+  categoryStatusOption = [];
   
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -83,7 +83,4 @@ export class CreateCategoryComponent implements OnInit {
       this.loading = false;
     })
   }
-
-
-
 }
