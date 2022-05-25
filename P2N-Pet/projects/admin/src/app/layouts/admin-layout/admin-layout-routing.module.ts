@@ -41,6 +41,7 @@ import { ListSupplierComponent } from '../../pages/supplier/list-supplier/list-s
 import { UpdateSupplierComponent } from '../../pages/supplier/update-supplier/update-supplier.component';
 import { PasswordUserComponent } from '../../pages/users/password-user/password-user.component';
 import { ProfileUserComponent } from '../../pages/users/profile-user/profile-user.component';
+import { CreateCategoryComponent } from './../../pages/category/create-category/create-category.component';
 
 const routes: Routes = [
     { path: '',      component: DashboardComponent },
@@ -84,7 +85,8 @@ const routes: Routes = [
     { path: 'admin/account/view/:id',      component: ViewAccountComponent},
     { path: 'admin/user/profile',      component:ProfileUserComponent},
     { path: 'admin/user/password',      component: PasswordUserComponent},
-    { path: 'admin/customer/view/:id',          component: ViewCustomerComponent }
+    { path: 'admin/customer/view/:id',          component: ViewCustomerComponent },
+    { path: 'admin/breed/create-category',      component: CreateCategoryComponent}
 ];
 
 @NgModule({

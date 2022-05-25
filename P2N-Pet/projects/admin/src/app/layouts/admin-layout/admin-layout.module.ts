@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -49,7 +50,10 @@ import { ViewAccountComponent } from '../../pages/account/view-account/view-acco
 import { ProfileUserComponent } from '../../pages/users/profile-user/profile-user.component';
 import { PasswordUserComponent } from '../../pages/users/password-user/password-user.component';
 import { ViewCustomerComponent } from '../../pages/customer/view-customer/view-customer.component';
-
+import { ListCategoryComponent } from '../../pages/category/list-category/list-category.component';
+import { CreateCategoryComponent } from '../../pages/category/create-category/create-category.component';
+import { UpdateCategoryComponent } from '../../pages/category/update-category/update-category.component';
+import { ListBrandComponent } from '../../pages/brand/list-brand/list-brand.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +98,10 @@ import { ViewCustomerComponent } from '../../pages/customer/view-customer/view-c
     ProfileUserComponent,
     PasswordUserComponent,
     ViewCustomerComponent,
+    ListCategoryComponent,
+    CreateCategoryComponent,
+    UpdateCategoryComponent,
+    ListBrandComponent
   ],
   imports: [
     CommonModule,
@@ -104,7 +112,8 @@ import { ViewCustomerComponent } from '../../pages/customer/view-customer/view-c
     ClipboardModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgxNumberFormatModule
+    NgxNumberFormatModule,
+    RouterModule
   ],
   providers: [
     DatePipe
