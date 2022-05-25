@@ -34,4 +34,15 @@ export class BreedService {
     GetNormalBreedDefault(){
         return this.http.get(`${environment.apiUrl}AData/GetNormalBreedDefault`);
     }
+    GetListCategory(condition){
+        return this.http.post(`${environment.apiUrl}ACategory/GetListCategory`, condition);
+    }
+
+    GetNormalTypeProductSelection(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalTypeProductSelection`);
+    }
+
+    GetNormalCategoryRootSelection(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalCategoryRootSelection`);
+    }
 }
