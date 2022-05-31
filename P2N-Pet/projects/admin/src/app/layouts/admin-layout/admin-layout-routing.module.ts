@@ -1,3 +1,4 @@
+import { ListBrandComponent } from './../../pages/brand/list-brand/list-brand.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateAccountComponent } from '../../pages/account/create-account/create-account.component';
@@ -86,7 +87,8 @@ const routes: Routes = [
     { path: 'admin/user/profile',      component:ProfileUserComponent},
     { path: 'admin/user/password',      component: PasswordUserComponent},
     { path: 'admin/customer/view/:id',          component: ViewCustomerComponent },
-    { path: 'admin/breed/create-category',      component: CreateCategoryComponent}
+    { path: 'admin/breed/create-category',      component: CreateCategoryComponent},
+    { path: 'admin/brand/list-brand',        component : ListBrandComponent}
 ];
 
 @NgModule({

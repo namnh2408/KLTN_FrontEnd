@@ -19,15 +19,15 @@
             <h5> {{ petDetail.ProductTitle }} </h5>
             <div class="col-md-4">
                 <div class="dropdown-img">
-                    <img src="{{ petImageRoot }}" alt=" " class="img-size-root"/>
+                    <img src="{{ petImageRoot }}" alt=" " class="img-size-root" />
                     <div class="dropdown-content-img">
                         <img src="{{ petImageRoot }}" alt=" " class="img-size" />
                     </div>
                 </div>
                 <div style="margin-left: -20px;">
                     <div class="dropdown-item-img drop-image-item-cus">
-                        <img *ngFor="let petImage of petDetail.productImages; index as indexOfelement" src="{{ petImage }}" alt=" " class="image-magrin" (click)="changeImage(indexOfelement)"/>
-                        
+                        <img *ngFor="let petImage of petDetail.productImages; index as indexOfelement" src="{{ petImage }}" alt=" " class="image-magrin" (click)="changeImage(indexOfelement)" />
+
                     </div>
                 </div>
             </div>
@@ -55,6 +55,21 @@
                     <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.Quantity - quantity}} con</p>
                 </div>
                 <hr class="my-hr">
+                <div class="dislay-select-inline">
+                    <div class="group-item decrease-intance-line">
+                        <div>
+                            <label class="" for="petDetailCondition.BrandId">Chi nhánh</label>
+                        </div>
+                        <div class="intance-div decrease-intance-line">
+                            <select class="form-control select-item" placeholder="Chi nhánh cửa hàng" [(ngModel)]="petDetailCondition.BrandId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(1)">
+                                <option *ngFor="let item of petDetail.productBrands " [ngValue]="item.BrandId">
+                                  {{ item.Address }}
+                                </option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-hr" style="margin-top: -2%;">
                 <div class="dislay-select-inline">
                     <div class="group-item">
                         <div>
@@ -139,10 +154,14 @@
                         <b>Bình luận</b>
                     </div>
                     <div class="panel-body">
+                        <div id="cmtTarget"></div>
                         <span *ngIf="user.Id > 0">
-                            <textarea class="form-control" placeholder="Nội dung bình luận..." rows="3"  [(ngModel)]="contentComment" (keyup.enter)="CreateComment()"></textarea>
+                            <textarea class="form-control" placeholder="Nội dung bình luận..." rows="3"  [(ngModel)]="contentComment" (keyup.enter)="CreateOrUpdateComment()"></textarea>
                             <br>
-                            <button type="button" class="btn btn-info pull-right" (click)="CreateComment()">GỬI</button>
+                            <button type="button" class="btn btn-info pull-right" (click)="CreateOrUpdateComment()">
+                                <p *ngIf="isUpdated == 0">GỬI</p>
+                                <p *ngIf="isUpdated == 1">LƯU</p>
+                            </button>
                             <div class="clearfix"></div>
                             <hr>
                         </span>
@@ -160,23 +179,22 @@
                                         {{ cmt.Content }}
                                         <span class="text-muted pull-right">
                                             <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId"
-                                             (click)="DeleteComment(cmt.CommentId)" style="color: blue;"><b>Cập nhật</b></button>
-                                             <span *ngIf="user.Id == cmt.UserId">|</span> 
-                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId"
-                                             (click)="DeleteComment(cmt.CommentId)"><b>Xóa bình luận</b></button>
+                                             (click)="GetDetailComment(cmt.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
+                                             <span *ngIf="user.Id == cmt.UserId">|</span>
+                                        <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId" (click)="DeleteComment(cmt.CommentId)"><b>Xóa bình luận</b></button>
                                         </span>
                                     </p>
-                                    <a><span><i class="fa fa-reply"></i> Phản hồi</span></a> 
+                                    <a *ngIf="user.Id > 0 "><span><i class="fa fa-reply"></i> Phản hồi</span></a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-    
+
         </div>
     </div>
-    </div>
+</div>
 <!-- //banner -->
 <!-- brands -->
 <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_popular">

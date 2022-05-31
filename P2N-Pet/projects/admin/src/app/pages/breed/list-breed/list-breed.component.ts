@@ -63,14 +63,11 @@ export class ListBreedComponent implements OnInit {
     
   }
 
-  routingForm(){
-    console.log('routing form type: ' + this.typeProductId);
+  routingForm(){    
     if(this.typeProductId == 10){
-      console.log("vào routing 10");
       this.router.navigate(["admin/breed/create"]);
     }
     else{
-      console.log("vào routing khac 10");
       this.router.navigate(["admin/breed/create-category"]);
     }
   }

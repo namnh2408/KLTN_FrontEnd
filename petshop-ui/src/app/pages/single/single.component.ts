@@ -1,3 +1,4 @@
+import { CommentCondition } from './../../models/comment';
 import { User } from 'src/app/models/account';
 import { CartItem } from './../../models/cart';
 import { AccountService } from './../../services/account.service';
@@ -32,6 +33,10 @@ export class SingleComponent implements OnInit {
 
   comment: CommentModel = new CommentModel();
   listComment: any;
+  commentDetail: any;
+  commentCondition : CommentCondition = new CommentCondition();
+  isUpdated: number;
+
 
   public petDetail: PetDetail = new PetDetail();
 
@@ -64,7 +69,10 @@ export class SingleComponent implements OnInit {
       this.quantity = 0;
       this.countSub = this.cartCountService.cartCount$.subscribe(
         count => {});
+
+      this.isUpdated = 0;
     }
+    
 
     
   get f() { return this.form.controls; }
@@ -298,6 +306,23 @@ export class SingleComponent implements OnInit {
     this.petImageRoot = this.petDetail.productImages[numImage];
   }
 
+  CreateOrUpdateComment(){
+    console.log('isUpdated: ' +  this.isUpdated);
+    if(this.isUpdated == 0){
+      this.CreateComment();
+    }
+    else{
+
+      //this.contentComment = this.commentDetail.Content;
+
+      this.commentCondition.ProductCommentId = this.commentDetail.CommentId;
+      this.commentCondition.Content = this.contentComment;
+      this.commentCondition.Rating = 0;
+
+      this.UpdateComment();
+    }
+  }
+
   CreateComment(){
     if(this.contentComment!=""){
       this.comment.ProductDetailId = this.petDetailId;
@@ -309,6 +334,25 @@ export class SingleComponent implements OnInit {
         this.GetListComment();
       });
     }
+  }
+
+  UpdateComment(){
+    this.commentService.UpdateComment({...this.commentCondition}).subscribe((res: any) =>{
+      this.isUpdated = 0;
+      this.contentComment = "";
+      this.GetListComment();
+    })
+  }
+
+  GetDetailComment(commentId){
+    this.commentService.GetDetailComment(commentId).subscribe( (res: any) =>{
+      this.commentDetail = res.content.Comment;
+
+      this.contentComment = this.commentDetail.Content;
+    });
+
+    let target = document.getElementById('cmtTarget');
+    this.scroll(target);
   }
 
   GetListComment(){

@@ -19,4 +19,12 @@ export class CommentService {
   DeleteComment( CommentId: any){
     return this.http.post(`${environment.apiUrl}Comment/DeleteComment?CommentId=${CommentId}`, null);
   }
+
+  UpdateComment(condition){
+    return this.http.post(`${environment.apiUrl}Comment/UpdateComment`, condition);
+  }
+
+  GetDetailComment(commentId){
+    return this.http.get(`${environment.apiUrl}Comment/GetDetailComment?commentId=${commentId}`);
+  }
 }

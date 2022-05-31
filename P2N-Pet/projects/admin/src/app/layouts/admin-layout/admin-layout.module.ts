@@ -54,6 +54,7 @@ import { ListCategoryComponent } from '../../pages/category/list-category/list-c
 import { CreateCategoryComponent } from '../../pages/category/create-category/create-category.component';
 import { UpdateCategoryComponent } from '../../pages/category/update-category/update-category.component';
 import { ListBrandComponent } from '../../pages/brand/list-brand/list-brand.component';
+import { UpdateBrandComponent } from '../../pages/brand/update-brand/update-brand.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { ListBrandComponent } from '../../pages/brand/list-brand/list-brand.comp
     ListCategoryComponent,
     CreateCategoryComponent,
     UpdateCategoryComponent,
-    ListBrandComponent
+    ListBrandComponent,
+    UpdateBrandComponent
   ],
   imports: [
     CommonModule,
