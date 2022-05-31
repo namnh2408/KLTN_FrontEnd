@@ -298,16 +298,24 @@ export class SingleComponent implements OnInit {
     this.petImageRoot = this.petDetail.productImages[numImage];
   }
 
-  CreateComment(){
-    if(this.contentComment!=""){
+  CreateComment(Id: any){
+    if(this.contentComment!="" ){
+      
       this.comment.ProductDetailId = this.petDetailId;
       this.comment.Content = this.contentComment;
 
-      this.commentService.CreateComment(this.comment).subscribe((res: any) =>{
-        this.contentComment = "";
-
-        this.GetListComment();
-      });
+      if (!Id){
+        this.commentService.CreateComment(this.comment).subscribe((res: any) =>{
+          this.contentComment = "";
+  
+          this.GetListComment();
+        });
+      }
+      else{
+        this.commentService.ReplyComment(Id).subscribe((res:any) => {
+          this.GetListComment();
+        });
+      }
     }
   }
 

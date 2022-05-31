@@ -165,8 +165,36 @@
                                             <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId"
                                              (click)="DeleteComment(cmt.CommentId)"><b>Xóa bình luận</b></button>
                                         </span>
+                                        
                                     </p>
-                                    <a><span><i class="fa fa-reply"></i> Phản hồi</span></a> 
+                                    <a><span><i class="fa fa-reply" (click)="CreateComment(cmt.CommentId)" ></i> Phản hồi</span></a> 
+                                    <span class="text-reply ml-10" *ngFor = "let itemReply of cmt.CommentChilds">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <a class="pull-left">
+                                                    <img src="{{itemReply.Avatar}}" alt="" class="img-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <span class="text-muted pull-right">
+                                                        <small class="text-muted">{{ formatDateVN(itemReply.CreateDate) }}</small>
+                                                    </span>
+                                                    <strong class="text-success">{{ itemReply.Name }}</strong>
+                                                    <p style="color: black;">
+                                                        {{ cmt.Content }}
+                                                        <span class="text-muted pull-right">
+                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
+                                                             (click)="DeleteComment(itemReply.CommentId)" style="color: blue;"><b>Cập nhật</b></button>
+                                                             <span *ngIf="user.Id == itemReply.UserId">|</span> 
+                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
+                                                             (click)="DeleteComment(itemReply.CommentId)"><b>Xóa bình luận</b></button>
+                                                        </span>
+                                                        
+                                                    </p>
+                                                    <a><span><i class="fa fa-reply" (click)="CreateComment(cmt.CommentId)" ></i> Phản hồi</span></a> 
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </li>
                         </ul>
