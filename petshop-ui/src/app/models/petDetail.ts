@@ -23,6 +23,20 @@ export class PetSex{
     }
 }
 
+export class ProductBrand{
+    BrandId: number;
+    ProductDetailId: number;
+    Address: string;
+    QuantityInBrand: number;
+
+    constructor(){
+        this.BrandId = 0;
+        this.ProductDetailId = 0;
+        this.Address = '';
+        this.QuantityInBrand = 0;
+    }
+}
+
 export class PetDetail{
     ProductDetailId : number;
     ProductTitle: string;
@@ -49,6 +63,7 @@ export class PetDetail{
     SexId: number;
     SexTitle: string;
     productSexes : PetSex[];
+    productBrands: ProductBrand[];
 }
 
 export class PetDetailCondition {
@@ -58,6 +73,7 @@ export class PetDetailCondition {
     ColorId: number;
     AgeId: number;
     SexId: number;
+    BrandId: number;
 
     constructor(){
         this.ProductDetailId = 0;
@@ -66,5 +82,6 @@ export class PetDetailCondition {
         this.ColorId = 0;
         this.AgeId = 0;
         this.SexId = 0;
+        this.BrandId = 0;
     }
 }
