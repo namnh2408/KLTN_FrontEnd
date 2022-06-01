@@ -25,9 +25,17 @@ export class CommentService {
     );
   }
 
-  ReplyComment(CommentId: any) {
+  ReplyComment(condition: any) {
     return this.http.post(
-      `${environment.apiUrl}Comment/ReplyComment?CommentId=${CommentId}`, null
+      `${environment.apiUrl}Comment/CreateComment`, condition
     );
+  }
+
+  UpdateComment(condition){
+    return this.http.post(`${environment.apiUrl}Comment/UpdateComment`, condition);
+  }
+
+  GetDetailComment(commentId){
+    return this.http.get(`${environment.apiUrl}Comment/GetDetailComment?commentId=${commentId}`);
   }
 }

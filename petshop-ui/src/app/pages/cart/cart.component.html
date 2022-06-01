@@ -51,7 +51,7 @@
                             </td>
                             <td class="invert">
                                 <div class="quantity">
-                                    <input class="form-control input-form"   style="margin: auto;" value="{{ item.Quantity }}" name="quantity" #quantity min="1" max="{{item.QuantityProduct}}" type="number" (change)="changeQuantityItem( item.CartItemId, item.ProductDetailId, quantity.value)">
+                                    <input class="form-control input-form" style="margin: auto;" value="{{ item.Quantity }}" name="quantity" #quantity min="1" max="{{item.QuantityProduct}}" type="number" (change)="changeQuantityItem( item.CartItemId, item.ProductDetailId, quantity.value)">
                                 </div>
                             </td>
                             <td class="invert">{{ item.ProductTitle}}</td>
