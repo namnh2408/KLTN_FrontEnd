@@ -88,9 +88,9 @@ const routes: Routes = [
     { path: 'admin/user/profile',      component:ProfileUserComponent},
     { path: 'admin/user/password',      component: PasswordUserComponent},
     { path: 'admin/customer/view/:id',          component: ViewCustomerComponent },
-    { path: 'admin/breed/create-category',      component: CreateCategoryComponent},
+    { path: 'admin/cate/create-category',      component: CreateCategoryComponent},
     { path: 'admin/brand/list-brand',        component : ListBrandComponent},
-    { path: 'admin/breed/update-category/:id',        component : UpdateCategoryComponent}
+    { path: 'admin/cate/update-category/:id',        component : UpdateCategoryComponent}
 ];
 
 @NgModule({

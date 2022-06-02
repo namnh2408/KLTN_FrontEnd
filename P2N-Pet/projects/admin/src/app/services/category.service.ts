@@ -27,7 +27,7 @@ export class CategoryService {
   }
 
   DeleteCategory(id){
-    return this.http.get(`${environment.apiUrl}ACategory/UpdateCategory?categoryid=${id}`);
+    return this.http.get(`${environment.apiUrl}ACategory/DeleteCategory?categoryid=${id}`);
   }
 
   GetDetailCategory(id){
