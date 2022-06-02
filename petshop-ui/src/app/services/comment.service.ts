@@ -4,20 +4,31 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommentService {
+  public comment: Observable<any>;
 
-  public comment : Observable<any>;
-  
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  CreateComment(condition: any){
-    return this.http.post(`${environment.apiUrl}Comment/CreateComment`, condition);
+  CreateComment(condition: any) {
+    return this.http.post(
+      `${environment.apiUrl}Comment/CreateComment`,
+      condition
+    );
   }
 
-  DeleteComment( CommentId: any){
-    return this.http.post(`${environment.apiUrl}Comment/DeleteComment?CommentId=${CommentId}`, null);
+  DeleteComment(CommentId: any) {
+    return this.http.post(
+      `${environment.apiUrl}Comment/DeleteComment?CommentId=${CommentId}`,
+      null
+    );
+  }
+
+  ReplyComment(condition: any) {
+    return this.http.post(
+      `${environment.apiUrl}Comment/CreateComment`, condition
+    );
   }
 
   UpdateComment(condition){
