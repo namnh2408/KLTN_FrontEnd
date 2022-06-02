@@ -1,4 +1,3 @@
-import { ListBrandComponent } from './../../pages/brand/list-brand/list-brand.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateAccountComponent } from '../../pages/account/create-account/create-account.component';
@@ -43,6 +42,8 @@ import { UpdateSupplierComponent } from '../../pages/supplier/update-supplier/up
 import { PasswordUserComponent } from '../../pages/users/password-user/password-user.component';
 import { ProfileUserComponent } from '../../pages/users/profile-user/profile-user.component';
 import { CreateCategoryComponent } from './../../pages/category/create-category/create-category.component';
+import { UpdateCategoryComponent } from './../../pages/category/update-category/update-category.component';
+import { ListBrandComponent } from './../../pages/brand/list-brand/list-brand.component';
 
 const routes: Routes = [
     { path: '',      component: DashboardComponent },
@@ -88,7 +89,8 @@ const routes: Routes = [
     { path: 'admin/user/password',      component: PasswordUserComponent},
     { path: 'admin/customer/view/:id',          component: ViewCustomerComponent },
     { path: 'admin/breed/create-category',      component: CreateCategoryComponent},
-    { path: 'admin/brand/list-brand',        component : ListBrandComponent}
+    { path: 'admin/brand/list-brand',        component : ListBrandComponent},
+    { path: 'admin/breed/update-category/:id',        component : UpdateCategoryComponent}
 ];
 
 @NgModule({
