@@ -15,11 +15,11 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-xl-6 col-md-12">
-                                <h3 class="mb-0">Chỉnh sửa loại</h3>
+                                <h3 class="mb-0">Chỉnh sửa loại sản phẩm</h3>
                             </div>
                             <div class="col-xl-6 col-md-12 text-right">
                                 <button *ngIf="!firstload" (click)="onSubmit()" [disabled]="loading" class="btn btn-primary"><span
-                    *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Lưu</button>
+                                    *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Lưu</button>
                                 <a [routerLink]="['/admin/list-breed']" class="btn btn-default">Hủy</a>
                             </div>
                         </div>
@@ -43,12 +43,12 @@
                                             <label class="form-control-label" for="CategoryRootId">Loại gốc</label>
                                             <select class="form-control form-control-alternative" placeholder="Loại gốc" [ngClass]="{ 'is-invalid': submitted && f.CategoryRootId.errors }" formControlName="CategoryRootId">
                                                 <option *ngFor="let item of categoryRootSelection" [ngValue]="item.Id">
-                                                {{ item.Name }}
+                                                {{ item.Title }}
                                                 </option>
                                             </select>
-                                            <div *ngIf="submitted && f.CategoryRootId.errors" class="invalid-feedback">
+                                            <!-- <div *ngIf="submitted && f.CategoryRootId.errors" class="invalid-feedback">
                                                 <div *ngIf="f.CategoryRootId.errors.required">Vui lòng chọn loại gốc</div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>

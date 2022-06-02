@@ -41,12 +41,14 @@ export class UpdateCategoryComponent implements OnInit {
 
     this.categoryService.GetDetailCategory(this.id)
       .subscribe((res:any) =>{
-        let category = res.Content.Category;
+        var category = res.content.Category;
 
         this.f.Title.setValue(category.Name);
         this.f.CategoryRootId.setValue(category.CategoryRootId);
         this.f.Status.setValue(category.Status);
         this.f.TypeProductId.setValue(category.TypeProductId);
+
+        this.firstload = false;
       });
 
     this.form = this.formBuilder.group({

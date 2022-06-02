@@ -68,7 +68,7 @@ export class ListBreedComponent implements OnInit {
       this.router.navigate(["admin/breed/create"]);
     }
     else{
-      this.router.navigate(["admin/breed/create-category"]);
+      this.router.navigate(["admin/cate/create-category"]);
     }
   }
 
@@ -189,7 +189,13 @@ export class ListBreedComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscriptionPagination.unsubscribe();
-    this.subscriptionPaginationCategory.unsubscribe();
+    if(this.typeProductId != 10 && this.subscriptionPagination){
+      console.log('destroy khác 10')
+    }
+    else if( this.typeProductId == 10 && this.subscriptionPaginationCategory){
+      console.log('destroy = 10')
+      this.subscriptionPaginationCategory.unsubscribe();
+    }    
   }
 
   previous() {
