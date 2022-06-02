@@ -85,7 +85,7 @@
                             <button type="button" class="btn btn-outline-dark" *ngIf=" typeProductId != 20" name="clear-search" (click)="getListCategoryFollowProduct(20)">Thức ăn</button>
                             <button type="button" class="btn btn-outline-success" *ngIf=" typeProductId != 30" name="clear-search" (click)="getListCategoryFollowProduct(30)">Phụ kiện</button>
                             <button type="button" class="btn btn-success" *ngIf="typeProductId == 10" style="color: #fff; font-weight: bold;" (click)="routingForm()">Tạo mới</button>
-                            <button type="button" class="btn btn-success" *ngIf="typeProductId != 10" style="color: #fff; font-weight: bold;" (click)="routingForm()"> Tạo loại mới</button>
+                            <button type="button" class="btn btn-success" *ngIf="typeProductId != 10" style="color: #fff; font-weight: bold;" (click)="routingForm()"> Tạo nhóm mới</button>
                         </div>
                     </div>
                     <!-- <div class="row" style="float:right;">
@@ -184,7 +184,7 @@
                                     <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
                                     <i class='ni ni-laptop'></i>
                                     </a> -->
-                                    <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/breed/update/{{cate.Id}}">
+                                    <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/breed/update-category/{{cate.Id}}">
                                         <i class='ni ni-ruler-pencil'></i>
                                     </a>
                                     <button class="btn btn-icon btn-danger custom-btn" (click)="deleteCategory(cate.Id)">
