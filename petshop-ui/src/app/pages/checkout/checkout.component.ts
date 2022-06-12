@@ -112,9 +112,12 @@ export class CheckoutComponent implements OnInit {
         /* this.router.onSameUrlNavigation = 'reload'; */
         window.alert("Đặt hàng thành công!");
 
-        window.open(res.content.LinkMomo);
-
-        //this.router.navigate([`/index`]);
+        if( this.f.TypePaymentId.value == 20){ 
+          window.open(res.content.LinkMomo);
+        }
+        else{
+          this.router.navigate([`/index`]);
+        }
       }
     }, error => {
         this.loading = false;

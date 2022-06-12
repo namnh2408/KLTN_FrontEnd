@@ -51,6 +51,7 @@
                             <th class="th-class">Số loài</th>
                             <th class="th-class">Số lượng</th>
                             <th class="th-class">Tổng tiền</th>
+                            <th class="th-class">Hình thức / Trạng thái thanh toán</th>
                             <!-- <th class="th-class">Địa chỉ giao hàng</th> -->
                             <th class="th-class">Trạng thái đơn hàng</th>
                             <th class="th-class" *ngIf=" item.StatusOrderId == 1">Chức năng</th>
@@ -63,6 +64,7 @@
                             <td class="invert"> {{ item.NumBreed}} loài</td>
                             <td class="invert"> {{ item.NumOrder}} con</td>
                             <td class="invert"> {{ item.TotalMoney| number: '4.0-2'}} VNĐ</td>
+                            <td class="invert"> {{ item.TypePaymentName}} / {{ item.StatusPaymentName}} </td>
                             <!-- <td class="invert"> {{ item.Address }}</td> -->
                             <td class="invert"> <b><i>{{ item.StatusOrderText }}</i></b></td>
                             <td class="invert" *ngIf=" item.StatusOrderId == 1">
