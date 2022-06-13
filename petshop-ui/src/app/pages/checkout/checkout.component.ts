@@ -112,8 +112,8 @@ export class CheckoutComponent implements OnInit {
         /* this.router.onSameUrlNavigation = 'reload'; */
         window.alert("Đặt hàng thành công!");
 
-        if( this.f.TypePaymentId.value == 20){ 
-          window.open(res.content.LinkMomo);
+        if( this.f.TypePaymentId.value == 20 || this.f.TypePaymentId.value == 30){ 
+          window.open(res.content.LinkPayment);
         }
         else{
           this.router.navigate([`/index`]);
