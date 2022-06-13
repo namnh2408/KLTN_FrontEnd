@@ -88,7 +88,7 @@
                 <tr>
                     <th scope="col" class="text-center">Mã đơn hàng</th>
                     <th scope="col" class="text-center">Thông tin đơn hàng</th>
-                    <th scope="col" class="text-center">Tổng tiền</th>
+                    <th scope="col" class="text-center">Thanh toán</th>
                     <th scope="col" class="text-center">Ghi chú</th>
                     <th scope="col" class="text-center">Trạng thái</th>
                     <th scope="col" class="text-center">Thông tin tạo</th>
@@ -118,7 +118,8 @@
                       </div>
                     </th>
                     <td class="text-center">
-                      {{ order.TotalMoney|number: '4.0-2' }} VNĐ
+                      Tổng tiền: <i><b>{{ order.TotalMoney|number: '4.0-2' }} VNĐ</b></i> <br>
+                      {{ order.TypePaymentName }} / {{ order.StatusPaymentName }}
                     </td>
                     <td class="text-center">
                       {{ order.Note }}

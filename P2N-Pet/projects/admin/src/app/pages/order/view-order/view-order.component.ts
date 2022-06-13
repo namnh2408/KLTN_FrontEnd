@@ -45,6 +45,8 @@ export class ViewOrderComponent implements OnInit {
       this.f.CustomerEmail.setValue(orderDetail.CustomerEmail);
       this.f.CustomerAddress.setValue(orderDetail.CustomerAddress);
       this.f.TotalMoney.setValue(orderDetail.TotalMoney);
+      this.f.TypePaymentName.setValue(orderDetail.TypePaymentName);
+      this.f.StatusPaymentName.setValue(orderDetail.StatusPaymentName);
       this.f.Note.setValue(orderDetail.Note);
       this.orderItems = orderDetail.OrderItems;
     });
@@ -56,6 +58,8 @@ export class ViewOrderComponent implements OnInit {
       CustomerEmail: ['', Validators.required],
       CustomerAddress: ['', Validators.required],
       TotalMoney: [0, Validators.required],
+      TypePaymentName: ['', Validators.required],
+      StatusPaymentName: ['', Validators.required],
       Note: ['', Validators.required]
     });
 
