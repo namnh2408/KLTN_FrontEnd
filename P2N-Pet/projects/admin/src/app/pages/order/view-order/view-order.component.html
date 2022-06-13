@@ -81,6 +81,28 @@
                           </div>
                         </div>
                         <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="TypePaymentName">Phương thức thanh toán</label>
+                              <input type="text" class="form-control form-control-alternative" placeholder="Phương thức thanh toán"
+                                [ngClass]="{ 'is-invalid': submitted && f.TypePaymentName.errors }" formControlName="TypePaymentName">
+                              <div *ngIf="submitted && f.TypePaymentName.errors" class="invalid-feedback">
+                                <div *ngIf="f.TypePaymentName.errors.required">Vui lòng không xóa phương thức thanh toán</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="StatusPaymentName">Trạng thái thanh toán</label>
+                              <input type="text" class="form-control form-control-alternative" placeholder="Trạng thái thanh toán"
+                                [ngClass]="{ 'is-invalid': submitted && f.StatusPaymentName.errors }" formControlName="StatusPaymentName">
+                              <div *ngIf="submitted && f.StatusPaymentName.errors" class="invalid-feedback">
+                                <div *ngIf="f.StatusPaymentName.errors.required">Vui lòng không xóa trạng thái thanh toán</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
                           <div class="col-lg-12">
                             <div class="form-group">
                               <label class="form-control-label" for="CustomerAddress">Địa chỉ khách hàng</label>
@@ -132,12 +154,12 @@
                           <th scope="row" class="text-center">
                             <div class="media align-items-center">
                               <div class="media-body">
-                                <span class="mb-0 text-sm">{{ orderItem.PetName }}</span>
+                                <span class="mb-0 text-sm">{{ orderItem.ProductName }}</span>
                               </div>
                             </div>
                           </th>
                           <td class="text-center">
-                            <img  alt="{{ orderItem.PetName }}" src="{{ orderItem.PetImage }}" class="display-img"/>
+                            <img  alt="{{ orderItem.ProductName }}" src="{{ orderItem.ProductImage }}" class="display-img"/>
                           </td>
                           <td class="text-center">
                             Màu sắc: {{ orderItem.ColorTitle }} <br>
