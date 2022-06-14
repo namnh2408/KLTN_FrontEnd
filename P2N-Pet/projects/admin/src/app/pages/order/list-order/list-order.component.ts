@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { ChangeEnumToList, FormatDateVN, FormatDaySearch } from '../../../heplers/utils';
 import { Pagination } from '../../../models/condition';
 import { OrderCondition } from '../../../models/order';
-import { StatusNormal } from '../../../models/status';
+import { StatusNormal, StatusPaymentNormal, TypePaymentNormal } from '../../../models/status';
 import { OrderService } from '../../../services/order.service';
 import { OrderCountService } from '../../../services/ordercount.service';
 import { PaginationService } from '../../../services/pagination.service';
@@ -27,6 +27,12 @@ export class ListOrderComponent implements OnInit {
 
   orderStatusText = StatusNormal;
   orderStatusOptions = [];
+
+  typePaymentText = TypePaymentNormal;
+  typePaymentOptions = [];
+
+  statusPaymentText = StatusPaymentNormal;
+  statusPaymentOptions = [];
 
   public orders: any;
 
@@ -65,6 +71,8 @@ export class ListOrderComponent implements OnInit {
 
   buildSelection() {
     ChangeEnumToList(this.orderStatusText, this.orderStatusOptions);
+    ChangeEnumToList(this.typePaymentText, this.typePaymentOptions);
+    ChangeEnumToList(this.statusPaymentText, this.statusPaymentOptions);
   }
 
   formatDateVN(input) {
