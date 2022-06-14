@@ -42,6 +42,28 @@
                                 </div>
                               </div>
                               <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="orderCondition.TypePaymentId">Hình thức thanh toán</label>
+                                  <select class="form-control form-control-alternative" placeholder="Hình thức thanh toán"
+                                    [(ngModel)]="orderCondition.TypePaymentId" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let item of typePaymentOptions" [ngValue]="item.Id">
+                                      {{ item.Title }}
+                                    </option>
+                                  </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                              <div class="form-group">
+                                <label class="form-control-label" for="orderCondition.StatusPaymentId">Trạng thái thanh toán</label>
+                                <select class="form-control form-control-alternative" placeholder="Trạng thái thanh toán"
+                                  [(ngModel)]="orderCondition.StatusPaymentId" [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let item of statusPaymentOptions" [ngValue]="item.Id">
+                                    {{ item.Title }}
+                                  </option>
+                                </select>
+                              </div>
+                          </div>
+                              <div class="col-lg-3 col-md-4">
                                   <div class="form-group">
                                     <label class="form-control-label" for="orderCondition.Status">Trạng thái</label>
                                     <select class="form-control form-control-alternative" placeholder="Trạng thái"

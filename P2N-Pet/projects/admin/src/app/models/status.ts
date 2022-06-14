@@ -250,3 +250,15 @@ export enum StatusExamSituationGroupSearch {
   'Hoạt động' = 10,
   'Ngừng hoạt động' = 90,
 }
+
+export enum TypePaymentNormal {
+  'Khi nhận hàng' = 10,
+  'Momo' = 20,
+  'Vn Pay' = 30
+}
+
+export enum StatusPaymentNormal {
+  'Chưa thanh toán' = 10,
+  'Đã thanh toán' = 20,
+}
+
