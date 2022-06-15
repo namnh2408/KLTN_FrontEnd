@@ -21,14 +21,18 @@ export class BrandService {
   }
 
   CreateBrand(condition){
-    return this.http.post(`${environment.apiUrl}/api/ABrand/CreateBrandPet`, condition);
+    return this.http.post(`${environment.apiUrl}ABrand/CreateBrandPet`, condition);
   }
 
   UpdateBrand(condition){
-    return this.http.post(`${environment.apiUrl}/api/ABrand/UpdateBrandPet`, condition);
+    return this.http.post(`${environment.apiUrl}ABrand/UpdateBrandPet`, condition);
   }
 
   DeleteBrand(brandId){
-    return this.http.get(`${environment.apiUrl}ABrand/GetDetailBrand?brandid=${brandId}`);
+    return this.http.get(`${environment.apiUrl}ABrand/DeleteBrandPet?brandid=${brandId}`);
+  }
+
+  GetListProductDetailSelection(){
+    return this.http.get(`${environment.apiUrl}AData/GetNormalProductDetailSelection`);
   }
 }

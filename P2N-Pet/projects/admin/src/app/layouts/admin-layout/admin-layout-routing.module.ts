@@ -1,3 +1,5 @@
+import { UpdateBrandComponent } from './../../pages/brand/update-brand/update-brand.component';
+import { CreateBrandComponent } from './../../pages/brand/create-brand/create-brand.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateAccountComponent } from '../../pages/account/create-account/create-account.component';
@@ -90,7 +92,9 @@ const routes: Routes = [
     { path: 'admin/customer/view/:id',          component: ViewCustomerComponent },
     { path: 'admin/cate/create-category',      component: CreateCategoryComponent},
     { path: 'admin/brand/list-brand',        component : ListBrandComponent},
-    { path: 'admin/cate/update-category/:id',        component : UpdateCategoryComponent}
+    { path: 'admin/cate/update-category/:id',        component : UpdateCategoryComponent},
+    { path: 'admin/brand/create',        component : CreateBrandComponent},
+    { path: 'admin/brand/update/:id',     component: UpdateBrandComponent}
 ];
 
 @NgModule({
