@@ -26,4 +26,8 @@ export class OrderService {
     GetOrderDetail(orderid){
         return this.http.get(`${environment.apiUrl}AOrder/GetOrderDetail?OrderId=${orderid}`);
     }
+
+    UpdateStatusPayment(orderId, statusPaymentId){
+        return this.http.post(`${environment.apiUrl}AOrder/UpdateStatusPayment?orderId=${orderId}&statusPaymentId=${statusPaymentId}`, null);
+    }
 }

@@ -17,6 +17,8 @@ export class OrderCondition {
     CustomerPhone: string;
     CustomerEmail: string;
     StatusOrderId: string;
+    TypePaymentId: string;
+    StatusPaymentId: string;
     Status: string;
   
     constructor() {
@@ -24,6 +26,8 @@ export class OrderCondition {
       this.CustomerPhone = '';
       this.CustomerEmail = '';
       this.StatusOrderId = '1';
+      this.TypePaymentId = '0';
+      this.StatusPaymentId = '0';
       this.Status = '0';
     }
   }

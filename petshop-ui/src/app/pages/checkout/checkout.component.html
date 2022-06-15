@@ -109,7 +109,17 @@
                                 <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted}" formControlName="Note" placeholder="Ghi chú" type="text" rows="4"></textarea>
                             </div>
                         </div>
-                        <div style="font-size: 14px; color: brown;"><b>*Thanh toán khi giao hàng</b></div>
+                        <div class="controls">
+                            <label class="control-label">Thanh toán: </label>
+                            <div class="form-group">
+                                <input type="radio" id="typepayment1" name = "typepaymentid" (click)="UpdateTypePayment(10)" style="margin: 10px 0px 0px;" checked>
+                                <label for="typepayment1" style="font-size:15px; font-weight: 500;">&ensp;Khi nhận hàng</label><br>
+                                <input type="radio" id="typepayment2" name="typepaymentid" (click)="UpdateTypePayment(20)">
+                                <label for="typepayment2" style="font-size:15px; font-weight: 500;">&ensp;Momo</label><br>
+                                <input type="radio" id="typepayment3" name="typepaymentid" (click)="UpdateTypePayment(30)">
+                                <label for="typepayment3" style="font-size:15px; font-weight: 500;">&ensp;Vn Pay</label>
+                            </div>
+                        </div>
                         <div style="display: inline-flex; flex: 1; float: right;">
                             <div class="text-center">
                                 <span class="spinner-border-sm mr-1"></span>

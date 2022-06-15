@@ -63,7 +63,8 @@ export class CheckoutComponent implements OnInit {
       Email: ['', Validators.required],
       Phone: ['', Validators.required],
       Address: ['', Validators.required],
-      Note: ['']
+      Note: [''],
+      TypePaymentId: 10
     });
 
     this.getListCartItem();
@@ -111,7 +112,12 @@ export class CheckoutComponent implements OnInit {
         /* this.router.onSameUrlNavigation = 'reload'; */
         window.alert("Đặt hàng thành công!");
 
-        this.router.navigate([`/index`]);
+        if( this.f.TypePaymentId.value == 20 || this.f.TypePaymentId.value == 30){ 
+          window.open(res.content.LinkPayment);
+        }
+        else{
+          this.router.navigate([`/index`]);
+        }
       }
     }, error => {
         this.loading = false;
@@ -121,6 +127,10 @@ export class CheckoutComponent implements OnInit {
 
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth'});
+  }
+
+  UpdateTypePayment(typepaymentid){
+    this.f.TypePaymentId.setValue(typepaymentid);
   }
 
 }

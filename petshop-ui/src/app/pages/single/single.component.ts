@@ -326,7 +326,6 @@ export class SingleComponent implements OnInit {
       this.comment.ProductDetailId = this.petDetailId;
       this.comment.Content = this.contentComment;
       this.comment.CommentRootId = this.commentId;
-      console.log("object",this.contentComment);
       if (!this.commentId) {
         this.commentService
           .CreateComment(this.comment)

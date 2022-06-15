@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChangeEnumToList } from '../../../heplers/utils';
-import { StatusNormal } from '../../../models/status';
+import { StatusNormal, StatusPaymentNormal } from '../../../models/status';
 import { OrderService } from '../../../services/order.service';
 
 @Component({
@@ -18,11 +18,15 @@ export class ViewOrderComponent implements OnInit {
   loading = false;
   submitted = false;
   firstload = false;
+  statusPaymentChecked = 10;
 
   orderItems: any;
 
   orderStatusText = StatusNormal;
-  orderStatusOptions = []
+  orderStatusOptions = [];
+
+  statusPaymentText = StatusPaymentNormal;
+  statusPaymentOptions = [];
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -45,8 +49,13 @@ export class ViewOrderComponent implements OnInit {
       this.f.CustomerEmail.setValue(orderDetail.CustomerEmail);
       this.f.CustomerAddress.setValue(orderDetail.CustomerAddress);
       this.f.TotalMoney.setValue(orderDetail.TotalMoney);
+      this.f.TypePaymentName.setValue(orderDetail.TypePaymentName);
+      this.f.StatusPaymentName.setValue(orderDetail.StatusPaymentName);
       this.f.Note.setValue(orderDetail.Note);
       this.orderItems = orderDetail.OrderItems;
+
+      
+      this.statusPaymentChecked = orderDetail.StatusPaymentId;
     });
 
     this.form = this.formBuilder.group({
@@ -56,6 +65,8 @@ export class ViewOrderComponent implements OnInit {
       CustomerEmail: ['', Validators.required],
       CustomerAddress: ['', Validators.required],
       TotalMoney: [0, Validators.required],
+      TypePaymentName: ['', Validators.required],
+      StatusPaymentName: ['', Validators.required],
       Note: ['', Validators.required]
     });
 
@@ -70,8 +81,24 @@ export class ViewOrderComponent implements OnInit {
 
   buildSelection() {
     ChangeEnumToList(this.orderStatusText, this.orderStatusOptions);
+    ChangeEnumToList(this.statusPaymentText, this.statusPaymentOptions);
   }
 
   tabchange: string[] = ['Thông tin đơn hàng','Các sản phẩm'];
   selectedwallet = this.tabchange[0];
+
+  UpdateStatusPaymentId(value){
+    if(value == "Đã thanh toán"){
+      this.statusPaymentChecked = 20;
+    }
+    else if(value == "Chưa thanh toán"){
+      this.statusPaymentChecked = 10;
+    } 
+  }
+
+  UpdateStatusPayment(){
+    this.orderService.UpdateStatusPayment(this.id, this.statusPaymentChecked).subscribe((res: any) => {
+      this.router.navigate(["admin/list-order"]);
+    });
+  }
 }
