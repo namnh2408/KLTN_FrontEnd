@@ -55,6 +55,7 @@ import { CreateCategoryComponent } from '../../pages/category/create-category/cr
 import { UpdateCategoryComponent } from '../../pages/category/update-category/update-category.component';
 import { ListBrandComponent } from '../../pages/brand/list-brand/list-brand.component';
 import { UpdateBrandComponent } from '../../pages/brand/update-brand/update-brand.component';
+import { CreateBrandComponent } from '../../pages/brand/create-brand/create-brand.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { UpdateBrandComponent } from '../../pages/brand/update-brand/update-bran
     CreateCategoryComponent,
     UpdateCategoryComponent,
     ListBrandComponent,
-    UpdateBrandComponent
+    UpdateBrandComponent,
+    CreateBrandComponent,
   ],
   imports: [
     CommonModule,

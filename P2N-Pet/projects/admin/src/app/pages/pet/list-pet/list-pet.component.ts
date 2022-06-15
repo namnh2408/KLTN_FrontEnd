@@ -28,6 +28,9 @@ export class ListPetComponent implements OnInit {
 
   public pets: any;
 
+  // Loại sản phẩm
+  typeProductId: number;
+
   constructor(private petService: PetService,
     private paginationService: PaginationService) { 
       this.pagination.CurrentDate = FormatDaySearch(new Date());
