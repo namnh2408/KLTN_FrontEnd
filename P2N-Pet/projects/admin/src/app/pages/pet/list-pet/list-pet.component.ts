@@ -1,4 +1,6 @@
+import { CategorySelection } from './../../../models/pet';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChangeEnumToList, FormatDateVN, FormatDaySearch } from '../../../heplers/utils';
 import { Pagination } from '../../../models/condition';
@@ -26,25 +28,37 @@ export class ListPetComponent implements OnInit {
   breedSelection: BreedSelection[];
   supplierSelection: SupplierSelection[];
 
+  categorySelection : CategorySelection[];
+
   public pets: any;
 
   // Loại sản phẩm
   typeProductId: number;
 
   constructor(private petService: PetService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService,
+    private router: Router) { 
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
       this.getBreedSelection();
       this.getSupplierSelection();
+      this.getCategoryNormalSelection();
+
+      this.typeProductId = 10;
   }
 
   ngOnInit(): void {
-    this.getList();
+    this.getListProduct(this.typeProductId);
     this.subscriptionPagination = this.paginationService.getChangePage().subscribe(pagenumber => {
       this.pagination.CurrentPage = pagenumber;
-      this.getList();
+      this.getListProduct(this.typeProductId);
     });
+  }
+
+  getListProduct(type){
+    this.typeProductId = type;
+    this.petCondition.TypeProductId = this.typeProductId;
+    this.getList();
   }
 
   getList() {
@@ -88,6 +102,16 @@ export class ListPetComponent implements OnInit {
       this.supplierSelection = res.content.SupplierSelection;
       this.loading = false;
     });
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 
   onSearch() {
@@ -138,5 +162,9 @@ export class ListPetComponent implements OnInit {
         this.listPage.push(value);
       }
     }
+  }
+
+  routingForm(){
+    this.router.navigate(["admin/pet/create"]);
   }
 }

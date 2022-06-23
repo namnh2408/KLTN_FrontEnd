@@ -1,3 +1,6 @@
+import { Breed } from './../../../models/breed';
+import { CategorySelection } from './../../../models/pet';
+import { TypeProductSelection } from './../../../models/category';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +23,8 @@ export class CreatePetComponent implements OnInit {
 
   breedSelection: BreedSelection[];
   supplierSelection: SupplierSelection[];
-
+  typeProductSelection: TypeProductSelection[];
+  categorySelection: CategorySelection[];
 
   petStatusText = StatusNormal;
   petStatusOptions = [];
@@ -33,6 +37,8 @@ export class CreatePetComponent implements OnInit {
     this.buildSelection();
     this.getBreedSelection();
     this.getSupplierSelection();
+    this.getTypeProductSelection();
+    this.getCategoryNormalSelection();
   }
 
   ngOnInit() {
@@ -40,7 +46,9 @@ export class CreatePetComponent implements OnInit {
       BreedId: null,
       SupplierId: null,
       Content: ['', Validators.required],
-      Status: [10, Validators.required]
+      Status: [10, Validators.required],
+      TypeProductId: [10, Validators.required],
+      CategoryId: 0,
     });
   }
 
@@ -54,6 +62,11 @@ export class CreatePetComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
+      return;
+    }
+
+    if(this.f.BreedId.value == "" && this.f.CategoryId.value == ""){
+      window.alert('Nhập đầy đủ thông tin');
       return;
     }
 
@@ -79,11 +92,29 @@ export class CreatePetComponent implements OnInit {
     });
   }
 
+  getTypeProductSelection() {
+    this.loading = true;
+    this.petService.GetNormalTypeProductSelection().subscribe((res: any) => {
+      this.typeProductSelection = res.content.Selection;
+      this.loading = false;
+    });
+  }
+
   getSupplierSelection() {
     this.loading = true;
     this.petService.GetNormalSupplier().subscribe((res: any) => {
       this.supplierSelection = res.content.SupplierSelection;
       this.loading = false;
     });
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 }

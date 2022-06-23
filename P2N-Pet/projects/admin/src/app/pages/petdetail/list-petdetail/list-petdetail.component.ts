@@ -33,6 +33,9 @@ export class ListPetdetailComponent implements OnInit {
 
   public petDetails: any;
 
+  // Loại sản phẩm
+  typeProductId: number;
+
   constructor(private petDetailService: PetDetailService,
     private paginationService: PaginationService) { 
     this.pagination.CurrentDate = FormatDaySearch(new Date());
@@ -44,6 +47,8 @@ export class ListPetdetailComponent implements OnInit {
     this.getNormalStatusDetailSelection();
     this.getNormalBreedPetDetailSelection();
     this.getNormalSupplierPetDetailSelection();
+
+    this.typeProductId = 10;
   }
 
   ngOnInit(): void {
@@ -59,6 +64,11 @@ export class ListPetdetailComponent implements OnInit {
   // scroll(el: HTMLElement) {
   //   el.scrollIntoView({behavior: 'smooth'});
   // }
+
+  getListProductDetail(type){
+    this.typeProductId = type;
+    this.getList();
+  }
 
   getList() {
     this.loading = true;

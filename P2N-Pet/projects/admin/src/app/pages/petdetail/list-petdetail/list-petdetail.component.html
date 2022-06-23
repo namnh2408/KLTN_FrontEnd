@@ -127,14 +127,27 @@
       <div class="col">
         <div class="card shadow">
           <div class="card-header border-0">
-            <div class="row">
+            <div class="row align-items-center">
+              <div class="col-md-5 col-12">
+                  <h3 class="mb-0" *ngIf=" typeProductId == 10" style="color: red;"><b>BẢNG THÚ CƯNG</b></h3>
+                  <h3 class="mb-0" *ngIf=" typeProductId == 20" style="color: red;"><b>BẢNG THỨC ĂN</b></h3>
+                  <h3 class="mb-0" *ngIf=" typeProductId == 30" style="color: red;"><b>BẢNG PHỤ KIỆN</b></h3>
+              </div>
+              <div class="col-md-7 col-12 text-right">
+                  <button type="button" class="btn btn-outline-primary" *ngIf=" typeProductId != 10" name="clear-search" (click)="getListProduct(10)">Thú cưng</button>
+                  <button type="button" class="btn btn-outline-dark" *ngIf=" typeProductId != 20" name="clear-search" (click)="getListProduct(20)">Thức ăn</button>
+                  <button type="button" class="btn btn-outline-success" *ngIf=" typeProductId != 30" name="clear-search" (click)="getListProduct(30)">Phụ kiện</button>
+                  <button type="button" class="btn btn-success" style="color: #fff; font-weight: bold;" (click)="routingForm()">Tạo mới</button>
+              </div>
+          </div>
+            <!-- <div class="row">
                 <div class="col-md-3 col-12">
                     <h3 class="mb-0">Bảng thông tin thú cưng</h3>
                 </div>
                 <div class="col-md-9 col-12 text-right">
                     <a [routerLink]="['/admin/petdetail/create']" class="btn btn-success">Tạo mới</a>
                 </div>
-            </div>
+            </div> -->
         </div>
           <div class="table-responsive">
             <table class="table align-items-center table-flush">
