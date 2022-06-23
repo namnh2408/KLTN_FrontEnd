@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  //apiUrl: 'https://localhost:44312/api/',
-  apiUrl: 'http://157.119.251.140:9713/api/',
+  apiUrl: 'https://localhost:44312/api/',
+  //apiUrl: 'http://157.119.251.140:9713/api/',
   defaultToken: '<<..P2N--==Pet[]>>21',
 };
 

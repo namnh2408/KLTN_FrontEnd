@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChangeEnumToList } from '../../../heplers/utils';
-import { BreedSelection, SupplierSelection } from '../../../models/pet';
+import { BreedSelection, CategorySelection, SupplierSelection } from '../../../models/pet';
 import { StatusNormal } from '../../../models/status';
 import { PetService } from '../../../services/pet.service';
 
@@ -22,6 +22,7 @@ export class UpdatePetComponent implements OnInit {
 
   breedSelection: BreedSelection[];
   supplierSelection: SupplierSelection[];
+  categorySelection: CategorySelection[];
 
   petStatusText = StatusNormal;
   petStatusOptions = []
@@ -34,6 +35,7 @@ export class UpdatePetComponent implements OnInit {
     this.buildSelection();
     this.getBreedSelection();
     this.getSupplierSelection();
+    this.getCategoryNormalSelection();
   }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class UpdatePetComponent implements OnInit {
       this.f.SupplierId.setValue(pet.SupplierId);
       this.f.Content.setValue(pet.Content);
       this.f.Status.setValue(pet.Status);
+      this.f.CategoryId.setValue(pet.CategoryId);
       this.firstload = false;
     });
 
@@ -54,7 +57,8 @@ export class UpdatePetComponent implements OnInit {
       BreedId: null,
       SupplierId: null,
       Content: ['', Validators.required],
-      Status: [10, Validators.required]
+      Status: [10, Validators.required],
+      CategoryId: 0
     });
   }
 
@@ -78,6 +82,16 @@ export class UpdatePetComponent implements OnInit {
     }, error => {
       this.loading = false;
     });
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 
   buildSelection() {
