@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChangeEnumToList, FormatDateVN, FormatDaySearch } from '../../../heplers/utils';
 import { Pagination } from '../../../models/condition';
+import { CategorySelection } from '../../../models/pet';
 import { AgeSelection, BreedSelection, ColorSelection, PetDetailCondition, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
 import { StatusNormal } from '../../../models/status';
 import { PaginationService } from '../../../services/pagination.service';
@@ -29,15 +31,17 @@ export class ListPetdetailComponent implements OnInit {
   statusDetailSelection: StatusDetailSelection[];
 
   petDetailStatusText = StatusNormal;
-  petDetailStatusOptions = []
+  petDetailStatusOptions = [];
+  categorySelection : CategorySelection[];
 
-  public petDetails: any;
+  public petDetails: any;  
 
   // Loại sản phẩm
   typeProductId: number;
 
   constructor(private petDetailService: PetDetailService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService,
+    private router: Router) { 
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.buildSelection();
     this.getNormalAgeSelection();
@@ -47,6 +51,7 @@ export class ListPetdetailComponent implements OnInit {
     this.getNormalStatusDetailSelection();
     this.getNormalBreedPetDetailSelection();
     this.getNormalSupplierPetDetailSelection();
+    this.getCategoryNormalSelection();
 
     this.typeProductId = 10;
   }
@@ -54,10 +59,11 @@ export class ListPetdetailComponent implements OnInit {
   ngOnInit(): void {
     // let target = document.getElementById('target');
     // this.scroll(target);
-    this.getList();
+    //this.getList();
+    this.getListProductDetail(this.typeProductId);
     this.subscriptionPagination = this.paginationService.getChangePage().subscribe(pagenumber => {
       this.pagination.CurrentPage = pagenumber;
-      this.getList();
+      this.getListProductDetail(this.typeProductId);
     });
   }
 
@@ -65,8 +71,13 @@ export class ListPetdetailComponent implements OnInit {
   //   el.scrollIntoView({behavior: 'smooth'});
   // }
 
+  routingForm(){
+    this.router.navigate(["admin/petdetail/create"]);
+  }
+
   getListProductDetail(type){
     this.typeProductId = type;
+    this.petDetailCondition.TypeProductId = this.typeProductId;
     this.getList();
   }
 
@@ -91,6 +102,16 @@ export class ListPetdetailComponent implements OnInit {
 
   buildSelection() {
     ChangeEnumToList(this.petDetailStatusText, this.petDetailStatusOptions);
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 
   formatDateVN(input) {

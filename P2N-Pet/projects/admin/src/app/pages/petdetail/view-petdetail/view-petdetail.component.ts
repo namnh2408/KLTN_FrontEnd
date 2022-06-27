@@ -1,9 +1,12 @@
+import { PetDetailOneModel, productBrands } from './../../../models/petdetail';
+import { Category } from './../../../models/category';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChangeEnumToList, FormBuilderConvertData } from '../../../heplers/utils';
-import { AgeSelection, BreedSelection, ColorSelection, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
+import { CategorySelection } from '../../../models/pet';
+import { AgeSelection, BrandSelection, BreedSelection, ColorSelection, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
 import { StatusNormal } from '../../../models/status';
 import { PetDetailService } from '../../../services/petdetail.service';
 
@@ -35,7 +38,11 @@ export class ViewPetdetailComponent implements OnInit {
   statusDetailSelection: StatusDetailSelection[];
 
   petDetailStatusText = StatusNormal;
-  petDetailStatusOptions = []
+  petDetailStatusOptions = [];
+  categorySelection : CategorySelection[];
+  brandSelection: BrandSelection[];
+
+  petDetail: PetDetailOneModel = new PetDetailOneModel();
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -48,6 +55,8 @@ export class ViewPetdetailComponent implements OnInit {
     this.getNormalSizeSelection();
     this.getNormalSexSelection();
     this.getNormalStatusDetailSelection();
+    this.getCategoryNormalSelection();
+    this.getNormalBrandSelection();   
   }
 
   ngOnInit() {
@@ -56,24 +65,35 @@ export class ViewPetdetailComponent implements OnInit {
 
     this.petDetailService.GetDetailPetDetail(this.id)
     .subscribe((x: any) => {
-      var petDetail = x.content.ProductDetail;
+      this.petDetail = x.content.ProductDetail;
       this.f.Id.setValue(this.id);
-      this.f.BreedId.setValue(petDetail.BreedId);
-      this.f.SupplierId.setValue(petDetail.SupplierId);
-      this.f.AgeId.setValue(petDetail.AgeId);
-      this.f.ColorId.setValue(petDetail.ColorId);
-      this.f.SizeId.setValue(petDetail.SizeId);
-      this.f.SexId.setValue(petDetail.SexId);
-      this.f.StatusDetailId.setValue(petDetail.StatusDetailId);
-      this.f.Status.setValue(petDetail.Status);
-      this.f.Price.setValue(petDetail.Price);
-      this.f.Discount.setValue(petDetail.Discount);
-      this.f.Quantity.setValue(petDetail.Quantity);
-      this.urls = petDetail.aProductProductImageForModels;
+      this.f.BreedId.setValue(this.petDetail.BreedId);
+      this.f.SupplierId.setValue(this.petDetail.SupplierId);
+      this.f.AgeId.setValue(this.petDetail.AgeId);
+      this.f.ColorId.setValue(this.petDetail.ColorId);
+      this.f.SizeId.setValue(this.petDetail.SizeId);
+      this.f.SexId.setValue(this.petDetail.SexId);
+      this.f.StatusDetailId.setValue(this.petDetail.StatusDetailId);
+      this.f.Status.setValue(this.petDetail.Status);
+      this.f.Price.setValue(this.petDetail.Price);
+      this.f.Discount.setValue(this.petDetail.Discount);
+      this.f.Quantity.setValue(this.petDetail.Quantity);
+      this.f.CategoryId.setValue(this.petDetail.CategoryId);
+      this.urls = this.petDetail.aProductProductImageForModels;
+
+      for( var item of this.petDetail.brands){
+        let brand = new productBrands();
+
+        brand.BrandId = item.BrandId;
+        brand.QuantityInBrand = item.QuantityInBrand;
+
+        let brandGroup = this.formBuilder.group(brand);
+        this.fBrands.push(brandGroup);
+      }
       this.firstload = false;
 
       this.getNormalBreedPetDetailSelection();
-      this.getNormalSupplierPetDetailSelection();
+      this.getNormalSupplierPetDetailSelection();      
     });
 
     this.form = this.formBuilder.group({
@@ -89,12 +109,16 @@ export class ViewPetdetailComponent implements OnInit {
       Price: null,
       Discount: null,
       Quantity: [1, Validators.required],
+      CategoryId: 0,
+      brands: this.formBuilder.array([])
     });
 
     this.form.disable();
   }
 
   get f() { return this.form.controls; }
+
+  get fBrands(): FormArray { return this.form.get('brands') as FormArray;}
 
   ngAfterViewInit() {
 
@@ -110,6 +134,26 @@ export class ViewPetdetailComponent implements OnInit {
       this.ageSelection = res.content.AgeSelection;
       this.loading = false;
     });
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
+  }
+
+  getNormalBrandSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalBrandSelection().subscribe( (res : any) => {
+      this.brandSelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 
   getNormalColorSelection(){
