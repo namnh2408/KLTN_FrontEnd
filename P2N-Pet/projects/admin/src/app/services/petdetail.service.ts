@@ -62,4 +62,16 @@ export class PetDetailService {
     GetNormalStatusDetailSelection(){
         return this.http.get(`${environment.apiUrl}AData/GetNormalStatusDetailSelection`);
     }
+
+    GetNormalTypeProductSelection(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalTypeProductSelection`);
+    }
+    
+    GetNormalCategory(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalCategorySelection`);
+    }
+
+    GetNormalBrandSelection(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalBrandSelection`);
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeEnumToList, FormBuilderConvertData } from '../../../heplers/utils';
+import { CategorySelection } from '../../../models/pet';
 import { AgeSelection, BreedSelection, ColorSelection, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
 import { StatusNormal } from '../../../models/status';
 import { PetDetailService } from '../../../services/petdetail.service';
@@ -30,6 +31,7 @@ export class CreatePetdetailComponent implements OnInit {
 
   petDetailStatusText = StatusNormal;
   petDetailStatusOptions = [];
+  categorySelection : CategorySelection[];
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -42,6 +44,7 @@ export class CreatePetdetailComponent implements OnInit {
     this.getNormalSizeSelection();
     this.getNormalSexSelection();
     this.getNormalStatusDetailSelection();
+    this.getCategoryNormalSelection();
   }
 
   ngOnInit() {
@@ -94,6 +97,16 @@ export class CreatePetdetailComponent implements OnInit {
 
   buildSelection() {
     ChangeEnumToList(this.petDetailStatusText, this.petDetailStatusOptions);
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 
   getNormalAgeSelection() {
