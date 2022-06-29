@@ -92,7 +92,7 @@ export class CreateBrandComponent implements OnInit {
     let row = this.formBuilder.group( new brandProducts());
     this.fProduct.push(row);  
 
-    console.log("Add row nhe");
+    // console.log("Add row nhe");
       
   }
 
