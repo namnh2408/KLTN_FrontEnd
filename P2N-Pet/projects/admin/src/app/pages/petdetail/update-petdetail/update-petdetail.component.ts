@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChangeEnumToList, FormBuilderConvertData } from '../../../heplers/utils';
-import { AgeSelection, BreedSelection, ColorSelection, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
+import { CategorySelection } from '../../../models/pet';
+import { AgeSelection, BrandSelection, BreedSelection, ColorSelection, PetDetailOneModel, productBrands, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
 import { StatusNormal } from '../../../models/status';
 import { PetDetailService } from '../../../services/petdetail.service';
 
@@ -36,7 +37,11 @@ export class UpdatePetdetailComponent implements OnInit {
   statusDetailSelection: StatusDetailSelection[];
 
   petDetailStatusText = StatusNormal;
-  petDetailStatusOptions = []
+  petDetailStatusOptions = [];
+  categorySelection : CategorySelection[];
+  brandSelection: BrandSelection[];
+
+  petDetail: PetDetailOneModel = new PetDetailOneModel();
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -50,6 +55,7 @@ export class UpdatePetdetailComponent implements OnInit {
     this.getNormalSizeSelection();
     this.getNormalSexSelection();
     this.getNormalStatusDetailSelection();
+    this.getNormalBrandSelection();
   }
 
   ngOnInit() {
@@ -58,24 +64,37 @@ export class UpdatePetdetailComponent implements OnInit {
 
     this.petDetailService.GetDetailPetDetail(this.id)
     .subscribe((x: any) => {
-      var petDetail = x.content.ProductDetail;
+      this.petDetail = x.content.ProductDetail;
       this.f.Id.setValue(this.id);
-      this.f.BreedId.setValue(petDetail.BreedId);
-      this.f.SupplierId.setValue(petDetail.SupplierId);
-      this.f.AgeId.setValue(petDetail.AgeId);
-      this.f.ColorId.setValue(petDetail.ColorId);
-      this.f.SizeId.setValue(petDetail.SizeId);
-      this.f.SexId.setValue(petDetail.SexId);
-      this.f.StatusDetailId.setValue(petDetail.StatusDetailId);
-      this.f.Status.setValue(petDetail.Status);
-      this.f.Price.setValue(petDetail.Price);
-      this.f.Discount.setValue(petDetail.Discount);
-      this.f.Quantity.setValue(petDetail.Quantity);
-      this.urls = petDetail.aProductProductImageForModels;
+      this.f.BreedId.setValue(this.petDetail.BreedId);
+      this.f.SupplierId.setValue(this.petDetail.SupplierId);
+      this.f.AgeId.setValue(this.petDetail.AgeId);
+      this.f.ColorId.setValue(this.petDetail.ColorId);
+      this.f.SizeId.setValue(this.petDetail.SizeId);
+      this.f.SexId.setValue(this.petDetail.SexId);
+      this.f.StatusDetailId.setValue(this.petDetail.StatusDetailId);
+      this.f.Status.setValue(this.petDetail.Status);
+      this.f.Price.setValue(this.petDetail.Price);
+      this.f.Discount.setValue(this.petDetail.Discount);
+      this.f.Quantity.setValue(this.petDetail.Quantity);
+      this.urls = this.petDetail.aProductProductImageForModels;
+      this.f.CategoryId.setValue(this.petDetail.CategoryId);
+
+      for( var item of this.petDetail.brands){
+        let brand = new productBrands();
+
+        brand.BrandId = item.BrandId;
+        brand.QuantityInBrand = item.QuantityInBrand;
+
+        let brandGroup = this.formBuilder.group(brand);
+        this.fBrands.push(brandGroup);
+      }
+
       this.firstload = false;
 
       this.getNormalBreedPetDetailSelection();
       this.getNormalSupplierPetDetailSelection();
+      this.getNormalCategoryProductDetailSelection();
     });
 
     this.form = this.formBuilder.group({
@@ -91,10 +110,13 @@ export class UpdatePetdetailComponent implements OnInit {
       Price: null,
       Discount: null,
       Quantity: [1, Validators.required],
+      CategoryId: 0,
+      brands: this.formBuilder.array([])
     });
   }
 
   get f() { return this.form.controls; }
+  get fBrands(): FormArray { return this.form.get('brands') as FormArray;}
 
   ngAfterViewInit() {
 
@@ -115,14 +137,46 @@ export class UpdatePetdetailComponent implements OnInit {
     }
 
     let formData = FormBuilderConvertData(this.form.value);
-    for (var i = 0; i < this.FileData.length; i++) { 
+    for (var i = 0; i < this.FileData.length; i++) {
       formData.append("FileData", this.FileData[i]);
     }
+
+    formData.delete('brands');
+    formData.append('ProductBrands',JSON.stringify(this.fBrands.value));
 
     this.petDetailService.UpdatePetDetail(formData)
     .subscribe(() => {
       this.router.navigate(["admin/list-petdetail"]);
     }, error => {
+      this.loading = false;
+    });
+  }
+
+  createRow(){
+    let row = this.formBuilder.group( new productBrands());
+    this.fBrands.push(row);  //fBrands
+
+    //console.log("Add row nhe");
+  }
+
+  deleteRow(ix: any){
+    this.fBrands.removeAt(ix);
+  }
+
+  getNormalBrandSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalBrandSelection().subscribe( (res : any) => {
+      this.brandSelection = res.content.Selection;
+
+      this.loading = false;
+    })
+  }
+
+  getNormalCategoryProductDetailSelection(){
+    this.loading = true;
+    this.petDetailService.GetNormalCategoryProductDetailSelection(this.form.controls['SupplierId'].value).subscribe((res: any) => {
+      this.categorySelection = res.content.Selection;
       this.loading = false;
     });
   }
@@ -173,10 +227,19 @@ export class UpdatePetdetailComponent implements OnInit {
 
   getNormalSupplierPetDetailSelection(){
     this.loading = true;
-    this.petDetailService.GetNormalSupplierPetDetailSelection(this.form.controls['BreedId'].value).subscribe((res: any) => {
-      this.supplierSelection = res.content.SupplierSelection;
-      this.loading = false;
-    });
+
+    if(this.f.BreedId.value != 0){
+      this.petDetailService.GetNormalSupplierPetDetailSelection(this.form.controls['BreedId'].value).subscribe((res: any) => {
+        this.supplierSelection = res.content.SupplierSelection;
+        this.loading = false;
+      });
+    }
+    else if ( this.f.CategoryId.value != 0){
+      this.petDetailService.GetSupplierPetDetailSelection(this.form.controls['CategoryId'].value).subscribe((res: any) => {
+        this.supplierSelection = res.content.SupplierSelection;
+        this.loading = false;
+      });
+    }
   }
 
   getNormalStatusDetailSelection(){
@@ -190,7 +253,7 @@ export class UpdatePetdetailComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files && event.target.files.length) {
 
-      for (var i = 0; i < event.target.files.length; i++) { 
+      for (var i = 0; i < event.target.files.length; i++) {
         this.FileData.push(event.target.files[i]);
       }
 
@@ -204,7 +267,7 @@ export class UpdatePetdetailComponent implements OnInit {
           reader.readAsDataURL(file);
         }
       }
-    }    
+    }
   }
 
   deleteItemImageOld(petimageid){

@@ -28,7 +28,7 @@ export class PetDetailCondition {
     Status: string;
     CategoryId: number;
     TypeProductId : number;
-  
+
     constructor() {
       this.BreedId = '0';
       this.SupplierId = '0';
