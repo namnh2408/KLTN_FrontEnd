@@ -94,20 +94,20 @@ export class CreatePetdetailComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    
+
     this.loading = true;
-    
+
     let formData = FormBuilderConvertData(this.form.value);
-    for (var i = 0; i < this.FileData.length; i++) { 
+    for (var i = 0; i < this.FileData.length; i++) {
       formData.append("FileData", this.FileData[i]);
     }
 
     formData.delete('brands');
     formData.append('brands',JSON.stringify(this.fBrands.value));
-   
+
     this.petDetailService.CreatePetDetail(formData)
       .subscribe((response: any) => {
-        
+
           this.router.navigate(["admin/list-petdetail"]);
       }, error => {
         this.loading = false;
@@ -116,9 +116,9 @@ export class CreatePetdetailComponent implements OnInit {
 
   createRow(){
     let row = this.formBuilder.group( new productBrands());
-    this.fBrands.push(row);  //fBrands 
+    this.fBrands.push(row);  //fBrands
 
-    //console.log("Add row nhe");      
+    //console.log("Add row nhe");
   }
 
   deleteRow(ix: any){
@@ -212,7 +212,7 @@ export class CreatePetdetailComponent implements OnInit {
         this.loading = false;
       });
     }
-    
+
   }
 
   getNormalStatusDetailSelection(){
@@ -226,7 +226,7 @@ export class CreatePetdetailComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files && event.target.files.length) {
 
-      for (var i = 0; i < event.target.files.length; i++) { 
+      for (var i = 0; i < event.target.files.length; i++) {
         this.FileData.push(event.target.files[i]);
       }
 
@@ -241,7 +241,7 @@ export class CreatePetdetailComponent implements OnInit {
         }
       }
     }
-    
+
   }
 
   deleteItemImage(index){

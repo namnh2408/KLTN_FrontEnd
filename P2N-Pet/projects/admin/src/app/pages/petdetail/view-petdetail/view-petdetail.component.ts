@@ -56,7 +56,7 @@ export class ViewPetdetailComponent implements OnInit {
     this.getNormalSexSelection();
     this.getNormalStatusDetailSelection();
     this.getCategoryNormalSelection();
-    this.getNormalBrandSelection();   
+    this.getNormalBrandSelection();
   }
 
   ngOnInit() {
@@ -93,7 +93,7 @@ export class ViewPetdetailComponent implements OnInit {
       this.firstload = false;
 
       this.getNormalBreedPetDetailSelection();
-      this.getNormalSupplierPetDetailSelection();      
+      this.getNormalSupplierPetDetailSelection();
     });
 
     this.form = this.formBuilder.group({
