@@ -22,14 +22,16 @@
                 <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" ngbDropdownMenu="userDrop">
                     <div class="w3ls_vegetables">
                         <ul *ngIf="user.Id > 0">
-                            <li><a routerLink="profile">Thông tin cá nhân</a></li>
-                            <li><a routerLink="myorder">Đơn hàng của tôi</a></li>
+                            <li></li>
+                            <li><a routerLink="/profile">Thông tin của tôi</a></li>
+                            <li><a routerLink="/myorder">Đơn hàng của tôi</a></li>
+                            <li><a routerLink="/about">Thông tin cửa hàng</a></li>
                             <hr/>
-                            <li><a (click)="logout()" routerLink="index"><b>Đăng xuất</b></a></li>
+                            <li><a (click)="logout()" routerLink="/index"><b>Đăng xuất</b></a></li>
                         </ul>
                         <ul *ngIf="!(user.Id > 0)">
-                            <li><a routerLink="login">Đăng nhập</a></li>
-                            <li><a routerLink="register">Đăng ký</a></li>
+                            <li><a routerLink="/login">Đăng nhập</a></li>
+                            <li><a routerLink="/register">Đăng ký</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
         <div class="w3ls_logo_products_left1" style="margin-left: 85px;">
             <ul class="special_items">
                 <li><a routerLink="/pets"><span style="font-size: 20px;">Thú cưng</span></a><i>/</i></li>
-                <li><a routerLink="/about"><span style="font-size: 20px;">Thông tin</span></a></li>
+                <li><a routerLink="/blogs"><span style="font-size: 20px;">Tin tức</span></a></li>
             </ul>
         </div>
         <div class="w3ls_logo_products_left1" style="margin-left: 158px;">

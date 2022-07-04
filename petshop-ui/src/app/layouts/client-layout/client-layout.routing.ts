@@ -14,6 +14,8 @@ import { CheckoutComponent } from 'src/app/pages/checkout/checkout.component';
 import { AboutComponent } from 'src/app/pages/about/about.component';
 import { IndexComponent } from 'src/app/pages/index/index.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
+import { ListBlogComponent } from 'src/app/pages/blog/list-blog/list-blog.component';
+import { DetailBlogComponent } from 'src/app/pages/blog/detail-blog/detail-blog.component';
 
 const routes: Routes = [ 
   {path: "index", component: IndexComponent},
@@ -34,7 +36,9 @@ const routes: Routes = [
   {path: "pets/find/:find", component: PetsComponent},
   {path: 'pets/:id', component: SingleComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'orders/:id', component: DetailOrderComponent}
+  {path: 'orders/:id', component: DetailOrderComponent},
+  {path: 'blogs', component: ListBlogComponent},
+  {path: 'blogs/:id', component: DetailBlogComponent}
 ]
 
 @NgModule({
