@@ -17,7 +17,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/admin/list-pet', title: 'Nguồn gốc thú cưng',  icon:'fa fa-paw text-yellow', class: '' },
   { path: '/admin/list-petdetail', title: 'Thông tin thú cưng', icon:'ni-collection text-info', class:''},
   { path: '/admin/brand/list-brand', title: 'Thông tin chi nhánh', icon:'ni-collection text-info', class:''}
-  
+
 ];
 
 export const PETDETAILS: RouteInfo[] = [
@@ -32,6 +32,7 @@ export const PETEXTRAS: RouteInfo[] = [
   { path: '/admin/list-promotion', title: 'Quảng cáo',  icon:'ni ni-world-2 text-info', class: '' },
   { path: '/admin/list-customer', title: 'Khách hàng',  icon:'ni ni-briefcase-24 text-orange', class: '' },
   { path: '/admin/list-contact', title: 'Liên hệ',  icon:'ni ni-chat-round text-blue', class: '' },
+  { path: '/admin/list-news', title:'Tin tức', icon:'ni ni-single-copy-04 text-info', class: ''}
 ];
 
 export const ADMINS: RouteInfo[] = [
@@ -59,7 +60,7 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router,
     private accountService: AccountService,
     private orderCountService: OrderCountService,
-    private contactCountService: ContactCountService) { 
+    private contactCountService: ContactCountService) {
       this.countPending = this.orderCountService.orderCount$;
       this.countContact = this.contactCountService.contactCount$;
     }
@@ -75,15 +76,15 @@ export class SidebarComponent implements OnInit {
 
           this.orderCountService.GetCountPending().subscribe((res: any) => {
             var countQuantity = res.content.CountPending;
-      
+
             this.orderCountService.setOrderCount(countQuantity);
           });
-      
+
           this.contactCountService.GetCountContact().subscribe((res: any) =>{
             var countQuantity = res.content.CountContact;
-            
+
             this.contactCountService.setContactCount(countQuantity);
-          });      
+          });
       }
       else if(this.user && this.user.RoleId == 10){
         this.admins = ADMINS.filter(menuItem => menuItem);
