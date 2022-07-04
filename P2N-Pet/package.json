@@ -25,6 +25,8 @@
     "@angular/platform-browser-dynamic": "12.1.2",
     "@angular/router": "12.1.2",
     "@auth0/angular-jwt": "^5.0.2",
+    "@ckeditor/ckeditor5-angular": "^4.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^34.2.0",
     "@material/tabs": "^2.3.0",
     "@ng-bootstrap/ng-bootstrap": "10.0.0",
     "@ng-select/ng-select": "^8.1.1",
