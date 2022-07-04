@@ -21,6 +21,8 @@ import { ForgetPasswordComponent } from '../../pages/account/forget-password/for
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from '../../pages/cart/cart.component';
 import { DetailOrderComponent } from '../../pages/myorder/detail-order/detail-order.component';
+import { ListBlogComponent } from '../../pages/blog/list-blog/list-blog.component';
+import { DetailBlogComponent } from '../../pages/blog/detail-blog/detail-blog.component';
 
 
 
@@ -40,7 +42,9 @@ import { DetailOrderComponent } from '../../pages/myorder/detail-order/detail-or
     ListOrderComponent,
     ForgetPasswordComponent,
     CartComponent,
-    DetailOrderComponent
+    DetailOrderComponent,
+    ListBlogComponent,
+    DetailBlogComponent
   ],
   imports: [
     CommonModule,

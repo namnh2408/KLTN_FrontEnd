@@ -99,7 +99,6 @@ export class PetsComponent implements OnInit {
         this.pagination = res.content.Pagination;
         this.getNumPage();
         this.loading = false;
-        //console.log(this.pagination);
       });
   }
 
