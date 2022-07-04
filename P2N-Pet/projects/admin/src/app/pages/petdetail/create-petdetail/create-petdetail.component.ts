@@ -1,8 +1,11 @@
+import { Category } from './../../../models/category';
+import { Breed } from './../../../models/breed';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeEnumToList, FormBuilderConvertData } from '../../../heplers/utils';
-import { AgeSelection, BreedSelection, ColorSelection, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
+import { CategorySelection } from '../../../models/pet';
+import { AgeSelection, BrandSelection, BreedSelection, ColorSelection, productBrands, SexSelection, SizeSelection, StatusDetailSelection, SupplierSelection } from '../../../models/petdetail';
 import { StatusNormal } from '../../../models/status';
 import { PetDetailService } from '../../../services/petdetail.service';
 import { ToastService } from '../../../services/toast.service';
@@ -20,6 +23,8 @@ export class CreatePetdetailComponent implements OnInit {
   FileData:string [] = [];
   urls: string[] = [];
 
+  //brands : any;
+
   breedSelection: BreedSelection[];
   supplierSelection: SupplierSelection[];
   ageSelection: AgeSelection[];
@@ -30,6 +35,8 @@ export class CreatePetdetailComponent implements OnInit {
 
   petDetailStatusText = StatusNormal;
   petDetailStatusOptions = [];
+  categorySelection : CategorySelection[];
+  brandSelection: BrandSelection[];
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -42,31 +49,43 @@ export class CreatePetdetailComponent implements OnInit {
     this.getNormalSizeSelection();
     this.getNormalSexSelection();
     this.getNormalStatusDetailSelection();
+    //this.getCategoryNormalSelection();
+    this.getNormalBrandSelection();
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       BreedId: 0,
       SupplierId: 0,
-      AgeId: null,
-      ColorId: null,
-      SizeId: null,
-      SexId:null,
+      AgeId: 0,
+      ColorId: 0,
+      SizeId: 0,
+      SexId:0,
       StatusDetailId: [1, Validators.required],
       Status: [10, Validators.required],
-      Price: null,
-      Discount: null,
+      Price: 0,
+      Discount: 0,
       Quantity: [1, Validators.required],
+      CategoryId: 0,
+      brands: this.formBuilder.array([])
     });
 
     this.getNormalBreedPetDetailSelection();
     this.getNormalSupplierPetDetailSelection();
+    this.getNormalCategoryProductDetailSelection();
   }
 
   get f() { return this.form.controls; }
 
+  get fBrands(): FormArray { return this.form.get('brands') as FormArray;}
+
   ngAfterViewInit() {
 
+  }
+
+  clickSupplier(){
+    this.getNormalBreedPetDetailSelection();
+    this.getNormalCategoryProductDetailSelection();
   }
 
   onSubmit() {
@@ -75,25 +94,59 @@ export class CreatePetdetailComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    
+
     this.loading = true;
-    
+
     let formData = FormBuilderConvertData(this.form.value);
-    for (var i = 0; i < this.FileData.length; i++) { 
+    for (var i = 0; i < this.FileData.length; i++) {
       formData.append("FileData", this.FileData[i]);
     }
 
+    formData.delete('brands');
+    formData.append('brands',JSON.stringify(this.fBrands.value));
+
     this.petDetailService.CreatePetDetail(formData)
       .subscribe((response: any) => {
-        
+
           this.router.navigate(["admin/list-petdetail"]);
       }, error => {
         this.loading = false;
       });
   }
 
+  createRow(){
+    let row = this.formBuilder.group( new productBrands());
+    this.fBrands.push(row);  //fBrands
+
+    //console.log("Add row nhe");
+  }
+
+  deleteRow(ix: any){
+    this.fBrands.removeAt(ix);
+  }
+
+  getNormalBrandSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalBrandSelection().subscribe( (res : any) => {
+      this.brandSelection = res.content.Selection;
+
+      this.loading = false;
+    })
+  }
+
   buildSelection() {
     ChangeEnumToList(this.petDetailStatusText, this.petDetailStatusOptions);
+  }
+
+  getCategoryNormalSelection(){
+    this.loading = true;
+
+    this.petDetailService.GetNormalCategory().subscribe( (res: any) => {
+      this.categorySelection = res.content.Selection;
+
+      this.loading = false;
+    })
   }
 
   getNormalAgeSelection() {
@@ -136,12 +189,30 @@ export class CreatePetdetailComponent implements OnInit {
     });
   }
 
-  getNormalSupplierPetDetailSelection(){
+  getNormalCategoryProductDetailSelection(){
     this.loading = true;
-    this.petDetailService.GetNormalSupplierPetDetailSelection(this.form.controls['BreedId'].value).subscribe((res: any) => {
-      this.supplierSelection = res.content.SupplierSelection;
+    this.petDetailService.GetNormalCategoryProductDetailSelection(this.form.controls['SupplierId'].value).subscribe((res: any) => {
+      this.categorySelection = res.content.Selection;
       this.loading = false;
     });
+  }
+
+  getNormalSupplierPetDetailSelection(){
+    this.loading = true;
+
+    if(this.f.BreedId.value != 0){
+      this.petDetailService.GetNormalSupplierPetDetailSelection(this.form.controls['BreedId'].value).subscribe((res: any) => {
+        this.supplierSelection = res.content.SupplierSelection;
+        this.loading = false;
+      });
+    }
+    else if ( this.f.CategoryId.value != 0){
+      this.petDetailService.GetSupplierPetDetailSelection(this.form.controls['CategoryId'].value).subscribe((res: any) => {
+        this.supplierSelection = res.content.SupplierSelection;
+        this.loading = false;
+      });
+    }
+
   }
 
   getNormalStatusDetailSelection(){
@@ -155,7 +226,7 @@ export class CreatePetdetailComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files && event.target.files.length) {
 
-      for (var i = 0; i < event.target.files.length; i++) { 
+      for (var i = 0; i < event.target.files.length; i++) {
         this.FileData.push(event.target.files[i]);
       }
 
@@ -170,7 +241,7 @@ export class CreatePetdetailComponent implements OnInit {
         }
       }
     }
-    
+
   }
 
   deleteItemImage(index){

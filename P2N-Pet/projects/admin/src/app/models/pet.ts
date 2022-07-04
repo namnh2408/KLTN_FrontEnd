@@ -14,11 +14,15 @@ export class PetCondition {
     BreedId: string;
     SupplierId: string;
     Status: string;
+    CategoryId : number;
+    TypeProductId : number;
   
     constructor() {
       this.BreedId = '0';
       this.SupplierId = '0';
       this.Status = '0';
+      this.CategoryId = 0;
+      this.TypeProductId = 0;
     }
   }
 
@@ -30,4 +34,14 @@ export class BreedSelection{
 export class SupplierSelection{
   Id:number;
   Name: string;
+}
+
+export class CategorySelection{
+  Id: number;
+  Title: string;
+
+  constructor(){
+    this.Id = 0;
+    this.Title = '';
+  }
 }

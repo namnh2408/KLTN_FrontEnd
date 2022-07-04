@@ -38,4 +38,12 @@ export class PetService {
     GetNormalSupplier(){
         return this.http.get(`${environment.apiUrl}AData/GetNormalSupplierSelection`);
     }
+
+    GetNormalCategory(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalCategorySelection`);
+    }
+
+    GetNormalTypeProductSelection(){
+        return this.http.get(`${environment.apiUrl}AData/GetNormalTypeProductSelection`);
+    }
 }

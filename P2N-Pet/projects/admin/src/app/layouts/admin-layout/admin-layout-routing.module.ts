@@ -1,3 +1,8 @@
+import { UpdateNewsComponent } from './../../pages/news/update-news/update-news.component';
+import { CreateNewsComponent } from './../../pages/news/create-news/create-news.component';
+import { ListNewsComponent } from './../../pages/news/list-news/list-news.component';
+import { UpdateBrandComponent } from './../../pages/brand/update-brand/update-brand.component';
+import { CreateBrandComponent } from './../../pages/brand/create-brand/create-brand.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateAccountComponent } from '../../pages/account/create-account/create-account.component';
@@ -90,7 +95,12 @@ const routes: Routes = [
     { path: 'admin/customer/view/:id',          component: ViewCustomerComponent },
     { path: 'admin/cate/create-category',      component: CreateCategoryComponent},
     { path: 'admin/brand/list-brand',        component : ListBrandComponent},
-    { path: 'admin/cate/update-category/:id',        component : UpdateCategoryComponent}
+    { path: 'admin/cate/update-category/:id',        component : UpdateCategoryComponent},
+    { path: 'admin/brand/create',        component : CreateBrandComponent},
+    { path: 'admin/brand/update/:id',     component: UpdateBrandComponent},
+    { path: 'admin/list-news', component: ListNewsComponent},
+    { path: 'admin/news/create', component: CreateNewsComponent},
+    { path: 'admin/news/update/:id', component: UpdateNewsComponent}
 ];
 
 @NgModule({

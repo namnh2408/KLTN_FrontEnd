@@ -34,7 +34,7 @@
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="BreedId">Thú cưng</label>
-                              <select class="form-control form-control-alternative" placeholder="Thú cưng" (click)="getNormalSupplierPetDetailSelection()" 
+                              <select class="form-control form-control-alternative" placeholder="Thú cưng" (click)="getNormalSupplierPetDetailSelection()"
                                 [ngClass]="{ 'is-invalid': submitted && f.BreedId.errors }" formControlName="BreedId">
                                 <option *ngFor="let item of breedSelection" [ngValue]="item.Id">
                                   {{ item.Name }}
@@ -45,22 +45,38 @@
                               </div>
                             </div>
                           </div>
+
                           <div class="col-lg-6">
-                              <div class="form-group">
-                                <label class="form-control-label" for="SupplierId">Nhà cung cấp</label>
-                                <select class="form-control form-control-alternative" placeholder="Nhà cung cấp" (click)="getNormalBreedPetDetailSelection()"
-                                  [ngClass]="{ 'is-invalid': submitted && f.SupplierId.errors }" formControlName="SupplierId">
-                                  <option *ngFor="let item of supplierSelection" [ngValue]="item.Id">
-                                    {{ item.Name }}
+                            <div class="form-group">
+                                <label class="form-control-label" for="CategoryId">Tên sản phẩm</label>
+                                <select class="form-control form-control-alternative" placeholder="Nhà cung cấp" (click)="getNormalSupplierPetDetailSelection()" [ngClass]="{ 'is-invalid': submitted && f.CategoryId.errors }" formControlName="CategoryId">
+                                  <option *ngFor="let item of categorySelection" [ngValue]="item.Id">
+                                    {{ item.Title }}
                                   </option>
                                 </select>
-                                <div *ngIf="submitted && f.SupplierId.errors" class="invalid-feedback">
-                                  <div *ngIf="f.SupplierId.errors.required">Vui lòng chọn nhà cung cấp</div>
-                                </div>
-                              </div>
+                                <!-- <div *ngIf="submitted && f.SupplierId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.CategoryId.errors.required">Vui lòng chọn tên sản phẩm</div>
+                                </div> -->
                             </div>
                         </div>
+
+                        </div>
                         <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="SupplierId">Nhà cung cấp</label>
+                              <select class="form-control form-control-alternative" placeholder="Nhà cung cấp" (click)="getNormalBreedPetDetailSelection()"
+                                [ngClass]="{ 'is-invalid': submitted && f.SupplierId.errors }" formControlName="SupplierId">
+                                <option *ngFor="let item of supplierSelection" [ngValue]="item.Id">
+                                  {{ item.Name }}
+                                </option>
+                              </select>
+                              <div *ngIf="submitted && f.SupplierId.errors" class="invalid-feedback">
+                                <div *ngIf="f.SupplierId.errors.required">Vui lòng chọn nhà cung cấp</div>
+                              </div>
+                            </div>
+                          </div>
+
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="ColorId">Màu sắc</label>
@@ -75,23 +91,24 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-6">
-                              <div class="form-group">
-                                <label class="form-control-label" for="SizeId">Kích cỡ</label>
-                                <select class="form-control form-control-alternative" placeholder="Kích cỡ"
-                                  [ngClass]="{ 'is-invalid': submitted && f.SizeId.errors }" formControlName="SizeId">
-                                  <option *ngFor="let item of sizeSelection" [ngValue]="item.Id">
-                                    {{ item.Title }}
-                                  </option>
-                                </select>
-                                <div *ngIf="submitted && f.SizeId.errors" class="invalid-feedback">
-                                  <div *ngIf="f.SizeId.errors.required">Vui lòng chọn kích cỡ</div>
-                                </div>
-                              </div>
-                            </div>
                         </div>
 
                         <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="SizeId">Kích cỡ</label>
+                              <select class="form-control form-control-alternative" placeholder="Kích cỡ"
+                                [ngClass]="{ 'is-invalid': submitted && f.SizeId.errors }" formControlName="SizeId">
+                                <option *ngFor="let item of sizeSelection" [ngValue]="item.Id">
+                                  {{ item.Title }}
+                                </option>
+                              </select>
+                              <div *ngIf="submitted && f.SizeId.errors" class="invalid-feedback">
+                                <div *ngIf="f.SizeId.errors.required">Vui lòng chọn kích cỡ</div>
+                              </div>
+                            </div>
+                          </div>
+
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="AgeId">Tuổi</label>
@@ -106,23 +123,25 @@
                               </div>
                             </div>
                           </div>
+
+                        </div>
+
+                        <div class="row">
                           <div class="col-lg-6">
-                              <div class="form-group">
-                                <label class="form-control-label" for="SexId">Giống</label>
-                                <select class="form-control form-control-alternative" placeholder="Giống"
-                                  [ngClass]="{ 'is-invalid': submitted && f.SexId.errors }" formControlName="SexId">
-                                  <option *ngFor="let item of sexSelection" [ngValue]="item.Id">
-                                    {{ item.Title }}
-                                  </option>
-                                </select>
-                                <div *ngIf="submitted && f.SexId.errors" class="invalid-feedback">
-                                  <div *ngIf="f.SexId.errors.required">Vui lòng chọn giống</div>
-                                </div>
+                            <div class="form-group">
+                              <label class="form-control-label" for="SexId">Giống</label>
+                              <select class="form-control form-control-alternative" placeholder="Giống"
+                                [ngClass]="{ 'is-invalid': submitted && f.SexId.errors }" formControlName="SexId">
+                                <option *ngFor="let item of sexSelection" [ngValue]="item.Id">
+                                  {{ item.Title }}
+                                </option>
+                              </select>
+                              <div *ngIf="submitted && f.SexId.errors" class="invalid-feedback">
+                                <div *ngIf="f.SexId.errors.required">Vui lòng chọn giống</div>
                               </div>
                             </div>
-                        </div>
-                        
-                        <div class="row">
+                          </div>
+
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="StatusDetailId">Trạng thái bán</label>
@@ -137,6 +156,8 @@
                               </div>
                             </div>
                           </div>
+                        </div>
+                        <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="Status">Trạng thái</label>
@@ -151,8 +172,8 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="row">
+
+
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="Price">Giá bán (VNĐ)</label>
@@ -163,6 +184,9 @@
                               </div>
                             </div>
                           </div>
+
+                        </div>
+                        <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="Discount">Giảm giá (%)</label>
@@ -173,12 +197,11 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="row">
+
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="Quantity">Số lượng</label>
-                              <input type="number" class="form-control form-control-alternative" placeholder="Số lượng" min="1" 
+                              <input type="number" class="form-control form-control-alternative" placeholder="Số lượng" min="1"
                                 [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }" formControlName="Quantity">
                               <div *ngIf="submitted && f.Quantity.errors" class="invalid-feedback">
                                 <div *ngIf="f.Quantity.errors.required">Vui lòng nhập số lượng</div>
@@ -193,12 +216,12 @@
                     <a ngbNavLink><h6 class="heading-small text-muted">Hình ảnh</h6></a>
                     <ng-template ngbNavContent>
                       <div class="pl-lg-4 mt-4">
-                        
+
                         <div class="row">
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-control-label" for="MyFile">Chọn các hình ảnh</label>
-                                  <input type="file" class="form-control form-control-alternative" (change)="onFileChange($event)" multiple> 
+                                  <input type="file" class="form-control form-control-alternative" (change)="onFileChange($event)" multiple>
                               </div>
                           </div>
                       </div>
@@ -230,13 +253,85 @@
                                         </div>
                                     </div>
                               </div>
-                                  
+
                               <div class="my-media__empty-text" *ngIf="urls.length == 0 && urlnews.length == 0">Không có hình ảnh</div>
                           </div>
                         </div>
                       </div>
                     </ng-template>
                   </li>
+                  <li ngbNavItem>
+                    <a ngbNavLink>
+                        <h6 class="heading-small text-muted">Chi nhánh</h6>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="pl-lg-4 mt-4">
+                            <!-- Add product vào chi nhánh -->
+                            <div class="card-header bg-white border-0">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-6 col-md-12">
+                                        <h3 class="mb-0">Thêm sản phẩm vào chi nhánh</h3>
+                                    </div>
+                                    <div class="col-xl-6 col-md-12 text-right">
+                                        <button (click)="createRow()" class="btn btn-outline-danger">
+                                      Thêm hàng
+                                  </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <label class="form-control-label">Địa chỉ chi nhánh</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label class="form-control-label">Số lượng</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label class="form-control-label">Tác vụ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pl-lg-4" formArrayName="brands">
+                                    <div *ngFor="let p of fBrands.controls; let ix = index" [formGroupName]="ix" class="productBrands">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <!-- <label class="form-control-label" for="ProductDetailId">Thú cưng</label> -->
+                                                    <select class="form-control form-control-alternative" placeholder="Địa chỉ" [ngClass]="{ 'is-invalid': submitted }" formControlName="BrandId">
+                                                        <option *ngFor="let item of brandSelection" [ngValue]="item.Id">
+                                                            {{ item.Address }}
+                                                        </option>
+                                                    </select>
+                                                    <!-- <div *ngIf="submitted && fProduct.ProductDetailId.errors" class="invalid-feedback">
+                                                        <div *ngIf="fProduct.ProductDetailId.errors.required">Vui lòng chọn thú cưng</div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <!-- <label class="form-control-label" for="QuantityInBrand">Số lượng</label> -->
+                                                    <input type="number" class="form-control form-control-alternative" placeholder="Số lượng" [ngClass]="{ 'is-invalid': submitted }" formControlName="QuantityInBrand">
+                                                    <!-- <div *ngIf="submitted && fProduct.QuantityInBrand.errors" class="invalid-feedback">
+                                                  <div *ngIf="fProduct.QuantityInBrand.errors.required">Vui lòng điền Số lượng</div>
+                                              </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button (click)="deleteRow(ix)" class="btn btn-danger">
+                                                    Xóa
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </li>
                 </ul>
                 <div [ngbNavOutlet]="nav"></div>
               </form>

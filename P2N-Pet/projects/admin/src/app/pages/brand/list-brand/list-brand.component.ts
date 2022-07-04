@@ -24,9 +24,12 @@ export class ListBrandComponent implements OnInit {
   brandStatusOptions = [];
 
   public brands: any;
-  
+
   constructor(private brandService: BrandService,
-    private paginationService: PaginationService,) { }
+    private paginationService: PaginationService,) {
+      this.pagination.CurrentDate = FormatDaySearch(new Date());
+      this.buildSelection();
+    }
 
   ngOnInit(): void {
     this.getListBrand();
@@ -39,7 +42,7 @@ export class ListBrandComponent implements OnInit {
   getListBrand(){
     this.loading = true;
     this.brandService.GetListBrand({
-      ...this.pagination, 
+      ...this.pagination,
       ...this.brandCondition
     }).subscribe((res:any) =>{
       this.brands = res.content.Brands;

@@ -26,7 +26,9 @@ export class PetDetailCondition {
     SexId: string;
     StatusDetailId: string;
     Status: string;
-  
+    CategoryId: number;
+    TypeProductId : number;
+
     constructor() {
       this.BreedId = '0';
       this.SupplierId = '0';
@@ -36,6 +38,8 @@ export class PetDetailCondition {
       this.SexId = '0';
       this.StatusDetailId = '0';
       this.Status = '0';
+      this.CategoryId = 0;
+      this.TypeProductId = 0;
     }
   }
 
@@ -77,4 +81,61 @@ export class StatusDetailSelection{
 export class ImageModel{
   Id:Number;
   Url: string;
+}
+
+export class BrandSelection{
+  Id: number;
+  Address: string;
+}
+
+export class productBrands{
+  BrandId: number;
+  QuantityInBrand : number;
+
+  constructor(){
+    this.BrandId = 0;
+    this.QuantityInBrand = 0;
+  }
+}
+
+export class PetDetailOneModel{
+  Id: number;
+  BreedId: number;
+  SupplierId: number;
+  ColorId: number;
+  SizeId: number;
+  AgeId: number;
+  SexId: number;
+  StatusDetailId: number;
+  Price: number;
+  Discount: number;
+  Quantity: number;
+  Status: number;
+  CategoryId: number;
+  aProductProductImageForModels: productImageFor[];
+  brands: brandProductDetail[]
+}
+
+export class productImageFor{
+  Id: number;
+  ProductImageId: number;
+  Image: string;
+
+  constructor(){
+    this.Id = 0;
+    this.ProductImageId = 0;
+    this.Image = '';
+  }
+}
+
+export class brandProductDetail{
+  BrandId: number;
+  Address: string;
+  QuantityInBrand: number;
+
+  constructor(){
+    this.BrandId = 0;
+    this.Address = '';
+    this.QuantityInBrand = 0;
+  }
 }
