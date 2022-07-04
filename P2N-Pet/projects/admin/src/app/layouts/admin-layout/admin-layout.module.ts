@@ -56,6 +56,9 @@ import { UpdateCategoryComponent } from '../../pages/category/update-category/up
 import { ListBrandComponent } from '../../pages/brand/list-brand/list-brand.component';
 import { UpdateBrandComponent } from '../../pages/brand/update-brand/update-brand.component';
 import { CreateBrandComponent } from '../../pages/brand/create-brand/create-brand.component';
+import { ListNewsComponent } from '../../pages/news/list-news/list-news.component';
+import { CreateNewsComponent } from '../../pages/news/create-news/create-news.component';
+import { UpdateNewsComponent } from '../../pages/news/update-news/update-news.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,9 @@ import { CreateBrandComponent } from '../../pages/brand/create-brand/create-bran
     ListBrandComponent,
     UpdateBrandComponent,
     CreateBrandComponent,
+    ListNewsComponent,
+    CreateNewsComponent,
+    UpdateNewsComponent,
   ],
   imports: [
     CommonModule,
@@ -117,7 +123,8 @@ import { CreateBrandComponent } from '../../pages/brand/create-brand/create-bran
     ReactiveFormsModule,
     NgSelectModule,
     NgxNumberFormatModule,
-    RouterModule
+    RouterModule,
+    //CKEditorMobule
   ],
   providers: [
     DatePipe

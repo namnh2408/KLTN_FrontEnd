@@ -1,78 +1,94 @@
-import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ChangeEnumToList, FormatDateVN, FormatDaySearch } from '../../../heplers/utils';
-import { BrandCondition } from '../../../models/brand';
+import { NewsService } from './../../../services/news.service';
+import { Component, OnInit } from '@angular/core';
 import { Pagination } from '../../../models/condition';
+import { NewsCondition, TypeNewsSelection } from '../../../models/news';
 import { StatusNormal } from '../../../models/status';
-import { BrandService } from '../../../services/brand.service';
 import { PaginationService } from '../../../services/pagination.service';
+import { ChangeEnumToList, FormatDateVN, FormatDaySearch } from '../../../heplers/utils';
+
+type NewType = Subscription;
 
 @Component({
-  selector: 'app-list-brand',
-  templateUrl: './list-brand.component.html',
-  styleUrls: ['./list-brand.component.scss']
+  selector: 'app-list-news',
+  templateUrl: './list-news.component.html',
+  styleUrls: ['./list-news.component.scss']
 })
-export class ListBrandComponent implements OnInit {
+export class ListNewsComponent implements OnInit {
 
   loading = false;
   pagination: Pagination = new Pagination();
   listPage: number[] = [];
-  brandCondition: BrandCondition = new BrandCondition();
+
+  newsCondition: NewsCondition = new NewsCondition();
   subscriptionPagination: Subscription;
 
-  brandStatusText = StatusNormal;
-  brandStatusOptions = [];
+  newsStatusText = StatusNormal;
+  newsStatusOptions = [];
 
-  public brands: any;
+  typeNewsSelection : TypeNewsSelection;
 
-  constructor(private brandService: BrandService,
-    private paginationService: PaginationService,) {
+  public newsList: any
+
+  constructor(private newsService: NewsService,
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
+      this.getNormalTypeNewsSelection();
     }
 
   ngOnInit(): void {
-    this.getListBrand();
+    this.getListNews();
     this.subscriptionPagination = this.paginationService.getChangePage().subscribe(pageNumber => {
       this.pagination.CurrentPage = pageNumber;
-      this.getListBrand();
+      this.getListNews();
     });
   }
 
-  getListBrand(){
+  getListNews(){
     this.loading = true;
-    this.brandService.GetListBrand({
+    this.newsService.GetListNews({
       ...this.pagination,
-      ...this.brandCondition
+      ...this.newsCondition
     }).subscribe((res:any) =>{
-      this.brands = res.content.Brands;
+      this.newsList = res.content.ListNews;
       this.pagination = res.content.Pagination;
       this.getNumPage()
       this.loading = false;
     })
+
+    console.log( JSON.stringify(this.newsList));
   }
 
-  deleteBrand(BrandId){
-    this.brandService.DeleteBrand(BrandId).subscribe((res : any) => {
-      this.getListBrand();
+  getNormalTypeNewsSelection(){
+    this.loading = true;
+    this.newsService.GetNormalTypeNewsSelection().subscribe( (res: any) =>{
+      this.typeNewsSelection = res.content.Selection;
+      this.loading = false;
+    })
+  }
+
+  deleteNews(newsId){
+    this.newsService.DeleteNews(newsId).subscribe((res : any) => {
+      this.getListNews();
     })
   }
 
   onSearch() {
     this.pagination.CurrentPage = 0;
     this.pagination.CurrentDate = FormatDaySearch(new Date());
-    this.getListBrand();
+    this.getListNews();
   }
 
   clearForm(){
-    this.brandCondition = new BrandCondition();
+    this.newsCondition = new NewsCondition();
     this.pagination.CurrentPage = 0;
     this.loading = true;
-    this.getListBrand();
+    this.getListNews();
   }
 
   buildSelection() {
-    ChangeEnumToList(this.brandStatusText, this.brandStatusOptions);
+    ChangeEnumToList(this.newsStatusText, this.newsStatusOptions);
   }
 
   formatDateVN(input) {
