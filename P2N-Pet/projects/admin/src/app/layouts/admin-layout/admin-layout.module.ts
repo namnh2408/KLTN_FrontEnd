@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxNumberFormatModule } from 'ngx-number-format';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -124,7 +125,7 @@ import { UpdateNewsComponent } from '../../pages/news/update-news/update-news.co
     NgSelectModule,
     NgxNumberFormatModule,
     RouterModule,
-    //CKEditorMobule
+    CKEditorModule
   ],
   providers: [
     DatePipe

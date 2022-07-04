@@ -58,10 +58,15 @@ export class CreateNewsComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    console.log('di choi nhAAA 11111')
 
     if (this.form.invalid) {
+
+      console.log('loi nhaaaaa')
       return;
     }
+
+    console.log('di choi nhAAA 222')
 
     this.loading = true;
     let formData = FormBuilderConvertData(this.form.value);
