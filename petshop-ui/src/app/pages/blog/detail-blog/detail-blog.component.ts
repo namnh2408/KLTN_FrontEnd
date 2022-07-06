@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FormatDateVN } from 'src/app/heplers/utils';
 import { BlogService } from 'src/app/services/blog.service';
@@ -22,6 +23,9 @@ export class DetailBlogComponent implements OnInit {
     this.blogId = this.route.snapshot.params['id'];
 
     this.getDetailBlogs();
+
+    let target = document.getElementById('target1');
+    this.scroll(target);
   }
 
   getDetailBlogs(){
@@ -38,5 +42,9 @@ export class DetailBlogComponent implements OnInit {
 
   formatDateVN(input) {
     return FormatDateVN(input);
+  }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({behavior: 'smooth'});
   }
 }

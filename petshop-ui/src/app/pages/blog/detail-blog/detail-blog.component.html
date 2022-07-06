@@ -1,5 +1,5 @@
 
-<div class="products-breadcrumb">
+<div class="products-breadcrumb"  id="target1" #target>
     <div class="container">
         <ul>
             <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
@@ -11,16 +11,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="padding: 10px 20px;">
+                        
                         <div class="page-wrapper">
-                            <div class="container_image_div">
-                                <img src={{blog.Image}} alt="" class="img-fluid container_img_new" style="margin-bottom: 5px;">
-                            </div>
                             <div class="blog-title-area text-center">
-                                <p style="font-size: 25px; padding: 10px 5px 0px 5px;"><b>{{blog.Title}}</b></p>
-                                <p style="font-size: 15px; padding: 0px 5px 10px 5px;;"><i><b>Người viết:</b> {{blog.CreateUserName}} &nbsp; &nbsp; <b>Ngày tạo:</b> {{ formatDateVN(blog.CreateDate) }}</i></p>
-                            </div><!-- end title -->
-                            <div class="single-post-media" style="margin-bottom: 20px;">
-                                <p>{{blog.Content}}</p>
+                                <p style="font-size: 38px; margin-top:10px; padding: 5px; color: brown;"><b>{{blog.Title}}</b></p>
+                            </div>
+                            <p style="font-size: 15px; padding: 10px 0px 5px 0px;;"><i><b>Người viết:</b> {{blog.CreateUserName}} &nbsp; &nbsp; <b>Ngày tạo:</b> {{ formatDateVN(blog.CreateDate) }}</i></p>
+                            <div style="margin-bottom: 20px;">
+                                <div [innerHTML]="blog.HtmlContent | safeHtml"></div>
                             </div><!-- end media -->
                         </div><!-- end page-wrapper -->
                     </div><!-- end col -->
@@ -35,7 +33,7 @@
                                 </div><!-- end banner -->
                             </div><!-- end widget -->
 
-                            <div class="widget">
+                            <div class="widget" style=" margin-top:30px;">
                                 <p style="font-size: 24px; margin-bottom: 10px;" class="widget-title"><b>Thông tin thú vị</b></p>
                                 <div class="blog-list-widget">
                                     <div class="list-group">
