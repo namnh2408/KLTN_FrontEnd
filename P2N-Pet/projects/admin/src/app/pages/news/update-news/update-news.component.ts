@@ -20,6 +20,8 @@ export class UpdateNewsComponent implements OnInit {
   loading = false;
   submitted = false;
   image: any;
+  firstload = false;
+  id : any;
 
   newsStatusText = StatusNormal;
   newsStatusOptions = [];
@@ -39,8 +41,24 @@ export class UpdateNewsComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.firstload = true;
+    this.id = this.route.snapshot.params['id'];
+
+    this.newsService.GetOneNews(this.id)
+    .subscribe((x: any) => {
+      var newsone = x.content.News;
+      this.f.Id.setValue(newsone.Id);
+      this.f.Title.setValue(newsone.Title);
+      this.f.Content.setValue(newsone.Content);
+      this.f.HtmlContent.setValue(newsone.HtmlContent);
+      this.f.Status.setValue(newsone.Status);
+      this.f.NewsImage.setValue(newsone.Image);
+      this.f.TypeNewsId.setValue(newsone.TypeNewsId);
+      this.firstload = false;
+    });
 
     this.form = this.formBuilder.group({
+      Id: 0,
       Title: ['', Validators.required],
       Content: ['', Validators.required],
       HtmlContent: '',
@@ -66,7 +84,7 @@ export class UpdateNewsComponent implements OnInit {
     this.loading = true;
     let formData = FormBuilderConvertData(this.form.value);
     formData.append('Image', this.image);
-    this.newsService.CreateNews(formData)
+    this.newsService.UpdateNews(formData)
       .subscribe((response: any) => {
 
           this.router.navigate(["admin/list-news"]);
