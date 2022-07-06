@@ -43,6 +43,8 @@
                                         <div class="snipcart-thumb">
                                             <a routerLink="/pets/{{item.ProductDetailId}}"><img src="{{ item.ProductImage }}" alt=" {{ item.BreedName }}" class="display-img" /></a>
                                             <div class="topright" *ngIf="item.Discount > 0"><b>- {{ item.Discount }} %</b></div>
+                                        </div>
+                                        <div style="width:77%; margin: auto;">
                                             <p>{{ item.ProductTitle }}</p>
                                             <h4>{{ item.PriceDiscount|number: '4.0-2'}} <span *ngIf=" item.Discount > 0"> {{ item.Price | number : '4.0-2'}}</span></h4>
                                         </div>

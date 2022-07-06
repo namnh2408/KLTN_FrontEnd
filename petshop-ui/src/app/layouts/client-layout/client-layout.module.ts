@@ -23,6 +23,7 @@ import { CartComponent } from '../../pages/cart/cart.component';
 import { DetailOrderComponent } from '../../pages/myorder/detail-order/detail-order.component';
 import { ListBlogComponent } from '../../pages/blog/list-blog/list-blog.component';
 import { DetailBlogComponent } from '../../pages/blog/detail-blog/detail-blog.component';
+import { SafeHtmlPipe } from 'src/app/heplers/safehtml';
 
 
 
@@ -44,7 +45,8 @@ import { DetailBlogComponent } from '../../pages/blog/detail-blog/detail-blog.co
     CartComponent,
     DetailOrderComponent,
     ListBlogComponent,
-    DetailBlogComponent
+    DetailBlogComponent,
+    SafeHtmlPipe
   ],
   imports: [
     CommonModule,

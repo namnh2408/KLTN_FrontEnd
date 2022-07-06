@@ -156,7 +156,7 @@
                     <div class="panel-body">
                         <div id="cmtTarget"></div>
                         <span *ngIf="user.Id > 0">
-                            <textarea class="form-control" placeholder="Nội dung bình luận..." rows="3"  [(ngModel)]="contentComment" (keyup.enter)="CreateOrUpdateComment()"></textarea>
+                            <textarea class="form-control" id="contentcomment" placeholder="Nội dung bình luận..." rows="3"  [(ngModel)]="contentComment" (keyup.enter)="CreateOrUpdateComment()"></textarea>
                             <br>
                             <button type="button" class="btn btn-info pull-right" (click)="CreateOrUpdateComment()">
                                 <p *ngIf="isUpdated == 0">GỬI</p>
@@ -201,14 +201,14 @@
                                                         {{ itemReply.Content }}
                                                         <span class="text-muted pull-right">
                                                             <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
-                                                             (click)="DeleteComment(itemReply.CommentId)" style="color: blue;"><b>Cập nhật</b></button>
+                                                            (click)="GetDetailComment(itemReply.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
                                                              <span *ngIf="user.Id == itemReply.UserId">|</span> 
                                                             <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
                                                              (click)="DeleteComment(itemReply.CommentId)"><b>Xóa bình luận</b></button>
                                                         </span>
                                                         
                                                     </p>
-                                                    <a><span><i class="fa fa-reply" (click)="CreateOrUpdateComment(itemReply)" ></i> Phản hồi</span></a> 
+                                                    <!-- <a><span><i class="fa fa-reply" (click)="CreateOrUpdateComment(itemReply)"  ></i> Phản hồi</span></a>  -->
                                                 </div>
                                             </li>
                                         </ul>
@@ -242,8 +242,10 @@
                                     <div class="snipcart-thumb">
                                         <a routerLink="/pets/{{ item.ProductDetailId}}"><img src="{{ item.ProductImage }}" alt="{{ item.BreedName }}" class="display-img" /></a>
                                         <div class="topright" *ngIf="item.Discount > 0"><b>- {{ item.Discount }} %</b></div>
-                                        <p>{{ item.PetTitle }}</p>
-                                        <h4>{{ item.PriceDiscount|number: '4.0-2'}} VNĐ<span *ngIf=" item.Discount > 0"> {{ item.Price | number : '4.0-2'}} VNĐ</span></h4>
+                                    </div>
+                                    <div style="width:77%; margin: auto;">
+                                        <p>{{ item.ProductTitle }}</p>
+                                        <h4 class="top_brand_home_details">{{ item.PriceDiscount|number: '4.0-2'}} VNĐ<span *ngIf=" item.Discount > 0"> {{ item.Price | number : '4.0-2'}} VNĐ</span></h4>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details">
                                         <form>

@@ -326,7 +326,7 @@ export class SingleComponent implements OnInit {
       this.comment.ProductDetailId = this.petDetailId;
       this.comment.Content = this.contentComment;
       this.comment.CommentRootId = this.commentId;
-      if (!this.commentId) {
+      if (this.commentId == 0) {
         this.commentService
           .CreateComment(this.comment)
           .subscribe((res: any) => {
@@ -340,6 +340,8 @@ export class SingleComponent implements OnInit {
           this.GetListComment();
         });
       }
+
+      this.commentId = 0;
     }
   }
 
@@ -365,6 +367,8 @@ export class SingleComponent implements OnInit {
         this.commentDetail = res.content.Comment;
         this.contentComment = this.commentDetail.Content;
       }
+      let myTextBox = document.getElementById('contentcomment');
+      myTextBox.focus();
     });
 
     let target = document.getElementById('cmtTarget');
