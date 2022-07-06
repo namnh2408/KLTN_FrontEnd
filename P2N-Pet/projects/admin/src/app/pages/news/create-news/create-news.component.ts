@@ -42,7 +42,7 @@ export class CreateNewsComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       Title: ['', Validators.required],
-      Content: ['', Validators.required],
+      Content: '',
       HtmlContent: '',
       NewsImage: null,
       TypeNewsId: 0,

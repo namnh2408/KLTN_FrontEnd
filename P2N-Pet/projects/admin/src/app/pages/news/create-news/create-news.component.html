@@ -74,7 +74,7 @@
               <div class="row">
                   <div class="col-lg-12">
                       <div class="form-group">
-                        <label class="form-control-label" for="NewsImage">Hình ảnh quảng cáo</label>
+                        <label class="form-control-label" for="NewsImage">Hình ảnh bài viết</label>
                         <input type="file" class="form-control form-control-alternative" (change)="onFileChange($event)">
                         <div style="margin-top: 20px;">
                           <img src="{{f.NewsImage.value}}" style="width: 100%;" />
@@ -85,7 +85,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label class="form-control-label" for="content">Nội dung</label>
+                    <label class="form-control-label" for="content">Nội dung App</label>
                     <textarea rows="10" class="form-control form-control-alternative" placeholder="Nội dung tin tức"
                               [ngClass]="{ 'is-invalid': submitted && f.Content.errors }" formControlName="Content">
                             </textarea>
@@ -98,7 +98,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label class="form-control-label" for="HtmlContent">Nội dung</label>
+                    <label class="form-control-label" for="HtmlContent">Nội dung Web</label>
                     <ckeditor tagName="textarea" [config]="configCKEditor" [editor]="MyEditor"
                       formControlName="HtmlContent"></ckeditor>
                     <div *ngIf="submitted && f.HtmlContent.errors" class="invalid-feedback">

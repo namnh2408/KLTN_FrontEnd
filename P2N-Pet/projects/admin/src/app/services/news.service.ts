@@ -14,7 +14,7 @@ export class NewsService {
   }
 
   GetOneNews(id: any){
-    return this.http.get(`${environment.apiUrl}ANews//api/ANews/GetOneNews?newsId=${id}`)
+    return this.http.get(`${environment.apiUrl}ANews/GetOneNews?newsId=${id}`)
   }
 
   CreateNews(condition){
@@ -26,7 +26,7 @@ export class NewsService {
   }
 
   DeleteNews(Id){
-    return this.http.get(`${environment.apiUrl}ANews/DeleteNews?NewsId=${Id}`);
+    return this.http.post(`${environment.apiUrl}ANews/DeleteNews?NewsId=${Id}`, '');
   }
 
   GetNormalTypeNewsSelection(){
