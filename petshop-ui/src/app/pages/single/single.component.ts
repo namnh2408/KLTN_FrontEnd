@@ -57,6 +57,8 @@ export class SingleComponent implements OnInit {
 
   quantity: number;
 
+  showBrand: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -72,6 +74,7 @@ export class SingleComponent implements OnInit {
     this.countSub = this.cartCountService.cartCount$.subscribe((count) => {});
 
     this.isUpdated = 0;
+    this.showBrand = 0;
   }
 
   get f() {

@@ -17,7 +17,7 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { ListBlogComponent } from 'src/app/pages/blog/list-blog/list-blog.component';
 import { DetailBlogComponent } from 'src/app/pages/blog/detail-blog/detail-blog.component';
 
-const routes: Routes = [ 
+const routes: Routes = [
   {path: "index", component: IndexComponent},
   {path: "about", component: AboutComponent},
   {path: "checkout", component: CheckoutComponent},
@@ -38,7 +38,12 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'orders/:id', component: DetailOrderComponent},
   {path: 'blogs', component: ListBlogComponent},
-  {path: 'blogs/:id', component: DetailBlogComponent}
+  {path: 'blogs/:id', component: DetailBlogComponent},
+  {path: 'category/cateroot/:crid', component:PetsComponent},
+  {path: "category/catechild/:ccid", component:PetsComponent},
+  {path: "typeproduct/:tid", component:PetsComponent},
+
+
 ]
 
 @NgModule({

@@ -35,7 +35,7 @@
             <div class="wthree_banner_bottom_left_grid">
                 <img src="../../../assets/pet/km-3.jpg" alt=" " class="img-responsive img-km" />
                 <div class="wthree_banner_btm_pos">
-                    <h3 style="color: lightgoldenrodyellow"><b>Đa dạng</b> 
+                    <h3 style="color: lightgoldenrodyellow"><b>Đa dạng</b>
                         <span style="color: #cc0000;">Uy tín</span>
                         <i style="color: aquamarine;">100 %</i></h3>
                 </div>
@@ -103,10 +103,14 @@
             <div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
                 <div class="w3l_fresh_vegetables_grid2">
                     <ul>
-                        <li><i class="fa fa-check" aria-hidden="true"></i><a routerLink="/pets">Tất cả thú cưng</a></li>
+                        <!-- <li><i class="fa fa-check" aria-hidden="true"></i><a routerLink="/pets">Tất cả thú cưng</a></li>
                         <li *ngFor="let item of parentBreeds ">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             <a routerLink="/category/root/{{ item.Id}}">Giống {{ item.BreedName }}</a>
+                        </li> -->
+                        <li *ngFor="let p of typeProducts" >
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                          <a routerLink="/typeproduct/{{ p.TypeProductId}}">Tất cả {{ p.TypeProductName }}</a>
                         </li>
                     </ul>
                 </div>

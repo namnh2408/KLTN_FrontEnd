@@ -64,6 +64,12 @@ export class PetDetail{
     SexTitle: string;
     productSexes : PetSex[];
     productBrands: ProductBrand[];
+    CategoryId: number;
+    CategoryName: string;
+    TypeProductId: number;
+    TypeProductName: string;
+    BrandId: number;
+    Address: string;
 }
 
 export class PetDetailCondition {

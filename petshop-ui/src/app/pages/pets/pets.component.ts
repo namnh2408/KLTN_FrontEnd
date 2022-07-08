@@ -33,6 +33,13 @@ export class PetsComponent implements OnInit {
   sid: number = 0;
   fString = "";
 
+  // for category
+  crid:number = 0;
+  ccid:number = 0;
+
+  // typeproductid
+  tid: number = 0;
+
   // Cart
   cartItem: CartItem = new CartItem();
   cartList: Array<CartItem> = [];
@@ -42,14 +49,16 @@ export class PetsComponent implements OnInit {
   user: User;
   message: string = "";
   tempQuantity: number;
-  
+
+  paramSetText = 0; // TypeProductId api trả về
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private petService: PetService,
     private paginationService: PaginationService,
     private cartService: CartService,
     private accountService: AccountService,
-    private cartCountService: CartCountService) { 
+    private cartCountService: CartCountService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.countSub = this.cartCountService.cartCount$.subscribe(
         count => {
@@ -74,10 +83,17 @@ export class PetsComponent implements OnInit {
     this.sid = this.route.snapshot.params['sid'];
     this.fString = this.route.snapshot.params['find'];
 
+    this.crid = this.route.snapshot.params['crid'];
+    this.ccid = this.route.snapshot.params['ccid'];
+    this.tid = this.route.snapshot.params['tid'];
+
     this.petCondition.BreedId = this.bid;
     this.petCondition.BreedIdRoot = this.rid;
     this.petCondition.SupplierId = this.sid;
     this.petCondition.FindString = this.fString === undefined ? "" : this.fString.replace('%20', ' ');
+    this.petCondition.TypeProducuctId = this.tid;
+    this.petCondition.CategoryId = this.ccid;
+    this.petCondition.CategoryIdRoot = this.crid;
 
     this.getList();
     this.subscriptionPagination = this.paginationService.getChangePage().subscribe(page => {
@@ -97,12 +113,14 @@ export class PetsComponent implements OnInit {
     }).subscribe((res: any) => {
         this.pets = res.content.Products;
         this.pagination = res.content.Pagination;
+        this.paramSetText = res.content.TypeProductId;
         this.getNumPage();
         this.loading = false;
       });
   }
 
-   previous() {
+
+  previous() {
     let value = this.pagination.CurrentPage - 1;
     if(value < 0) {
       return;
@@ -176,7 +194,7 @@ export class PetsComponent implements OnInit {
     if(!(this.user.Id > 0)){
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return false;
-      } 
+      }
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate([`/login`]);
 
@@ -209,7 +227,7 @@ export class PetsComponent implements OnInit {
 
         this.cartCountService.getCountQuantity().subscribe((res: any) =>{
           var countQuantity = res.content.countQuantity;
-          
+
           this.cartCountService.setCartCount(countQuantity);
         });
 

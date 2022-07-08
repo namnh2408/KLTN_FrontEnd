@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TypeProductModel } from 'src/app/models/category';
 import { PetCondition } from 'src/app/models/pet';
 import { CategoryService } from 'src/app/services/category.service';
 import { PetService } from 'src/app/services/pet.service';
@@ -22,12 +23,13 @@ export class IndexComponent implements OnInit {
   promotion: any;
 
   parentBreeds: any;
-  
+  typeProducts: TypeProductModel[];
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private petService: PetService,
     private categoryService : CategoryService,
-    private promotionService: PromotionService) { 
+    private promotionService: PromotionService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class IndexComponent implements OnInit {
     this.getList();
 
     this.getListBreedParent();
+    this.getListTypeProduct();
   }
 
   getList(){
@@ -56,7 +59,7 @@ export class IndexComponent implements OnInit {
     });
   }
 
-  public loadScript() {        
+  public loadScript() {
     var isFound = false;
     var scripts = document.getElementsByTagName("script")
     for (var i = 0; i < scripts.length; ++i) {
@@ -84,5 +87,11 @@ export class IndexComponent implements OnInit {
     this.promotionService.getPromotion().subscribe((res : any) =>{
       this.promotion = res.content.Promotion;
     });
+  }
+
+  getListTypeProduct(){
+    this.categoryService.getListTypeProduct().subscribe( (res: any) => {
+      this.typeProducts = res.content.Selection;
+    })
   }
 }

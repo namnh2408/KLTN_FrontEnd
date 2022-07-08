@@ -24,7 +24,7 @@
                         <img src="{{ petImageRoot }}" alt=" " class="img-size" />
                     </div>
                 </div>
-                <div style="margin-left: -20px;">
+                <div style="margin-left: -10%;">
                     <div class="dropdown-item-img drop-image-item-cus">
                         <img *ngFor="let petImage of petDetail.productImages; index as indexOfelement" src="{{ petImage }}" alt=" " class="image-magrin" (click)="changeImage(indexOfelement)" />
 
@@ -38,9 +38,13 @@
                     </h4>
                 </div>
                 <hr class="my-hr">
-                <div class="description-single">
+                <div class="description-single" *ngIf="petDetail.BreedId > 0">
                     <h4 style="margin-right: 1%; width: 20%; text-align: left;">Giống loài:</h4>
                     <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.BreedName }}</p>
+                </div>
+                <div class="description-single" *ngIf="petDetail.BreedId == 0">
+                    <h4 style="margin-right: 1%; width: 20%; text-align: left;">Loại sản phẩm:</h4>
+                    <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.CategoryName }}</p>
                 </div>
                 <div class="description-single">
                     <h4 style="margin-right: 1%; width: 20%; text-align: left;">Nhà cung cấp:</h4>
@@ -52,11 +56,17 @@
                 </div>
                 <div class="description-single">
                     <h4 style="margin-right: 1%; width: 20%; text-align: left;">Số lượng còn:</h4>
-                    <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.Quantity - quantity}} con</p>
+                    <p style="margin-top: 0; color: #999; width: 80%;">
+                      {{ petDetail.Quantity - quantity}} <span *ngIf="petDetail.TypeProductId == 10">con</span><span *ngIf="petDetail.TypeProductId != 10"> sản phẩm</span>
+                    </p>
                 </div>
                 <hr class="my-hr">
-                <div class="dislay-select-inline">
-                    <div class="group-item decrease-intance-line">
+                <div class="dislay-select-inline" *ngIf="petDetail.productBrands.length > 0">
+                    <div class="group-item" *ngIf="showBrand == 0">
+                        <label (click)="showBrand = 1" *ngIf="petDetail.TypeProductId == 10"> Xem chi nhánh có thú cưng</label>
+                        <label (click)="showBrand = 1" *ngIf="petDetail.TypeProductId != 10"> Xem chi nhánh có sản phẩm</label>
+                    </div>
+                    <div class="group-item" *ngIf="showBrand > 0">
                         <div>
                             <label class="" for="petDetailCondition.BrandId">Chi nhánh</label>
                         </div>
@@ -69,24 +79,33 @@
                         </div>
                     </div>
                 </div>
-                <hr class="my-hr" style="margin-top: -2%;">
+                <hr class="my-hr" *ngIf="petDetail.productBrands.length > 0">
+
                 <div class="dislay-select-inline">
-                    <div class="group-item">
+                    <div class="group-item" *ngIf="petDetail.ColorId > 0">
                         <div>
                             <label class="" for="petDetailCondition.ColorId">Màu sắc</label>
                         </div>
-                        <div class="intance-div">
+                        <div class="intance-div" *ngIf="petDetail.AgeId > 0">
                             <select class="form-control select-item" placeholder="Màu sắc" [(ngModel)]="petDetailCondition.ColorId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(1)">
                                 <option *ngFor="let item of petDetail.productColors " [ngValue]="item.ColorId">
                                   {{ item.ColorName }}
                                 </option>
                               </select>
                         </div>
+                        <!-- Dùng cho thức ăn, phụ kiện -->
+                        <div class="intance-div decrease-intance-line" *ngIf="petDetail.AgeId == 0">
+                            <select class="form-control select-item" placeholder="Màu sắc" [(ngModel)]="petDetailCondition.ColorId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(1)">
+                              <option *ngFor="let item of petDetail.productColors " [ngValue]="item.ColorId">
+                                {{ item.ColorName }}
+                              </option>
+                            </select>
+                        </div>
 
                     </div>
-                    <div class="group-item">
+                    <div class="group-item" *ngIf="petDetail.AgeId > 0">
                         <div>
-                            <label class="" for="petDetailCondition.ColorId">Độ tuổi</label>
+                            <label class="" for="petDetailCondition.AgeId">Độ tuổi</label>
                         </div>
                         <div class="intance-div">
                             <select class="form-control select-item" placeholder="Độ tuổi" [(ngModel)]="petDetailCondition.AgeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(2)">
@@ -96,21 +115,38 @@
                               </select>
                         </div>
                     </div>
-                    <div class="group-item">
+                    <div class="group-item" *ngIf="petDetail.SizeId > 0">
                         <div>
                             <label class="" for="petDetailCondition.SizeId">Kích cỡ</label>
                         </div>
-                        <div class="intance-div">
+                        <div class="intance-div " *ngIf="petDetail.AgeId > 0">
                             <select class="form-control select-item" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(3)">
                                 <option *ngFor="let item of petDetail.productSizes " [ngValue]="item.SizeId">
                                   {{ item.SizeTitle }}
                                 </option>
                               </select>
                         </div>
+                        <!-- Dùng cho 1 field kích cỡ -->
+                        <div class="intance-div decrease-intance-line" *ngIf="petDetail.AgeId == 0 && petDetail.ColorId == 0">
+                            <select class="form-control select-item-one" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(3)">
+                              <option *ngFor="let item of petDetail.productSizes " [ngValue]="item.SizeId">
+                                {{ item.SizeTitle }}
+                              </option>
+                            </select>
+                        </div>
+                        <!-- Dùng cho 2 field trở lên -->
+                        <div class="intance-div decrease-intance-line" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId == 0">
+                            <select class="form-control select-item" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(3)">
+                              <option *ngFor="let item of petDetail.productSizes " [ngValue]="item.SizeId">
+                                {{ item.SizeTitle }}
+                              </option>
+                            </select>
+                        </div>
+
                     </div>
-                    <div class="group-item">
+                    <div class="group-item" *ngIf="petDetail.SexId > 0">
                         <div>
-                            <label class="" for="petDetailCondition.ColorId">Giới tính</label>
+                            <label class="" for="petDetailCondition.SexId">Giới tính</label>
                         </div>
                         <div class="intance-div">
                             <select class="form-control select-item" placeholder="Chọn giới tính" [(ngModel)]="petDetailCondition.SexId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(4)">
@@ -119,10 +155,11 @@
                                 </option>
                               </select>
                         </div>
-
                     </div>
                 </div>
-                <hr class="my-hr">
+                <hr class="my-hr" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId > 0">
+                <hr class="my-hr" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId == 0">
+
                 <div class="snipcart-item block">
                     <div class="alert alert-danger" role="alert" *ngIf=" message != '' ">
                         <strong>{{ message }}</strong>
@@ -183,10 +220,10 @@
                                              <span *ngIf="user.Id == cmt.UserId">|</span>
                                         <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId" (click)="DeleteComment(cmt.CommentId)"><b>Xóa bình luận</b></button>
                                         </span>
-                                        
+
                                     </p>
-                                    <a  (click)="GetDetailComment(cmt.CommentId , 0)" ><span><i class="fa fa-reply"></i> Phản hồi</span></a> 
-                                    <span class="text-reply ml-10" *ngFor = "let itemReply of cmt.CommentChilds">
+                                    <a (click)="GetDetailComment(cmt.CommentId , 0)"><span><i class="fa fa-reply"></i> Phản hồi</span></a>
+                                    <span class="text-reply ml-10" *ngFor="let itemReply of cmt.CommentChilds">
                                         <ul class="media-list">
                                             <li class="media" style="margin-top: 10px;">
                                                 <a class="pull-left">
@@ -200,13 +237,12 @@
                                                     <p style="color: black;">
                                                         {{ itemReply.Content }}
                                                         <span class="text-muted pull-right">
-                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
-                                                            (click)="GetDetailComment(itemReply.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
-                                                             <span *ngIf="user.Id == itemReply.UserId">|</span> 
-                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
-                                                             (click)="DeleteComment(itemReply.CommentId)"><b>Xóa bình luận</b></button>
+                                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
+                                                                            (click)="GetDetailComment(itemReply.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
+                                                                            <span *ngIf="user.Id == itemReply.UserId">|</span>
+                                                        <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId" (click)="DeleteComment(itemReply.CommentId)"><b>Xóa bình luận</b></button>
                                                         </span>
-                                                        
+
                                                     </p>
                                                     <!-- <a><span><i class="fa fa-reply" (click)="CreateOrUpdateComment(itemReply)"  ></i> Phản hồi</span></a>  -->
                                                 </div>
@@ -219,7 +255,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

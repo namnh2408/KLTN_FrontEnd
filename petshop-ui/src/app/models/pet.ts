@@ -21,7 +21,10 @@ export class PetCondition{
     BreedIdRoot: number;
     SupplierId: number;
     FindString: string;
-    TopProduct:number;
+    TopProduct: number;
+    TypeProducuctId: number;
+    CategoryId: number;
+    CategoryIdRoot: number;
 
     constructor(){
         this.BreedId = 0;
@@ -29,5 +32,8 @@ export class PetCondition{
         this.SupplierId = 0;
         this.FindString = "";
         this.TopProduct = 0;
+        this.TypeProducuctId = 0;
+        this.CategoryId = 0;
+        this.CategoryIdRoot = 0;
     }
 }
