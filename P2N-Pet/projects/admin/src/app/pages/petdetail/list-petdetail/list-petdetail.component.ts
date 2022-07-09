@@ -34,6 +34,8 @@ export class ListPetdetailComponent implements OnInit {
   petDetailStatusOptions = [];
   categorySelection : CategorySelection[];
 
+  categorySelectionAll : CategorySelection[];
+
   public petDetails: any;  
 
   // Loại sản phẩm
@@ -61,6 +63,7 @@ export class ListPetdetailComponent implements OnInit {
     // this.scroll(target);
     //this.getList();
     this.getListProductDetail(this.typeProductId);
+    
     this.subscriptionPagination = this.paginationService.getChangePage().subscribe(pagenumber => {
       this.pagination.CurrentPage = pagenumber;
       this.getListProductDetail(this.typeProductId);
@@ -77,6 +80,12 @@ export class ListPetdetailComponent implements OnInit {
 
   getListProductDetail(type){
     this.typeProductId = type;
+
+    if(type != 10){
+      this.categorySelection = this.categorySelectionAll.filter(p => p.TypeProductId == type);
+    }
+    this.petDetailCondition.CategoryId = 0;
+
     this.petDetailCondition.TypeProductId = this.typeProductId;
     this.getList();
   }
@@ -108,7 +117,7 @@ export class ListPetdetailComponent implements OnInit {
     this.loading = true;
 
     this.petDetailService.GetNormalCategory().subscribe( (res: any) => {
-      this.categorySelection = res.content.Selection;
+      this.categorySelectionAll = res.content.Selection;
 
       this.loading = false;
     })
@@ -185,6 +194,7 @@ export class ListPetdetailComponent implements OnInit {
     this.petDetailCondition = new PetDetailCondition();
     this.pagination.CurrentPage = 0;
     this.loading = true;
+    this.petDetailCondition.TypeProductId = this.typeProductId;
     this.getList();
     this.getNormalBreedPetDetailSelection();
     this.getNormalSupplierPetDetailSelection();
