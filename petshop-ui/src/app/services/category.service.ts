@@ -32,6 +32,6 @@ export class CategoryService {
   }
 
   getListTypeProduct(){
-    return this.httpClient.get(`${environment.apiUrl}AData/GetNormalTypeProductSelection`);
+    return this.httpClient.get(`${environment.apiUrl}Category/GetNormalTypeProductSelection`);
   }
 }

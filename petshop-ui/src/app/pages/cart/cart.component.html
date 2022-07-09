@@ -47,7 +47,7 @@
                         <tr class="rem1" *ngFor=" let item of cartItemList">
                             <td class="invert">{{ item.Id }}</td>
                             <td>
-                                <a routerLink="/pets/{{ item.ProductDetailId}}"><img src="{{ item.ProductImage}}" alt=" " class="display-img"></a>
+                                <a routerLink="/details/{{ item.ProductDetailId}}/{{item.BrandId}}"><img src="{{ item.ProductImage}}" alt=" " class="display-img"></a>
                             </td>
                             <td class="invert">
                                 <div class="quantity">

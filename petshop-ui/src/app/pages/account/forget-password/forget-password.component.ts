@@ -23,8 +23,8 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      Password: ['', Validators.required],
-      RepeatPassword: ['', Validators.required],
+      //Password: ['', Validators.required],
+      //RepeatPassword: ['', Validators.required],
     });
   }
 
@@ -36,10 +36,10 @@ export class ForgetPasswordComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    
+
     this.loading = true;
-    
-    this.accountService.forgetPassword({...this.form.value})
+
+    this.accountService.forgetPasswordV2({...this.form.value})
         .subscribe((res: any) => {
           if(res.result == 0){
             this.message = res.message;
@@ -49,7 +49,7 @@ export class ForgetPasswordComponent implements OnInit {
             this.message = '';
             this.router.navigate(["login"]);
           }
-          
+
         }, error => {
             this.loading = false;
         });

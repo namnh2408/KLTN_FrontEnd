@@ -32,9 +32,10 @@
                 </div>
             </div>
             <div class="col-md-8 agileinfo_single_right">
-                <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                    <h4> Giá: {{petDetail.PriceDiscount|number : '4.0-2'}} VNĐ
+                <div class="snipcart-thumb agileinfo_single_right_snipcart" style="display: inline-flex;">
+                    <h4 style="display: -webkit-inline-box;"> Giá: {{petDetail.PriceDiscount|number : '4.0-2'}} VNĐ
                         <span *ngIf=" petDetail.Discount > 0"> {{ petDetail.Price|number : '4.0-2' }} VNĐ</span>
+                        <p class="price-discount" *ngIf=" petDetail.Discount > 0"> -{{ petDetail.Discount}}%</p>
                     </h4>
                 </div>
                 <hr class="my-hr">
@@ -56,22 +57,25 @@
                 </div>
                 <div class="description-single">
                     <h4 style="margin-right: 1%; width: 20%; text-align: left;">Số lượng còn:</h4>
-                    <p style="margin-top: 0; color: #999; width: 80%;">
+                    <p style="margin-top: 0; color: #999; width: 80%;" *ngIf="petDetail.BrandId == 0">
                       {{ petDetail.Quantity - quantity}} <span *ngIf="petDetail.TypeProductId == 10">con</span><span *ngIf="petDetail.TypeProductId != 10"> sản phẩm</span>
+                    </p>
+                    <p style="margin-top: 0; color: #999; width: 80%;" *ngIf="petDetail.BrandId > 0">
+                      {{ petDetail.QuantityBrand - quantity}} <span *ngIf="petDetail.TypeProductId == 10">con</span><span *ngIf="petDetail.TypeProductId != 10"> sản phẩm</span>
                     </p>
                 </div>
                 <hr class="my-hr">
-                <div class="dislay-select-inline" *ngIf="petDetail.productBrands.length > 0">
-                    <div class="group-item" *ngIf="showBrand == 0">
+                <div class="dislay-select-inline" *ngIf="petDetail.NumBrand > 0">
+                    <div class="group-item" *ngIf="showBrand == 0 && petDetail.BrandId == 0">
                         <label (click)="showBrand = 1" *ngIf="petDetail.TypeProductId == 10"> Xem chi nhánh có thú cưng</label>
                         <label (click)="showBrand = 1" *ngIf="petDetail.TypeProductId != 10"> Xem chi nhánh có sản phẩm</label>
                     </div>
-                    <div class="group-item" *ngIf="showBrand > 0">
+                    <div class="group-item" *ngIf="showBrand > 0 || petDetail.BrandId > 0">
                         <div>
                             <label class="" for="petDetailCondition.BrandId">Chi nhánh</label>
                         </div>
                         <div class="intance-div decrease-intance-line">
-                            <select class="form-control select-item" placeholder="Chi nhánh cửa hàng" [(ngModel)]="petDetailCondition.BrandId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(1)">
+                            <select class="form-control select-item" placeholder="Chi nhánh cửa hàng" [(ngModel)]="petDetailCondition.BrandId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(10)">
                                 <option *ngFor="let item of petDetail.productBrands " [ngValue]="item.BrandId">
                                   {{ item.Address }}
                                 </option>
@@ -79,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <hr class="my-hr" *ngIf="petDetail.productBrands.length > 0">
+                <hr class="my-hr" *ngIf="petDetail.NumBrand > 0">
 
                 <div class="dislay-select-inline">
                     <div class="group-item" *ngIf="petDetail.ColorId > 0">
@@ -168,7 +172,8 @@
                         <form role="form" [formGroup]="form" (ngSubmit)="AddToCart(petDetail.ProductDetailId)">
                             <div class="description-single" style="margin-bottom: 10%;width: 300%;">
                                 <h4 style="margin-right: 2%; width: 30%; text-align: left; padding-top: 1.75%;">Số lượng đặt: </h4>
-                                <input class="form-control input-form" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }" formControlName="Quantity" value="1" min="1" max="{{petDetail.Quantity - quantity}}" type="number">
+                                <input *ngIf="brandIdPet == 0" class="form-control input-form" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }" formControlName="Quantity" value="1" min="1" max="{{petDetail.Quantity - quantity}}" type="number">
+                                <input *ngIf="brandIdPet > 0" class="form-control input-form" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }" formControlName="Quantity" value="1" min="1" max="{{petDetail.QuantityBrand - quantity}}" type="number">
                             </div>
 
                             <input [disabled]="loading" type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" style="width: 120%; margin-top: 35px; font-size: 16px;" />
@@ -237,9 +242,9 @@
                                                     <p style="color: black;">
                                                         {{ itemReply.Content }}
                                                         <span class="text-muted pull-right">
-                                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
-                                                                            (click)="GetDetailComment(itemReply.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
-                                                                            <span *ngIf="user.Id == itemReply.UserId">|</span>
+                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
+                                                            (click)="GetDetailComment(itemReply.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
+                                                            <span *ngIf="user.Id == itemReply.UserId">|</span>
                                                         <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId" (click)="DeleteComment(itemReply.CommentId)"><b>Xóa bình luận</b></button>
                                                         </span>
 

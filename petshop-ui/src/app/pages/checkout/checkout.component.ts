@@ -28,34 +28,15 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private accountService: AccountService,
-    private orderService: OrderService) { 
+    private orderService: OrderService) {
       this.total = 0;
       this.count = 0;
       this.message = '';
     }
 
-  get f() { return this.form.controls; }
-
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
-    }
-
-    if(this.accountService.user){
-      this.accountService.user.subscribe( x =>{
-        if(x){
-          this.user = x;
-
-          this.f.Name.setValue(this.user.Name);
-          this.f.Email.setValue(this.user.Email);
-          this.f.Phone.setValue(this.user.Phone);
-          this.f.Address.setValue(this.user.Address);
-          this.f.Note.setValue("");
-        }
-        else{
-          this.user = new User();
-        }
-      });
     }
 
     this.form = this.formBuilder.group({
@@ -67,11 +48,32 @@ export class CheckoutComponent implements OnInit {
       TypePaymentId: 10
     });
 
+    if(this.accountService.user){
+      this.accountService.user.subscribe( x =>{
+        if(x){
+          this.user = x;
+
+          this.f.Name.setValue(this.user.Name);
+          this.f.Email.setValue(this.user.Email);
+          this.f.Phone.setValue(this.user.Phone);
+          this.f.Address.setValue(this.user.Address);
+          this.f.Note.setValue("");
+
+          console.log('có userrrrrrr')
+        }
+        else{
+          this.user = new User();
+        }
+      });
+    }
+
     this.getListCartItem();
 
     let view = document.getElementById('view-checkout');
     this.scroll(view);
   }
+
+  get f() { return this.form.controls; }
 
   getListCartItem(){
     this.loading = true;
@@ -108,11 +110,11 @@ export class CheckoutComponent implements OnInit {
         this.submitted = false; */
         /* this.router.routeReuseStrategy.shouldReuseRoute = () => {
           return false;
-        } */ 
+        } */
         /* this.router.onSameUrlNavigation = 'reload'; */
         window.alert("Đặt hàng thành công!");
 
-        if( this.f.TypePaymentId.value == 20 || this.f.TypePaymentId.value == 30){ 
+        if( this.f.TypePaymentId.value == 20 || this.f.TypePaymentId.value == 30){
           window.open(res.content.LinkPayment);
         }
         else{
