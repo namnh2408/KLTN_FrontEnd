@@ -20,6 +20,7 @@ export class TypeProductSelection{
 export class CategoryRootSelection{
     Id: number;
     Title: string;
+    TypeProductId: number;
 }
 
 

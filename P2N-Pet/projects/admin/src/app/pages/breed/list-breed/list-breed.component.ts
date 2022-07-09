@@ -36,6 +36,7 @@ export class ListBreedComponent implements OnInit {
   typeProductSelection : TypeProductSelection[];
   categoryCondition : CategoryCondition = new CategoryCondition();
   categoryRootSelection : CategoryRootSelection[];
+  categoryRootSelectionAll : CategoryRootSelection[];
 
   constructor(private breedService: BreedService,
     private paginationService: PaginationService,
@@ -48,7 +49,6 @@ export class ListBreedComponent implements OnInit {
       this.getBreedDefaultSelection();
       this.getCategoryRootSelection();
       this.typeProductId = 10;
-
   }
 
   ngOnInit(): void {
@@ -102,6 +102,8 @@ export class ListBreedComponent implements OnInit {
     this.typeProductId = typeproductid;
 
     if( this.typeProductId != 10){
+      this.categoryRootSelection = this.categoryRootSelectionAll.filter(p => p.TypeProductId == typeproductid);
+
       console.log("type khác 10: " + this.typeProductId);
       this.subscriptionPaginationCategory = this.paginationService.getChangePage().subscribe(pageNumber => {
         this.paginationCategory.CurrentPage = pageNumber;
@@ -116,6 +118,9 @@ export class ListBreedComponent implements OnInit {
       console.log(this.breeds);
     }
     else{
+      this.breedCondition = new BreedCondition();
+      this.categoryCondition = new CategoryCondition();
+      this.pagination.CurrentPage = 0;
       this.categoryCondition.TypeProductId = this.typeProductId;
       this.paginationCategory.CurrentPage = 0;
       this.getListCategory();
@@ -156,7 +161,7 @@ export class ListBreedComponent implements OnInit {
   getCategoryRootSelection(){
     this.loading = true;
     this.breedService.GetNormalCategoryRootSelection().subscribe((res: any) => {
-      this.categoryRootSelection = res.content.Selection;
+      this.categoryRootSelectionAll = res.content.Selection;
       this.loading = false;
     });
   }
@@ -181,6 +186,7 @@ export class ListBreedComponent implements OnInit {
 
   clearForm(){
     this.breedCondition = new BreedCondition();
+    this.categoryCondition = new CategoryCondition();
     this.pagination.CurrentPage = 0;
     this.loading = true;
     //this.getList

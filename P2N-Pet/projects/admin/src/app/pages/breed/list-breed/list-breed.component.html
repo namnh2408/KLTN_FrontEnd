@@ -27,7 +27,7 @@
                                                 <input type="text" class="form-control form-control-alternative" placeholder="Nhập tên giống/ thức ăn..." [(ngModel)]="breedCondition.Name" [ngModelOptions]="{standalone: true}">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-4">
+                                        <div class="col-lg-3 col-md-4" *ngIf="typeProductId == 10">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="breedCondition.BreedId">Loại thú cưng</label>
                                                 <select class="form-control form-control-alternative" placeholder="Thể loại" [(ngModel)]="breedCondition.BreedId" [ngModelOptions]="{standalone: true}">
@@ -37,10 +37,11 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-4">
+                                        <div class="col-lg-3 col-md-4" *ngIf="typeProductId != 10">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="categoryCondition.CategoryRootId">Loại sản phẩm</label>
                                                 <select class="form-control form-control-alternative" placeholder="Thể loại" [(ngModel)]="categoryCondition.CategoryRootId" [ngModelOptions]="{standalone: true}">
+                                                    <option value="0"></option>
                                                     <option *ngFor="let item of categoryRootSelection" [ngValue]="item.Id">
                                                         {{ item.Title }}
                                                     </option>

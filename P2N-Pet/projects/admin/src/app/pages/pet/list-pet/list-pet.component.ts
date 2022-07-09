@@ -29,6 +29,7 @@ export class ListPetComponent implements OnInit {
   supplierSelection: SupplierSelection[];
 
   categorySelection : CategorySelection[];
+  categorySelectionAll : CategorySelection[];
 
   public pets: any;
 
@@ -58,6 +59,12 @@ export class ListPetComponent implements OnInit {
   getListProduct(type){
     this.typeProductId = type;
     this.petCondition.TypeProductId = this.typeProductId;
+    if(type != 10){
+      this.categorySelection = this.categorySelectionAll.filter(p => p.TypeProductId == type);
+    }
+    this.petCondition.CategoryId = 0;
+    this.petCondition.SupplierId = '0';
+    this.petCondition.Status = '0';
     this.getList();
   }
 
@@ -108,7 +115,7 @@ export class ListPetComponent implements OnInit {
     this.loading = true;
 
     this.petService.GetNormalCategory().subscribe( (res: any) => {
-      this.categorySelection = res.content.Selection;
+      this.categorySelectionAll = res.content.Selection;
 
       this.loading = false;
     })

@@ -39,9 +39,11 @@ export class SupplierSelection{
 export class CategorySelection{
   Id: number;
   Title: string;
+  TypeProductId: number;
 
   constructor(){
     this.Id = 0;
     this.Title = '';
+    this.TypeProductId;
   }
 }

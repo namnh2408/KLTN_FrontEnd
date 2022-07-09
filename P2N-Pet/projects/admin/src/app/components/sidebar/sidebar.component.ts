@@ -14,14 +14,14 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/admin/dashboard', title: 'Thống kê',  icon: 'ni-tv-2 text-primary', class: '' },
   { path: '/admin/list-order', title: 'Đơn hàng',  icon:'ni ni-cart text-red', class: '' },
-  { path: '/admin/list-pet', title: 'Nguồn gốc thú cưng',  icon:'fa fa-paw text-yellow', class: '' },
-  { path: '/admin/list-petdetail', title: 'Thông tin thú cưng', icon:'ni-collection text-info', class:''},
+  { path: '/admin/list-pet', title: 'Nguồn gốc sản phẩm',  icon:'fa fa-paw text-yellow', class: '' },
+  { path: '/admin/list-petdetail', title: 'Thông tin sản phẩm', icon:'ni ni-bullet-list-67', class:''},
   { path: '/admin/brand/list-brand', title: 'Thông tin chi nhánh', icon:'ni-collection text-info', class:''}
 
 ];
 
 export const PETDETAILS: RouteInfo[] = [
-  { path: '/admin/list-breed', title: 'Loại thú cưng',  icon:'ni ni-books text-blue', class: '' },
+  { path: '/admin/list-breed', title: 'Loại sản phẩm',  icon:'ni ni-books text-blue', class: '' },
   { path: '/admin/list-age', title: 'Tuổi hiện tại',  icon:'fa fa-spinner text-violet', class: '' },
   { path: '/admin/list-color', title: 'Màu sắc',  icon:'ni ni-palette text-green', class: '' },
   { path: '/admin/list-size', title: 'Kích cỡ',  icon:'fa fa-sort text-pink', class: '' },
