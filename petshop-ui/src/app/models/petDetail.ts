@@ -70,6 +70,8 @@ export class PetDetail{
     TypeProductName: string;
     BrandId: number;
     Address: string;
+    QuantityBrand: number;
+    NumBrand: number;
 }
 
 export class PetDetailCondition {

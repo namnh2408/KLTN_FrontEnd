@@ -1,10 +1,12 @@
 export class CartCreateCondition{
     ProductDetailId: number;
     Quantity: number;
+    BrandId: number;
 
     constructor(){
         this.ProductDetailId = 0;
         this.Quantity = 1;
+        this.BrandId = 0;
     }
 }
 

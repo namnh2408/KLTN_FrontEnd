@@ -12,8 +12,8 @@ export class PetService {
 
   constructor( private httpClient : HttpClient) { }
 
-  getPetDetail(Id){
-    return this.httpClient.get(`${environment.apiUrl}Product/GetDetailProduct?ProductDetailId=${Id}`);
+  getPetDetail(Id: any, brandId: any){
+    return this.httpClient.get(`${environment.apiUrl}Product/GetDetailProduct?ProductDetailId=${Id}&brandId=${brandId}`);
   }
 
   getListPet(condition: any){

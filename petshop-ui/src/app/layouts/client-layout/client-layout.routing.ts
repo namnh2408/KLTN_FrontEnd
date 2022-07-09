@@ -42,6 +42,7 @@ const routes: Routes = [
   {path: 'category/cateroot/:crid', component:PetsComponent},
   {path: "category/catechild/:ccid", component:PetsComponent},
   {path: "typeproduct/:tid", component:PetsComponent},
+  {path: 'details/:id/:brandid', component: SingleComponent},
 
 
 ]

@@ -47,6 +47,7 @@ export class AccountService {
     return this.http.post(`${environment.apiUrl}Login/ForgetPassword`, condition);
   }
 
-  
-
+  forgetPasswordV2(condition){
+    return this.http.post(`${environment.apiUrl}Login/ForgotPasswordV2`, condition);
+  }
 }

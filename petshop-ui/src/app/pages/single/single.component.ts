@@ -59,6 +59,9 @@ export class SingleComponent implements OnInit {
 
   showBrand: number;
 
+  numBrand: number;
+  brandIdPet : number;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -67,14 +70,14 @@ export class SingleComponent implements OnInit {
     private cartService: CartService,
     private accountService: AccountService,
     private cartCountService: CartCountService,
-    private commentService: CommentService
-  ) {
-    this.tempQuantity = 0;
-    this.quantity = 0;
-    this.countSub = this.cartCountService.cartCount$.subscribe((count) => {});
+    private commentService: CommentService) {
+      this.tempQuantity = 0;
+      this.quantity = 0;
+      this.countSub = this.cartCountService.cartCount$.subscribe((count) => {});
 
-    this.isUpdated = 0;
-    this.showBrand = 0;
+      this.isUpdated = 0;
+      this.showBrand = 0;
+      this.brandIdPet = 0;
   }
 
   get f() {
@@ -91,6 +94,7 @@ export class SingleComponent implements OnInit {
     });
 
     this.petDetailId = this.route.snapshot.params['id'];
+    this.brandIdPet = this.route.snapshot.params['brandid'] === undefined ? 0 : this.route.snapshot.params['brandid'];
     this.getDetailPet();
 
     this.petCondition.TopProduct = 6;
@@ -162,6 +166,8 @@ export class SingleComponent implements OnInit {
     } else {
       this.cartCondition.ProductDetailId = Id;
       this.cartCondition.Quantity = this.f.Quantity.value;
+      this.cartCondition.BrandId = this.brandIdPet;
+
 
       this.cartService.AddToCart({ ...this.cartCondition }).subscribe(
         (res: any) => {
@@ -178,6 +184,8 @@ export class SingleComponent implements OnInit {
           this.cartService.getQuantityPetDetailIdAndUserId(Id).subscribe(
             (res: any) => {
               this.quantity = res.content.Quantity;
+
+              //this.f.Quantity.setValue(this.quantity);
 
               //let currentUrl = this.router.url;
               this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -206,7 +214,9 @@ export class SingleComponent implements OnInit {
   getDetailPet() {
     this.loading = true;
 
-    this.petService.getPetDetail(this.petDetailId).subscribe((res: any) => {
+    console.log('brandIdPet: ' + this.brandIdPet);
+
+    this.petService.getPetDetail(this.petDetailId, this.brandIdPet).subscribe((res: any) => {
       this.petDetail = res.content.ProductDetail;
 
       this.petImageRoot = this.petDetail.productImages[0];
@@ -215,6 +225,7 @@ export class SingleComponent implements OnInit {
       this.petDetailCondition.ColorId = this.petDetail.ColorId;
       this.petDetailCondition.AgeId = this.petDetail.AgeId;
       this.petDetailCondition.SexId = this.petDetail.SexId;
+      this.petDetailCondition.BrandId = this.petDetail.BrandId;
 
       this.loading = false;
     });
@@ -237,12 +248,17 @@ export class SingleComponent implements OnInit {
       this.petDetailCondition.SexId = 0;
     }
 
+    this.brandIdPet = this.petDetailCondition.BrandId;
+
     this.petService
       .getMultiPetDetail({ ...this.petDetailCondition })
       .subscribe((res: any) => {
         this.petDetail = res.content.ProductDetail;
 
         this.petImageRoot = this.petDetail.productImages[0];
+        if( this.petDetail.BrandId > 0){
+          this.showBrand = 1;
+        }
         this.loading = false;
 
         this.router.routeReuseStrategy.shouldReuseRoute = () => {
@@ -250,7 +266,7 @@ export class SingleComponent implements OnInit {
         };
 
         /* this.router.onSameUrlNavigation = 'reload'; */
-        this.router.navigate([`/pets/${this.petDetail.ProductDetailId}`]);
+        this.router.navigate([`/details/${this.petDetail.ProductDetailId}/${this.petDetail.BrandId}`]);
       });
 
     let target = document.getElementById('target');
@@ -294,7 +310,7 @@ export class SingleComponent implements OnInit {
       this.cartService.getQuantityPetDetailIdAndUserId(Id).subscribe(
         (res: any) => {
           this.quantity = res.content.Quantity;
-
+          //this.f.Quantity.setValue(this.quantity);
           //let currentUrl = this.router.url;
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
