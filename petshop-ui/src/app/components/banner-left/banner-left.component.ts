@@ -1,3 +1,5 @@
+import { CategoryModel, TypeProductModel } from './../../models/category';
+import { map } from 'rxjs/operators';
 import { CategoryService } from './../../services/category.service';
 import { Component,  OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,21 +17,32 @@ export class BannerLeftComponent implements OnInit {
 
   public breedAlls : any;
 
+  public categoryAlls : CategoryModel[];
+
+  public phukien: CategoryModel[];
+  public thucan: CategoryModel[];
+  public typeProducts: TypeProductModel[];
+
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private categoryService : CategoryService) { 
+    private categoryService : CategoryService) {
     }
 
   ngOnInit(): void {
     this.getListSupplier();
     this.getListBreedAll();
+    this.getListCategoryAll();
+    this.getListTypeProduct();
+
+    //let abc = this.categoryAlls;
+
+    //console.log('sao kgoong ra nhỉ');
   }
 
   ngAfterViewInit() : void {
-    
   }
 
-  
+
 
   getListBreedParent(){
       this.categoryService.getListBreedParent().subscribe((res : any) => {
@@ -55,6 +68,21 @@ export class BannerLeftComponent implements OnInit {
     })
   }
 
+  getListCategoryAll(){
+    this.categoryService.getListCategoryAll().subscribe((res:any)=>{
+      this.categoryAlls = res.content.Categories;
+
+      this.phukien = this.categoryAlls.filter(p => p.TypeProductId == 30);
+      this.thucan = this.categoryAlls.filter(p => p.TypeProductId == 20);
+    })
+  }
+
+  getListTypeProduct(){
+    this.categoryService.getListTypeProduct().subscribe( (res: any) => {
+      this.typeProducts = res.content.Selection;
+    })
+  }
+
  /*  reloadRoute() {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -62,3 +90,4 @@ export class BannerLeftComponent implements OnInit {
     this.router.navigate([currentUrl]);
   } */
 }
+

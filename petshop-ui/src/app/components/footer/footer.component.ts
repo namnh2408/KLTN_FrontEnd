@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TypeProductModel } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { CategoryService } from 'src/app/services/category.service';
 export class FooterComponent implements OnInit {
 
   parentBreeds: any;
+  typeProducts: TypeProductModel[];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -17,12 +19,19 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListBreedParent();
+    this.getListTypeProduct();
   }
 
   getListBreedParent(){
     this.categoryService.getListBreedParent().subscribe((res : any) => {
       this.parentBreeds = res.content.breeds;
     });
+  }
+
+  getListTypeProduct(){
+    this.categoryService.getListTypeProduct().subscribe( (res: any) => {
+      this.typeProducts = res.content.Selection;
+    })
   }
 
 }

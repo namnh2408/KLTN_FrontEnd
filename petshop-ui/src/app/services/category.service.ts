@@ -26,4 +26,12 @@ export class CategoryService {
   getListBreedAll(){
     return this.httpClient.get(`${environment.apiUrl}Category/GetListBreedAll`);
   }
+
+  getListCategoryAll(){
+    return this.httpClient.get(`${environment.apiUrl}Category/GetListCategoryAll`);
+  }
+
+  getListTypeProduct(){
+    return this.httpClient.get(`${environment.apiUrl}AData/GetNormalTypeProductSelection`);
+  }
 }

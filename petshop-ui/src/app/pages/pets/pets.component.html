@@ -17,7 +17,8 @@
         </div>
 
         <div class="privacy about" *ngIf="pets.length == 0">
-            <h3 id="target1" style="font-family: Arial, Helvetica, sans-serif;">Không có thú cưng nào</h3>
+            <h3 id="target1" style="font-family: Arial, Helvetica, sans-serif;" *ngIf="tid == 10">Không có thú cưng nào</h3>
+            <h3 id="target1" style="font-family: Arial, Helvetica, sans-serif;" *ngIf="tid != 10">Không có sản phẩm nào</h3>
             <div class="checkout-left">
                 <div class="col-md-8 address_form_agile">
                     <div class="checkout-right-basket">
@@ -29,7 +30,8 @@
         </div>
 
         <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub" *ngIf="pets.length > 0">
-            <h3 id="target1" class="w3l_fruit" #target>Các loại thú cưng độc đáo</h3>
+            <h3 id="target1" class="w3l_fruit" #target *ngIf="paramSetText == 10">Các loại thú cưng độc đáo</h3>
+            <h3 id="target1" class="w3l_fruit" #target *ngIf="paramSetText != 10">Các loại sản phẩm chất lượng</h3>
             <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
                 <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd" *ngFor="let item of pets" style="margin: 0 8% 2% 0">
                     <div class="hover14 column border-item">

@@ -20,7 +20,9 @@
         <div class="col-md-3 w3_footer_grid">
             <h3>Chức năng</h3>
             <ul class="w3_footer_grid_list">
-                <li><a routerLink="/pets">Thú cưng</a></li>
+                <li *ngFor="let i of typeProducts">
+                  <a routerLink="/typeproduct/ {{ i.TypeProductId }} "> {{ i.TypeProductName }}</a>
+                </li>
                 <li><a routerLink="/about">Thông tin</a></li>
             </ul>
         </div>
