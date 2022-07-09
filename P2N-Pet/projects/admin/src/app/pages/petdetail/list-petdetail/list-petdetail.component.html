@@ -21,7 +21,7 @@
                             <div class="card-body">
                                 <div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-4">
+                                        <div class="col-lg-3 col-md-4" *ngIf=" typeProductId == 10">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="petDetailCondition.BreedId">Thú cưng</label>
                                                 <select class="form-control form-control-alternative" placeholder="Thú cưng" (click)="getNormalSupplierPetDetailSelection()" [(ngModel)]="petDetailCondition.BreedId" [ngModelOptions]="{standalone: true}">
@@ -29,6 +29,17 @@
                                     {{ item.Name }}
                                   </option>
                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4" *ngIf=" typeProductId != 10">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petCondition.CategoryId">Tên sản phẩm</label>
+                                                <select class="form-control form-control-alternative" placeholder="Tên sản phẩm" [(ngModel)]="petDetailCondition.CategoryId" [ngModelOptions]="{standalone: true}">
+                                                    <option value="0"></option>
+                                                    <option *ngFor="let item of categorySelection" [ngValue]="item.Id">
+                                                  {{ item.Title }}
+                                                </option>
+                                              </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-4">
@@ -101,16 +112,6 @@
                                                     {{ item.Title }}
                                                   </option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="petCondition.CategoryId">Tên sản phẩm</label>
-                                                <select class="form-control form-control-alternative" placeholder="Tên sản phẩm" [(ngModel)]="petDetailCondition.CategoryId" [ngModelOptions]="{standalone: true}">
-                                                <option *ngFor="let item of categorySelection" [ngValue]="item.Id">
-                                                  {{ item.Title }}
-                                                </option>
-                                              </select>
                                             </div>
                                         </div>
                                     </div>
