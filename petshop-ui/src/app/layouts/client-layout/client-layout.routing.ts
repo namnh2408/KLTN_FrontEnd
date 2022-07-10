@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './../../pages/account/change-password/change-password.component';
 import { DetailOrderComponent } from './../../pages/myorder/detail-order/detail-order.component';
 import { ForgetPasswordComponent } from './../../pages/account/forget-password/forget-password.component';
 import { ListOrderComponent } from './../../pages/myorder/list-order/list-order.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: "category/catechild/:ccid", component:PetsComponent},
   {path: "typeproduct/:tid", component:PetsComponent},
   {path: 'details/:id/:brandid', component: SingleComponent},
+  {path: 'changepassword', component: ChangePasswordComponent}
 
 
 ]
