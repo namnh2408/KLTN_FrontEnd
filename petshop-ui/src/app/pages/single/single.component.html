@@ -163,6 +163,7 @@
                 </div>
                 <hr class="my-hr" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId > 0">
                 <hr class="my-hr" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId == 0">
+                <hr class="my-hr" *ngIf="petDetail.ColorId == 0 && petDetail.AgeId == 0">
 
                 <div class="snipcart-item block">
                     <div class="alert alert-danger" role="alert" *ngIf=" message != '' ">
