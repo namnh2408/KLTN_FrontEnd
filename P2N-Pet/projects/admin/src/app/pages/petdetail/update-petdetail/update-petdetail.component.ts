@@ -272,7 +272,7 @@ export class UpdatePetdetailComponent implements OnInit {
 
   deleteItemImageOld(petimageid){
     this.urls.forEach((value,index)=>{
-      if(value.PetImageId == petimageid){
+      if(value.ProductImageId == petimageid){
         this.urls.splice(index,1);
       }
     });
