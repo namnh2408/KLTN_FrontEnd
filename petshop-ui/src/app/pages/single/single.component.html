@@ -228,7 +228,7 @@
                                         </span>
 
                                     </p>
-                                    <a (click)="GetDetailComment(cmt.CommentId, 0)"><span><i class="fa fa-reply"></i> Phản hồi</span></a>
+                                    <a (click)="GetDetailComment(cmt.CommentId, 0)" *ngIf="user.Id == cmt.UserId"><span><i class="fa fa-reply"></i> Phản hồi</span></a>
                                     <span class="text-reply ml-10" *ngFor="let itemReply of cmt.CommentChilds">
                                         <ul class="media-list">
                                             <li class="media" style="margin-top: 10px;">
