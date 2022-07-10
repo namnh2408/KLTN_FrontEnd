@@ -24,6 +24,7 @@ import { DetailOrderComponent } from '../../pages/myorder/detail-order/detail-or
 import { ListBlogComponent } from '../../pages/blog/list-blog/list-blog.component';
 import { DetailBlogComponent } from '../../pages/blog/detail-blog/detail-blog.component';
 import { SafeHtmlPipe } from 'src/app/heplers/safehtml';
+import { ChangePasswordComponent } from '../../pages/account/change-password/change-password.component';
 
 
 
@@ -46,7 +47,8 @@ import { SafeHtmlPipe } from 'src/app/heplers/safehtml';
     DetailOrderComponent,
     ListBlogComponent,
     DetailBlogComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
