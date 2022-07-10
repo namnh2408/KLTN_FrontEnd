@@ -13,8 +13,8 @@ export class OrderService {
     return this.http.post(`${environment.apiUrl}Order/CreateOrder`, condition);
   }
 
-  GetListHistoryOrder(){
-    return this.http.get(`${environment.apiUrl}Order/GetListHistoryOrder`);
+  GetListHistoryOrder(condition: any){
+    return this.http.post(`${environment.apiUrl}Order/GetListHistoryOrder`, condition);
   }
 
   GetOrderDetail(OrderId: any){

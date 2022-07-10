@@ -30,7 +30,7 @@
                                         <div class="blog-meta big-meta col-md-8">
                                             <p style="font-size: 21px; padding: 5px;"><a routerLink="/blogs/{{blog.Id}}" title=""><b>{{blog.Title}}</b></a></p>
                                             <p style=" padding: 5px; width: 100%; overflow: hidden; display: inline-block; white-space: nowrap; text-overflow: ellipsis;"> {{blog.Content}} </p>
-                                            <p style="font-size: 15px; padding: 5px;"><i><b>Người viết:</b> {{blog.CreateUserName}} &nbsp; &nbsp; <b>Ngày tạo:</b> {{ formatDateVN(blog.CreateDate) }}</i></p>
+                                            <p style="font-size: 15px; padding: 5px;"><i> <b>Thể loại:</b> {{blog.TypeNewsText}} &nbsp; &nbsp; <b>Người viết:</b> {{blog.CreateUserName}} &nbsp; &nbsp; <b>Ngày tạo:</b> {{ formatDateVN(blog.CreateDate) }}</i></p>
                                         </div><!-- end meta -->
                                     </div><!-- end blog-box -->
 
