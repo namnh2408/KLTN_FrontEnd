@@ -156,4 +156,10 @@ export class ListOrderComponent implements OnInit {
       }
     }
   }
+
+  updateStatusPendingOrder(orderid){
+    this.orderService.UpdateStatusPendingOrder(orderid).subscribe((res: any) => {
+      this.getList();
+    });
+  }
 }

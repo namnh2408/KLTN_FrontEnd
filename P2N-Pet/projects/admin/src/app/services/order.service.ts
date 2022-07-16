@@ -30,4 +30,8 @@ export class OrderService {
     UpdateStatusPayment(orderId, statusPaymentId){
         return this.http.post(`${environment.apiUrl}AOrder/UpdateStatusPayment?orderId=${orderId}&statusPaymentId=${statusPaymentId}`, null);
     }
+
+    UpdateStatusPendingOrder(orderid){
+        return this.http.post(`${environment.apiUrl}AOrder/UpdateStatusPendingOrder?orderId=${orderid}`, null);
+    }
 }
