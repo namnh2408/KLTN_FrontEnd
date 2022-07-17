@@ -23,21 +23,21 @@
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="accountCondition.Name">Tên tài khoản</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Tên tài khoản" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Tên tài khoản"
                                     [(ngModel)]="accountCondition.Name" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="accountCondition.Phone">Số điện thoại</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại"
                                     [(ngModel)]="accountCondition.Phone" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="accountCondition.Email">Email</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Email" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Email"
                                     [(ngModel)]="accountCondition.Email" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
@@ -151,19 +151,24 @@
                       </td>
                       <td class="text-center">
                           <!-- <div ngbDropdown placement="bottom-right"> -->
-                          <button class="btn btn-icon btn-info custom-btn" routerLink="/admin/account/view/{{account.Id}}" *ngIf="statusaccount == 10">
+                          <button [tooltip]="ViewContent" contentType="template"
+                           class="btn btn-icon btn-info custom-btn" routerLink="/admin/account/view/{{account.Id}}" *ngIf="statusaccount == 10">
                               <i class='ni ni-laptop'></i>
                           </button>
-                          <button class="btn btn-icon btn-warning custom-btn" (click)="blockAccount(account.Id)" *ngIf="statusaccount == 20 || statusaccount == 30">
+                          <button [tooltip]="BlockContent" contentType="template"
+                           class="btn btn-icon btn-warning custom-btn" (click)="blockAccount(account.Id)" *ngIf="statusaccount == 20 || statusaccount == 30">
                             <i class='ni ni-lock-circle-open'></i>
-                          </button> 
-                          <button class="btn btn-icon btn-success custom-btn"(click)="openAccount(account.Id)" *ngIf="statusaccount == 50">
+                          </button>
+                          <button [tooltip]="OpenContent" contentType="template"
+                           class="btn btn-icon btn-success custom-btn"(click)="openAccount(account.Id)" *ngIf="statusaccount == 50">
                             <i class='ni ni-key-25'></i>
-                          </button> 
-                          <button class="btn btn-icon btn-primary custom-btn" routerLink="/admin/account/update/{{account.Id}}" *ngIf="statusaccount != 10 && statusaccount != 50" >
+                          </button>
+                          <button [tooltip]="UpdateContent" contentType="template"
+                           class="btn btn-icon btn-primary custom-btn" routerLink="/admin/account/update/{{account.Id}}" *ngIf="statusaccount != 10 && statusaccount != 50" >
                               <i class='ni ni-ruler-pencil'></i>
                           </button>
-                          <button class="btn btn-icon btn-danger custom-btn" (click)="deleteAccount(account.Id)" *ngIf="statusaccount != 10">
+                          <button [tooltip]="DeleteContent" contentType="template"
+                            class="btn btn-icon btn-danger custom-btn" (click)="deleteAccount(account.Id)" *ngIf="statusaccount != 10">
                               <i class='ni ni-scissors'></i>
                           </button>
                       </td>
@@ -196,4 +201,19 @@
       </div>
     </div>
   </div>
-  
+
+  <ng-template #UpdateContent>
+    <label for=""> Cập nhật </label>
+  </ng-template>
+  <ng-template #DeleteContent>
+    <label> Xoá </label>
+  </ng-template>
+  <ng-template #ViewContent>
+    <label> Xem chi tiết </label>
+  </ng-template>
+  <ng-template #BlockContent>
+    <label> Khoá tài khoản </label>
+  </ng-template>
+  <ng-template #OpenContent>
+    <label> Mở khoá </label>
+  </ng-template>
