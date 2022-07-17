@@ -60,6 +60,7 @@ import { CreateBrandComponent } from '../../pages/brand/create-brand/create-bran
 import { ListNewsComponent } from '../../pages/news/list-news/list-news.component';
 import { CreateNewsComponent } from '../../pages/news/create-news/create-news.component';
 import { UpdateNewsComponent } from '../../pages/news/update-news/update-news.component';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,7 @@ import { UpdateNewsComponent } from '../../pages/news/update-news/update-news.co
     CreateBrandComponent,
     ListNewsComponent,
     CreateNewsComponent,
-    UpdateNewsComponent,
+    UpdateNewsComponent
   ],
   imports: [
     CommonModule,
@@ -125,7 +126,8 @@ import { UpdateNewsComponent } from '../../pages/news/update-news/update-news.co
     NgSelectModule,
     NgxNumberFormatModule,
     RouterModule,
-    CKEditorModule
+    CKEditorModule,
+    TooltipModule
   ],
   providers: [
     DatePipe
