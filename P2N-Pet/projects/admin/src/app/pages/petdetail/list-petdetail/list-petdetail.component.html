@@ -209,13 +209,16 @@
                                 </td>
                                 <td class="text-center">
                                     <!-- <div ngbDropdown placement="bottom-right"> -->
-                                    <a class="btn btn-icon btn-info custom-btn" routerLink="/admin/petdetail/view/{{petDetail.Id}}">
+                                    <a [tooltip]="ViewContent" contentType="template"
+                                      class="btn btn-icon btn-info custom-btn" routerLink="/admin/petdetail/view/{{petDetail.Id}}">
                                         <i class='ni ni-laptop'></i>
                                     </a>
-                                    <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/petdetail/update/{{petDetail.Id}}">
+                                    <a [tooltip]="UpdateContent" contentType="template"
+                                      class="btn btn-icon btn-primary custom-btn" routerLink="/admin/petdetail/update/{{petDetail.Id}}">
                                         <i class='ni ni-ruler-pencil'></i>
                                     </a>
-                                    <button class="btn btn-icon btn-danger custom-btn" (click)="deletePetDetail(petDetail.Id)">
+                                    <button [tooltip]="DeleteContent" contentType="template"
+                                      class="btn btn-icon btn-danger custom-btn" (click)="deletePetDetail(petDetail.Id)">
                                         <i class='ni ni-scissors'></i>
                                     </button>
                                 </td>
@@ -248,3 +251,13 @@
         </div>
     </div>
 </div>
+
+<ng-template #UpdateContent>
+  <label for=""> Cập nhật </label>
+</ng-template>
+<ng-template #ViewContent>
+  <label> Xem chi tiết </label>
+</ng-template>
+<ng-template #DeleteContent>
+  <label> Xoá </label>
+</ng-template>

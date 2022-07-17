@@ -23,21 +23,21 @@
                             <div class="col-lg-3 col-md-4">
                               <div class="form-group">
                                 <label class="form-control-label" for="supplierCondition.Name">Tên nhà cung cấp</label>
-                                <input type="text" class="form-control form-control-alternative" placeholder="Tên nhà cung cấp" 
+                                <input type="text" class="form-control form-control-alternative" placeholder="Tên nhà cung cấp"
                                   [(ngModel)]="supplierCondition.Name" [ngModelOptions]="{standalone: true}">
                               </div>
                             </div>
                             <div class="col-lg-3 col-md-4">
                               <div class="form-group">
                                 <label class="form-control-label" for="supplierCondition.Phone">Số điện thoại</label>
-                                <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại" 
+                                <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại"
                                   [(ngModel)]="supplierCondition.Phone" [ngModelOptions]="{standalone: true}">
                               </div>
                             </div>
                             <div class="col-lg-3 col-md-4">
                               <div class="form-group">
                                 <label class="form-control-label" for="supplierCondition.Email">Email</label>
-                                <input type="text" class="form-control form-control-alternative" placeholder="Email" 
+                                <input type="text" class="form-control form-control-alternative" placeholder="Email"
                                   [(ngModel)]="supplierCondition.Email" [ngModelOptions]="{standalone: true}">
                               </div>
                             </div>
@@ -120,10 +120,12 @@
                         <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
                             <i class='ni ni-laptop'></i>
                         </a> -->
-                        <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/supplier/update/{{supplier.Id}}">
+                        <a [tooltip]="UpdateContent" contentType="template"
+                          class="btn btn-icon btn-primary custom-btn" routerLink="/admin/supplier/update/{{supplier.Id}}">
                             <i class='ni ni-ruler-pencil'></i>
                         </a>
-                        <button class="btn btn-icon btn-danger custom-btn" (click)="deleteSupplier(supplier.Id)">
+                        <button [tooltip]="DeleteContent" contentType="template"
+                          class="btn btn-icon btn-danger custom-btn" (click)="deleteSupplier(supplier.Id)">
                             <i class='ni ni-scissors'></i>
                         </button>
                     </td>
@@ -156,4 +158,13 @@
       </div>
     </div>
   </div>
-  
+
+  <ng-template #UpdateContent>
+    <label for=""> Cập nhật </label>
+  </ng-template>
+  <ng-template #DeleteContent>
+    <label> Xoá </label>
+  </ng-template>
+  <ng-template #ViewContent>
+    <label> Xem chi tiết </label>
+  </ng-template>

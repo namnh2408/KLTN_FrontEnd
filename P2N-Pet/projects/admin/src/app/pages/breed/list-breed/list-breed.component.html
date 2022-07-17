@@ -136,10 +136,12 @@
                                     <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
                                     <i class='ni ni-laptop'></i>
                                     </a> -->
-                                    <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/breed/update/{{breed.Id}}">
+                                    <a [tooltip]="UpdateContent" contentType="template"
+                                      class="btn btn-icon btn-primary custom-btn" routerLink="/admin/breed/update/{{breed.Id}}">
                                         <i class='ni ni-ruler-pencil'></i>
                                     </a>
-                                    <button class="btn btn-icon btn-danger custom-btn" (click)="deleteBreed(breed.Id)">
+                                    <button [tooltip]="DeleteContent" contentType="template"
+                                      class="btn btn-icon btn-danger custom-btn" (click)="deleteBreed(breed.Id)">
                                         <i class='ni ni-scissors'></i>
                                     </button>
                                 </td>
@@ -185,10 +187,12 @@
                                     <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
                                     <i class='ni ni-laptop'></i>
                                     </a> -->
-                                    <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/cate/update-category/{{cate.Id}}">
+                                    <a [tooltip]="UpdateContent" contentType="template"
+                                      class="btn btn-icon btn-primary custom-btn" routerLink="/admin/cate/update-category/{{cate.Id}}">
                                         <i class='ni ni-ruler-pencil'></i>
                                     </a>
-                                    <button class="btn btn-icon btn-danger custom-btn" (click)="deleteCategory(cate.Id)">
+                                    <button [tooltip]="DeleteContent" contentType="template"
+                                      class="btn btn-icon btn-danger custom-btn" (click)="deleteCategory(cate.Id)">
                                         <i class='ni ni-scissors'></i>
                                     </button>
                                 </td>
@@ -242,3 +246,13 @@
         </div>
     </div>
 </div>
+
+<ng-template #UpdateContent>
+  <label for=""> Cập nhật </label>
+</ng-template>
+<ng-template #DeleteContent>
+  <label> Xoá </label>
+</ng-template>
+<ng-template #ViewContent>
+  <label> Xem chi tiết </label>
+</ng-template>

@@ -23,7 +23,7 @@
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="sizeCondition.Title">Tiêu đề</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Nhập tiêu đề" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Nhập tiêu đề"
                                     [(ngModel)]="sizeCondition.Title" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
@@ -104,10 +104,12 @@
                       <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
                         <i class='ni ni-laptop'></i>
                       </a> -->
-                      <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/size/update/{{size.Id}}">
+                      <a [tooltip]="UpdateContent" contentType="template"
+                        class="btn btn-icon btn-primary custom-btn" routerLink="/admin/size/update/{{size.Id}}">
                         <i class='ni ni-ruler-pencil'></i>
                       </a>
-                      <button class="btn btn-icon btn-danger custom-btn" (click)="deleteSize(size.Id)">
+                      <button [tooltip]="DeleteContent" contentType="template"
+                        class="btn btn-icon btn-danger custom-btn" (click)="deleteSize(size.Id)">
                         <i class='ni ni-scissors'></i>
                       </button>
                   </td>
@@ -140,4 +142,13 @@
       </div>
     </div>
   </div>
-  
+
+  <ng-template #UpdateContent>
+    <label for=""> Cập nhật </label>
+  </ng-template>
+  <ng-template #DeleteContent>
+    <label> Xoá </label>
+  </ng-template>
+  <ng-template #ViewContent>
+    <label> Xem chi tiết </label>
+  </ng-template>

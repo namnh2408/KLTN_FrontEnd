@@ -23,21 +23,21 @@
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="orderCondition.CustomerName">Tên khách hàng</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Tên khách hàng" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Tên khách hàng"
                                     [(ngModel)]="orderCondition.CustomerName" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="orderCondition.CustomerPhone">Số điện thoại</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại"
                                     [(ngModel)]="orderCondition.CustomerPhone" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
                               <div class="col-lg-3 col-md-4">
                                 <div class="form-group">
                                   <label class="form-control-label" for="orderCondition.CustomerEmail">Email</label>
-                                  <input type="text" class="form-control form-control-alternative" placeholder="Email" 
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Email"
                                     [(ngModel)]="orderCondition.CustomerEmail" [ngModelOptions]="{standalone: true}">
                                 </div>
                               </div>
@@ -154,19 +154,28 @@
                     <td class="text-center">
                         Người tạo: {{ order.CreateUserName }} <br>
                         Ngày tạo: {{ formatDateVN(order.CreateDate) }}
+                        <br>
+                        <span *ngIf="statusorder != 1">
+                          Người cập nhật: {{ order.UpdateUserName }} <br>
+                          Ngày cập nhật: {{ formatDateVN(order.UpdateDate) }}
+                        </span>
                       </td>
                       <td class="text-center">
                           <!-- <div ngbDropdown placement="bottom-right"> -->
-                          <a class="btn btn-icon btn-info custom-btn" routerLink="/admin/order/view/{{order.Id}}">
+                          <a [tooltip]="ViewContent" contentType="template"
+                            class="btn btn-icon btn-info custom-btn" routerLink="/admin/order/view/{{order.Id}}">
                               <i class='ni ni-laptop'></i>
-                          </a> 
-                          <button class="btn btn-icon btn-primary custom-btn" *ngIf="statusorder < 3" (click)="upgradeStatusOrder(order.Id)">
+                          </a>
+                          <button [tooltip]="UpgradeContent" contentType="template"
+                            class="btn btn-icon btn-primary custom-btn" *ngIf="statusorder < 3" (click)="upgradeStatusOrder(order.Id)">
                               <i class='ni ni-bold-right'></i>
                           </button>
-                          <button class="btn btn-icon btn-danger custom-btn" *ngIf="statusorder == 1" (click)="cancelOrder(order.Id)">
+                          <button [tooltip]="DeleteContent" contentType="template"
+                            class="btn btn-icon btn-danger custom-btn" *ngIf="statusorder == 1" (click)="cancelOrder(order.Id)">
                               <i class='ni ni-scissors'></i>
                           </button>
-                          <button class="btn btn-icon btn-warning custom-btn" *ngIf="statusorder == 4" (click)="updateStatusPendingOrder(order.Id)">
+                          <button [tooltip]="UndoContent" contentType="template"
+                            class="btn btn-icon btn-warning custom-btn" *ngIf="statusorder == 4" (click)="updateStatusPendingOrder(order.Id)">
                             <i class='ni ni-curved-next'></i>
                         </button>
                       </td>
@@ -199,4 +208,17 @@
       </div>
     </div>
   </div>
-  
+
+  <ng-template #UpgradeContent>
+    <label for=""> Duyệt đơn hàng </label>
+  </ng-template>
+  <ng-template #ViewContent>
+    <label for=""> Xem chi tiết </label>
+  </ng-template>
+  <ng-template #DeleteContent>
+    <label> Xoá đơn hàng</label>
+  </ng-template>
+
+  <ng-template #UndoContent>
+    <label> Hoàn tác</label>
+  </ng-template>

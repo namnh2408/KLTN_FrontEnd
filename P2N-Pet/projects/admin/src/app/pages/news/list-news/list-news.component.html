@@ -168,13 +168,13 @@
                 <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
                       <i class='ni ni-laptop'></i>
                     </a> -->
-                <a
+                <a [tooltip]="UpdateContent" contentType="template"
                   class="btn btn-icon btn-primary custom-btn"
                   routerLink="/admin/news/update/{{ news.Id }}"
                 >
                   <i class="ni ni-ruler-pencil"></i>
                 </a>
-                <button
+                <button [tooltip]="DeleteContent" contentType="template"
                   class="btn btn-icon btn-danger custom-btn"
                   (click)="deleteNews(news.Id)"
                 >
@@ -225,3 +225,13 @@
   </div>
 </div>
 </div>
+
+<ng-template #UpdateContent>
+  <label for=""> Cập nhật </label>
+</ng-template>
+<ng-template #DeleteContent>
+  <label> Xoá </label>
+</ng-template>
+<ng-template #ViewContent>
+  <label> Xem chi tiết </label>
+</ng-template>

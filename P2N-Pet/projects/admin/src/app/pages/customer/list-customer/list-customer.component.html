@@ -23,21 +23,21 @@
                             <div class="col-lg-3 col-md-4">
                               <div class="form-group">
                                 <label class="form-control-label" for="customerCondition.Name">Tên khách hàng</label>
-                                <input type="text" class="form-control form-control-alternative" placeholder="Tên khách hàng" 
+                                <input type="text" class="form-control form-control-alternative" placeholder="Tên khách hàng"
                                   [(ngModel)]="customerCondition.Name" [ngModelOptions]="{standalone: true}">
                               </div>
                             </div>
                             <div class="col-lg-3 col-md-4">
                               <div class="form-group">
                                 <label class="form-control-label" for="customerCondition.Phone">Số điện thoại</label>
-                                <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại" 
+                                <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại"
                                   [(ngModel)]="customerCondition.Phone" [ngModelOptions]="{standalone: true}">
                               </div>
                             </div>
                             <div class="col-lg-3 col-md-4">
                               <div class="form-group">
                                 <label class="form-control-label" for="customerCondition.Email">Email</label>
-                                <input type="text" class="form-control form-control-alternative" placeholder="Email" 
+                                <input type="text" class="form-control form-control-alternative" placeholder="Email"
                                   [(ngModel)]="customerCondition.Email" [ngModelOptions]="{standalone: true}">
                               </div>
                             </div>
@@ -106,7 +106,7 @@
                       <!-- Ngày sinh: {{ formatDateVN(customer.Birthday) }} <br> -->
                       Số điện thoại: {{ customer.Phone }} <br>
                       Email: {{ customer.Email }} <br>
-                      Địa chỉ: {{ customer.Address }} 
+                      Địa chỉ: {{ customer.Address }}
                     </td>
                     <td class="text-center">
                       {{ customer.StatusText }}
@@ -119,10 +119,12 @@
                     </td>
                     <td class="text-center">
                         <!-- <div ngbDropdown placement="bottom-right"> -->
-                        <a class="btn btn-icon btn-info custom-btn" routerLink="/admin/customer/view/{{customer.Id}}">
+                        <a [tooltip]="ViewContent" contentType="template"
+                          class="btn btn-icon btn-info custom-btn" routerLink="/admin/customer/view/{{customer.Id}}">
                             <i class='ni ni-laptop'></i>
                         </a>
-                        <a class="btn btn-icon btn-primary custom-btn" routerLink="/admin/customer/update/{{customer.Id}}">
+                        <a [tooltip]="UpdateContent" contentType="template"
+                          class="btn btn-icon btn-primary custom-btn" routerLink="/admin/customer/update/{{customer.Id}}">
                             <i class='ni ni-ruler-pencil'></i>
                         </a>
                         <!-- <button class="btn btn-icon btn-danger custom-btn" (click)="deleteCustomer(customer.Id)">
@@ -158,4 +160,13 @@
       </div>
     </div>
   </div>
-  
+
+  <ng-template #UpdateContent>
+    <label for=""> Cập nhật </label>
+  </ng-template>
+  <ng-template #DeleteContent>
+    <label> Xoá </label>
+  </ng-template>
+  <ng-template #ViewContent>
+    <label> Xem chi tiết </label>
+  </ng-template>
