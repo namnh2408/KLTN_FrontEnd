@@ -38,7 +38,7 @@ export class ListPetComponent implements OnInit {
 
   constructor(private petService: PetService,
     private paginationService: PaginationService,
-    private router: Router) { 
+    private router: Router) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
       this.getBreedSelection();
@@ -87,6 +87,17 @@ export class ListPetComponent implements OnInit {
     });
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá thú cưng / sản phẩm này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deletePet(Id);
+      alert('Xoá thú cưng / sản phẩm thành công');
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.petStatusText, this.petStatusOptions);
   }
@@ -126,7 +137,7 @@ export class ListPetComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.petCondition = new PetCondition();
     this.pagination.CurrentPage = 0;

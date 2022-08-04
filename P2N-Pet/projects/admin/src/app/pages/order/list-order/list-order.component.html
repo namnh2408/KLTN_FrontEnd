@@ -167,15 +167,15 @@
                               <i class='ni ni-laptop'></i>
                           </a>
                           <button [tooltip]="UpgradeContent" contentType="template"
-                            class="btn btn-icon btn-primary custom-btn" *ngIf="statusorder < 3" (click)="upgradeStatusOrder(order.Id)">
+                            class="btn btn-icon btn-primary custom-btn" *ngIf="statusorder < 3" (click)="confirmAlertAction('Confirm', order.Id)">
                               <i class='ni ni-bold-right'></i>
                           </button>
                           <button [tooltip]="DeleteContent" contentType="template"
-                            class="btn btn-icon btn-danger custom-btn" *ngIf="statusorder == 1" (click)="cancelOrder(order.Id)">
+                            class="btn btn-icon btn-danger custom-btn" *ngIf="statusorder == 1" (click)="confirmAlertAction('Cancel', order.Id)">
                               <i class='ni ni-scissors'></i>
                           </button>
                           <button [tooltip]="UndoContent" contentType="template"
-                            class="btn btn-icon btn-warning custom-btn" *ngIf="statusorder == 4" (click)="updateStatusPendingOrder(order.Id)">
+                            class="btn btn-icon btn-warning custom-btn" *ngIf="statusorder == 4" (click)="confirmAlertAction('Pending', order.Id)">
                             <i class='ni ni-curved-next'></i>
                         </button>
                       </td>

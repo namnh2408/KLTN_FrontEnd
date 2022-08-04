@@ -36,14 +36,14 @@ export class ListPetdetailComponent implements OnInit {
 
   categorySelectionAll : CategorySelection[];
 
-  public petDetails: any;  
+  public petDetails: any;
 
   // Loại sản phẩm
   typeProductId: number;
 
   constructor(private petDetailService: PetDetailService,
     private paginationService: PaginationService,
-    private router: Router) { 
+    private router: Router) {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.buildSelection();
     this.getNormalAgeSelection();
@@ -63,7 +63,7 @@ export class ListPetdetailComponent implements OnInit {
     // this.scroll(target);
     //this.getList();
     this.getListProductDetail(this.typeProductId);
-    
+
     this.subscriptionPagination = this.paginationService.getChangePage().subscribe(pagenumber => {
       this.pagination.CurrentPage = pagenumber;
       this.getListProductDetail(this.typeProductId);
@@ -109,6 +109,17 @@ export class ListPetdetailComponent implements OnInit {
     });
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá thông tin chi tiết của thú cưng / sản phẩm này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deletePetDetail(Id);
+      alert('Xoá thông tin thú cưng / sản phẩm thành công');
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.petDetailStatusText, this.petDetailStatusOptions);
   }
@@ -127,7 +138,7 @@ export class ListPetdetailComponent implements OnInit {
     return FormatDateVN(input);
   }
 
-  
+
   getNormalAgeSelection() {
     this.loading = true;
     this.petDetailService.GetNormalAgeSelection().subscribe((res: any) => {
@@ -189,7 +200,7 @@ export class ListPetdetailComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.petDetailCondition = new PetDetailCondition();
     this.pagination.CurrentPage = 0;

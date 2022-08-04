@@ -26,7 +26,7 @@ export class ListAgeComponent implements OnInit {
   public ages: any;
 
   constructor(private ageService: AgeService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
   }
@@ -69,6 +69,17 @@ export class ListAgeComponent implements OnInit {
     this.ageService.DeleteAge(Id).subscribe((res: any) => {
       this.getList();
     });
+  }
+
+  confirmAlertDelete(AgeId){
+    let textConfirm = 'Bạn muốn xoá độ tuổi này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteAge(AgeId);
+      alert('Xoá độ tuổi thành công');
+    }
   }
 
   buildSelection() {

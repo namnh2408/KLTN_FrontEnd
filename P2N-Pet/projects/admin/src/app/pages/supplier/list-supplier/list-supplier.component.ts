@@ -26,7 +26,7 @@ export class ListSupplierComponent implements OnInit {
   public suppliers: any;
 
   constructor(private supplierService: SupplierService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
   }
@@ -58,6 +58,17 @@ export class ListSupplierComponent implements OnInit {
     });
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá nhà cung cấp này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteSupplier(Id);
+      alert('Xoá nhà cung cấp thành công...');
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.supplierStatusText, this.supplierStatusOptions);
   }
@@ -71,7 +82,7 @@ export class ListSupplierComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.supplierCondition = new SupplierCondition();
     this.pagination.CurrentPage = 0;

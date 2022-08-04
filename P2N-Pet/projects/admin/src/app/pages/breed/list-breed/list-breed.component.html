@@ -141,7 +141,7 @@
                                         <i class='ni ni-ruler-pencil'></i>
                                     </a>
                                     <button [tooltip]="DeleteContent" contentType="template"
-                                      class="btn btn-icon btn-danger custom-btn" (click)="deleteBreed(breed.Id)">
+                                      class="btn btn-icon btn-danger custom-btn" (click)="confirmAlertDelete('Breed',breed.Id, breed.Name)">
                                         <i class='ni ni-scissors'></i>
                                     </button>
                                 </td>
@@ -192,7 +192,7 @@
                                         <i class='ni ni-ruler-pencil'></i>
                                     </a>
                                     <button [tooltip]="DeleteContent" contentType="template"
-                                      class="btn btn-icon btn-danger custom-btn" (click)="deleteCategory(cate.Id)">
+                                      class="btn btn-icon btn-danger custom-btn" (click)="confirmAlertDelete('Category',cate.Id, cate.Name)">
                                         <i class='ni ni-scissors'></i>
                                     </button>
                                 </td>
