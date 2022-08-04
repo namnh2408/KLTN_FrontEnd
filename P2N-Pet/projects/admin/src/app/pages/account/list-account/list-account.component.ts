@@ -29,7 +29,7 @@ export class ListAccountComponent implements OnInit {
   public accounts: any;
 
   constructor(private accountService: AccountService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.getNormalRoleSelection();
       this.buildSelection();
@@ -84,7 +84,7 @@ export class ListAccountComponent implements OnInit {
       this.getList();
     }
   }
-  
+
   blockAccount(accountid){
     this.accountService.BlockUser({UserId: accountid}).subscribe((res: any) => {
       this.getList();
@@ -103,6 +103,42 @@ export class ListAccountComponent implements OnInit {
     });
   }
 
+  confirmAlertAction(action, accountId, msg){
+    let textConfirm = '';
+
+    let isCheck = false;
+
+    if(action == 'Delete'){
+      textConfirm = 'Bạn muốn xoá tài khoản của '+ msg +' ?';
+      isCheck = confirm(textConfirm);
+
+      if(isCheck){
+        this.deleteAccount(accountId);
+        alert('Xoá tài khoản thành công...');
+      }
+    }
+    else if( action == 'Open'){
+      textConfirm = 'Bạn muốn mở khoá tài khoản của '+ msg +' ?';
+      isCheck = confirm(textConfirm);
+
+      if(isCheck){
+        this.openAccount(accountId);
+        alert('Mở khoá tài khoản thành công...');
+      }
+    }
+    else if( action == 'Block'){
+      textConfirm = 'Bạn muốn khoá tài khoản của '+ msg +' ?';
+      isCheck = confirm(textConfirm);
+
+      if(isCheck){
+        this.blockAccount(accountId);
+        alert('Khoá tài khoản thành công...');
+      }
+    }
+
+
+  }
+
   getNormalRoleSelection(){
     this.loading = true;
     this.accountService.GetRoleSelection().subscribe((res: any) => {
@@ -116,7 +152,7 @@ export class ListAccountComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.accountCondition = new AccountCondition();
 

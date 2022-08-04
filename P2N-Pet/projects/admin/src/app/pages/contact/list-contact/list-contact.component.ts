@@ -26,7 +26,7 @@ export class ListContactComponent implements OnInit {
   public contacts: any;
 
   constructor(private contactService: ContactService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
   }
@@ -58,6 +58,17 @@ export class ListContactComponent implements OnInit {
     });
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá liên hệ này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteContact(Id);
+      alert('Xoá liên hệ thành công..');
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.contactStatusText, this.contactStatusOptions);
   }
@@ -67,7 +78,7 @@ export class ListContactComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-   
+
   clearForm(){
     this.contactCondition = new ContactCondition();
     this.pagination.CurrentPage = 0;

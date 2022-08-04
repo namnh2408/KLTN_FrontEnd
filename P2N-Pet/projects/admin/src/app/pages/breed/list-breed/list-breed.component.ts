@@ -42,7 +42,7 @@ export class ListBreedComponent implements OnInit {
     private paginationService: PaginationService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private router: Router,) { 
+    private router: Router,) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.paginationCategory.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
@@ -53,17 +53,17 @@ export class ListBreedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getList();
-    
+
     if(this.typeProductId == 10){
       this.subscriptionPagination = this.paginationService.getChangePage().subscribe(pagenumber => {
         this.pagination.CurrentPage = pagenumber;
         this.getList();
       });
     }
-    
+
   }
 
-  routingForm(){    
+  routingForm(){
     if(this.typeProductId == 10){
       this.router.navigate(["admin/breed/create"]);
     }
@@ -142,6 +142,32 @@ export class ListBreedComponent implements OnInit {
     })
   }
 
+  confirmAlertDelete(action, Id, msg){
+    let textConfirm = "";
+
+    if( action == 'Breed'){
+      textConfirm = 'Bạn muốn xoá loại thú cưng ' + msg + ' ?';
+
+      let isCheck = confirm(textConfirm);
+
+      if(isCheck){
+        this.deleteBreed(Id);
+        alert('Xoá thú cưng thành công..');
+      }
+    }
+    else if( action == 'Category'){
+      textConfirm = 'Bạn muốn xoá loại sản phẩm ' + msg + ' ?';
+
+      let isCheck = confirm(textConfirm);
+
+      if(isCheck){
+        this.deleteCategory(Id);
+        alert('Xoá loại sản phẩm thành công..');
+      }
+
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.breedStatusText, this.breedStatusOptions);
   }
@@ -181,7 +207,7 @@ export class ListBreedComponent implements OnInit {
       this.categoryCondition.Status = parseInt(this.breedCondition.Status);
       this.getListCategory();
     }
-    
+
   }
 
   clearForm(){
@@ -201,7 +227,7 @@ export class ListBreedComponent implements OnInit {
     else if( this.typeProductId == 10 && this.subscriptionPaginationCategory){
       console.log('destroy = 10')
       this.subscriptionPaginationCategory.unsubscribe();
-    }    
+    }
   }
 
   previous() {
@@ -212,7 +238,7 @@ export class ListBreedComponent implements OnInit {
     else{
       value = this.paginationCategory.CurrentPage - 1;
     }
-    
+
     if(value < 0) {
       return;
     }
@@ -236,7 +262,7 @@ export class ListBreedComponent implements OnInit {
       }
     }
     //let value = this.pagination.CurrentPage + 1;
-    
+
     this.paginationService.changePage(value);
   }
 
@@ -251,7 +277,7 @@ export class ListBreedComponent implements OnInit {
         return;
       }
     }
-    
+
     this.paginationService.changePage(number);
   }
 
@@ -270,7 +296,7 @@ export class ListBreedComponent implements OnInit {
           this.listPage.push(value);
         }
       }
-      
+
     }
   }
 }

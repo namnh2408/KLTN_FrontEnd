@@ -27,7 +27,7 @@ export class ListPromotionComponent implements OnInit {
   public promotions: any;
 
   constructor(private promotionService: PromotionService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
   }
@@ -59,6 +59,17 @@ export class ListPromotionComponent implements OnInit {
     });
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá quảng cáo này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deletePromotion(Id);
+      alert('Xoá quảng cáo thành công..');
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.promotionStatusText, this.promotionStatusOptions);
   }
@@ -72,7 +83,7 @@ export class ListPromotionComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.promotionCondition = new PromotionCondition();
     this.pagination.CurrentPage = 0;

@@ -52,6 +52,17 @@ export class ListBrandComponent implements OnInit {
     })
   }
 
+  confirmAlertDelete(brandId, msg){
+    let textConfirm = "Bạn muốn xoá chi nhánh tại " + msg + " ?";
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteBrand(brandId);
+      alert('Xoá chi nhánh thành công..')
+    }
+  }
+
   deleteBrand(BrandId){
     this.brandService.DeleteBrand(BrandId).subscribe((res : any) => {
       this.getListBrand();

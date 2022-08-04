@@ -26,7 +26,7 @@ export class ListColorComponent implements OnInit {
   public colors: any;
 
   constructor(private colorService: ColorService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
   }
@@ -56,6 +56,17 @@ export class ListColorComponent implements OnInit {
     this.colorService.DeleteColor(Id).subscribe((res: any) => {
       this.getList();
     });
+  }
+
+  confirmAlertDelete(ColorId){
+    let textConfirm = 'Bạn muốn xoá màu sắc này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteColor(ColorId);
+      alert('Xoá màu sắc thành công');
+    }
   }
 
   buildSelection() {

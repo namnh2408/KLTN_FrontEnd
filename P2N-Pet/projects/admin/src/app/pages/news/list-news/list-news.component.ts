@@ -74,6 +74,17 @@ export class ListNewsComponent implements OnInit {
     })
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá bài viết này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteNews(Id);
+      alert('Xoá bài viết thành công');
+    }
+  }
+
   onSearch() {
     this.pagination.CurrentPage = 0;
     this.pagination.CurrentDate = FormatDaySearch(new Date());

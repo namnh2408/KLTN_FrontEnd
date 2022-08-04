@@ -27,7 +27,7 @@ export class ListSizeComponent implements OnInit {
   public sizes: any;
 
   constructor(private sizeService: SizeService,
-    private paginationService: PaginationService) { 
+    private paginationService: PaginationService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
   }
@@ -59,6 +59,17 @@ export class ListSizeComponent implements OnInit {
     });
   }
 
+  confirmAlertDelete(Id){
+    let textConfirm = 'Bạn muốn xoá kích cỡ này ?';
+
+    let isCheck = confirm(textConfirm);
+
+    if(isCheck){
+      this.deleteSize(Id);
+      alert('Xoá kích cỡ thành công...');
+    }
+  }
+
   buildSelection() {
     ChangeEnumToList(this.sizeStatusText, this.sizeStatusOptions);
   }
@@ -72,14 +83,14 @@ export class ListSizeComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.sizeCondition = new SizeCondition();
     this.pagination.CurrentPage = 0;
     this.loading = true;
     this.getList();
   }
-  
+
   ngOnDestroy() {
     this.subscriptionPagination.unsubscribe();
   }

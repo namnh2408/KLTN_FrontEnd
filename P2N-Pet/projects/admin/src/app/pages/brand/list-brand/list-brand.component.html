@@ -170,7 +170,7 @@
                   </a>
                   <button [tooltip]="DeleteContent" contentType="template"
                     class="btn btn-icon btn-danger custom-btn"
-                    (click)="deleteBrand(brand.Id)"
+                    (click)="confirmAlertDelete(brand.Id, brand.Address)"
                   >
                     <i class="ni ni-scissors"></i>
                   </button>

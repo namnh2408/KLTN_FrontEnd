@@ -39,7 +39,7 @@ export class ListOrderComponent implements OnInit {
   constructor(private orderService: OrderService,
       private paginationService: PaginationService,
       private router: Router,
-      private orderCountService: OrderCountService) { 
+      private orderCountService: OrderCountService) {
       this.pagination.CurrentDate = FormatDaySearch(new Date());
       this.buildSelection();
       this.statusorder = 1;
@@ -85,16 +85,28 @@ export class ListOrderComponent implements OnInit {
     this.pagination.CurrentPage = 0;
     this.getList();
   }
-  
+
   upgradeStatusOrder(orderid){
     this.orderService.UpgradeStatusOrder({OrderId: orderid}).subscribe((res: any) => {
+      if(res.result == 0){
+        if( this.statusorder  < 3){
+          window.alert("Xác nhận đơn hàng thất bại..")
+          return;
+        }
+        else if( this.statusorder == 4){
+          window.alert("Hoàn tác đơn hàng thất bại..")
+          return;
+        }
+      }
+
       if(this.statusorder == 1){
         this.orderCountService.GetCountPending().subscribe((res: any) => {
           var countQuantity = res.content.CountPending;
-    
+
           this.orderCountService.setOrderCount(countQuantity);
         });
       }
+
 
       this.getList();
     });
@@ -102,8 +114,49 @@ export class ListOrderComponent implements OnInit {
 
   cancelOrder(orderid){
     this.orderService.CancelOrder({OrderId: orderid}).subscribe((res: any) => {
+
+      if(res.result == 0){
+        window.alert("Huỷ đơn hàng thất bại...");
+        return;
+      }
       this.getList();
     });
+  }
+
+  confirmAlertAction(action, orderId){
+    var isClick = false;
+    var textConfirm = "";
+    var textSuccess = "";
+    if(action == "Confirm"){
+
+      textConfirm = "Bạn muốn duyệt đơn hàng #" + orderId + " này ?";
+      textSuccess = 'Duyệt đơn hàng thành công..';
+
+      isClick = window.confirm(textConfirm);
+
+      if( isClick){
+        this.upgradeStatusOrder(orderId);
+        window.alert(textSuccess)
+      }
+    }
+    else if( action == 'Cancel'){
+      textConfirm = "Bạn muốn xoá đơn hàng #" + orderId + " này ?";
+      isClick = window.confirm(textConfirm);
+
+      if( isClick){
+        this.cancelOrder(orderId);
+        window.alert('Xoá đơn hàng thành công..')
+      }
+    }
+    else if( action == 'Pending'){
+      textConfirm = "Bạn muốn hoàn tác đơn hàng #" + orderId + " này ?";
+      isClick = window.confirm(textConfirm);
+
+      if( isClick){
+        this.updateStatusPendingOrder(orderId);
+        window.alert('Hoàn tác đơn hàng thành công..')
+      }
+    }
   }
 
   onSearch() {
@@ -111,7 +164,7 @@ export class ListOrderComponent implements OnInit {
     this.pagination.CurrentDate = FormatDaySearch(new Date());
     this.getList();
   }
-    
+
   clearForm(){
     this.orderCondition = new OrderCondition();
     this.orderCondition.StatusOrderId = this.statusorder.toString();
